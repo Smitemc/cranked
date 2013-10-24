@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.sniperzciinema.cranked.Messages.StringUtil;
-import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayerManager;
+import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
+import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
 import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
@@ -123,7 +123,7 @@ public class ArenaManager {
 		}
 		return null;
 	}
-	public static Arena getArena(CrackedPlayer cp){
+	public static Arena getArena(CrankedPlayer cp){
 		return cp.getArena();
 	}
 	
@@ -143,7 +143,7 @@ public class ArenaManager {
 	}
 	public static List<Player> getPlayers(Arena arena){
 		List<Player> players = new ArrayList<Player>();
-		for(CrackedPlayer cp : CrackedPlayerManager.getPlayers()){
+		for(CrankedPlayer cp : CrankedPlayerManager.getPlayers()){
 			if(cp.getArena() == arena)
 				players.add(cp.getPlayer());
 		}

@@ -8,8 +8,8 @@ import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
 import me.sniperzciinema.cranked.Listeners.RegisterAndUnRegister;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.StringUtil;
-import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayerManager;
+import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
+import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
 
 import org.bukkit.Bukkit;
@@ -42,8 +42,8 @@ public class Main extends JavaPlugin {
 
 		for (Player p : Bukkit.getOnlinePlayers())
 		{
-			CrackedPlayer cp = new CrackedPlayer(p);
-			CrackedPlayerManager.loadCrackedPlayer(cp);
+			CrankedPlayer cp = new CrankedPlayer(p);
+			CrankedPlayerManager.loadCrackedPlayer(cp);
 		}
 		if (Files.getArenas().getConfigurationSection("Arenas") != null)
 			for (String s : Files.getArenas().getConfigurationSection("Arenas").getKeys(false))
@@ -67,8 +67,8 @@ public class Main extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		if (!CrackedPlayerManager.getPlayers().isEmpty())
-			for (CrackedPlayer cp : CrackedPlayerManager.getPlayers())
+		if (!CrankedPlayerManager.getPlayers().isEmpty())
+			for (CrankedPlayer cp : CrankedPlayerManager.getPlayers())
 			{
 				if(cp.getArena() != null){
 					cp.getPlayer().sendMessage(Msgs.Error_Plugin_Unload.getString());

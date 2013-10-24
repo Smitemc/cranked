@@ -27,7 +27,9 @@ public enum Msgs
 	Game_You_Left_A_Game("Game.You Left A Game"), 
 	Game_They_Left_A_Game("Game.They Left A Game"), //<player>>
 	Game_Not_Enough_Players("Game.Not Enough Players"), 
-	Game_Players_Needed("Game.Players Needed"),//<current>> // <needed> 
+	Game_Players_Needed("Game.Players Needed"),//<current>> // <needed>
+	Game_PreGame_Time_Left("Game.PreGame Time Left"),// <time>
+	Game_Game_Time_Left("Game.Game Time Left"), // <time>
 	Commands_How_To_Join("Commands.How To Join"), 
 	Commands_How_To_Set_Spawn("Commands.How To Set Spawn"), 
 	Commands_Spawn_Set("Commands.Spawn Set"), //<spawns>

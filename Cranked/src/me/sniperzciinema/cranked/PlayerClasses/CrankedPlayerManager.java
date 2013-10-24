@@ -8,45 +8,45 @@ import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
 import org.bukkit.entity.Player;
  
-public class CrackedPlayerManager {
+public class CrankedPlayerManager {
  
   // An list to hold all of the arenas
-	private static List<CrackedPlayer> players = new ArrayList<CrackedPlayer>();
+	private static List<CrankedPlayer> players = new ArrayList<CrankedPlayer>();
  
-	public static List<CrackedPlayer> getPlayers(){
+	public static List<CrankedPlayer> getPlayers(){
 		return players;
 	}
 
 	// Method to register an arena if not registered, just adds it to the list
-	public static CrackedPlayer getCrackedPlayer(Player player) {
-		for(CrackedPlayer p : players){
+	public static CrankedPlayer getCrackedPlayer(Player player) {
+		for(CrankedPlayer p : players){
 			if(p.name.equalsIgnoreCase(player.getName()))
 				return p;
 		}
 		return null;
 	}
-	public static void loadCrackedPlayer(CrackedPlayer cp) {
+	public static void loadCrackedPlayer(CrankedPlayer cp) {
 		if (!isCrackedPlayer(cp)) {
 			players.add(cp);
 		}
 	}
 	
 	public static void createCrackedPlayer(Player player) {
-		CrackedPlayer cp = new CrackedPlayer(player);
+		CrankedPlayer cp = new CrankedPlayer(player);
 		players.add(cp);
 	}
 	
- 	public static void deleteCrackedPlayer(CrackedPlayer cp) {
+ 	public static void deleteCrackedPlayer(CrankedPlayer cp) {
 		players.remove(cp);
 	}
  
-	public static boolean isCrackedPlayer(CrackedPlayer cp) {
+	public static boolean isCrackedPlayer(CrankedPlayer cp) {
 		return players.contains(cp);
 	}
-	public static void setInfo(CrackedPlayer cp){
+	public static void setInfo(CrankedPlayer cp){
 		cp.setInfo();
 	}
-	public static void reset(CrackedPlayer cp){
+	public static void reset(CrankedPlayer cp){
 		cp.reset();
 	}
 	
@@ -60,7 +60,7 @@ public class CrackedPlayerManager {
 		
 		p.teleport(LocationHandler.getPlayerLocation(loc));
 	}
-	public static void respawn(CrackedPlayer cp){
+	public static void respawn(CrankedPlayer cp){
 		Player p = cp.getPlayer();
 		p.setHealth(20.0);
 		p.setFoodLevel(20);

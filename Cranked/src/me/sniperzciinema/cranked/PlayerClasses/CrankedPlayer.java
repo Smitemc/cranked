@@ -8,9 +8,10 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 
-public class CrackedPlayer {
+public class CrankedPlayer {
 	private int killstreak = 0;
 	private long timeJoined;
 	private GameMode gamemode;
@@ -26,7 +27,7 @@ public class CrackedPlayer {
 	private Player player;
 	String name;
 
-	public CrackedPlayer(Player p) {
+	public CrankedPlayer(Player p) {
 		location = p.getLocation();
 		name = p.getName();
 		gamemode = p.getGameMode();
@@ -52,7 +53,6 @@ public class CrackedPlayer {
 		armor = player.getInventory().getArmorContents();
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
-		
 	}
 
 	@SuppressWarnings("deprecation")
@@ -70,6 +70,8 @@ public class CrackedPlayer {
 		p.updateInventory();
 		p.setFallDistance(0);
 		p.teleport(location);
+		for (PotionEffect effect : player.getActivePotionEffects())
+	        player.removePotionEffect(effect.getType());
 		location = null;
 		gamemode = null;
 		level = 0;

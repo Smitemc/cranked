@@ -5,8 +5,8 @@ import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.GameMechanics.Stats;
 import me.sniperzciinema.cranked.Messages.Msgs;
-import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayerManager;
+import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
+import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,11 +28,11 @@ public class Commands implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("Cranked"))
 		{
 			Player p = null;
-			CrackedPlayer cp = null;
+			CrankedPlayer cp = null;
 			if (sender instanceof Player)
 			{
 				p = (Player)sender;
-				cp = CrackedPlayerManager.getCrackedPlayer(p);
+				cp = CrankedPlayerManager.getCrackedPlayer(p);
 			}
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
