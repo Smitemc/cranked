@@ -1,4 +1,4 @@
-package me.sniperzciinema.cranked.GameMechanics;
+package me.sniperzciinema.cranked.PlayerClasses;
  
 import java.util.ArrayList;
 import java.util.List;

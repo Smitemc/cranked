@@ -1,11 +1,13 @@
-package me.sniperzciinema.cranked.Tools.Handlers;
+package me.sniperzciinema.cranked.ArenaClasses;
  
 import java.util.ArrayList;
 import java.util.List;
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayer;
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayerManager;
+
+import me.sniperzciinema.cranked.Messages.StringUtil;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayer;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
-import me.sniperzciinema.cranked.Tools.StringUtil;
+import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

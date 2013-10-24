@@ -1,9 +1,9 @@
 package me.sniperzciinema.cranked;
 
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayer;
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayerManager;
-import me.sniperzciinema.cranked.Tools.Msgs;
-import me.sniperzciinema.cranked.Tools.Handlers.Arena;
+import me.sniperzciinema.cranked.ArenaClasses.Arena;
+import me.sniperzciinema.cranked.Messages.Msgs;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayer;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayerManager;
 
 import org.bukkit.entity.Player;
 

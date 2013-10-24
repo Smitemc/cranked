@@ -1,5 +1,5 @@
 
-package me.sniperzciinema.cranked.Tools.Handlers;
+package me.sniperzciinema.cranked.ArenaClasses;
 
 import java.util.List;
 

@@ -1,19 +1,9 @@
-/**
- * 
- * For more help visit:
- * http://wiki.bukkit.org/Event_API_Reference
- * 
- * For a list on events look into:
- * https://github.com/Bukkit/Bukkit/tree/master/src/main/java/org/bukkit/event
- * 
- * To learn what Priority you should use look at:
- * http://forums.bukkit.org/threads/getting-your-priorities-straight-the-plugin-version.788/
- * 
- */
-package me.sniperzciinema.cranked;
 
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayer;
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayerManager;
+package me.sniperzciinema.cranked.Listeners;
+
+import me.sniperzciinema.cranked.Main;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayer;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayerManager;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,11 +13,11 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-public class Listeners implements Listener{
+public class RegisterAndUnRegister implements Listener{
 	
 	Main plugin;
 	
-	public Listeners(Main instance){
+	public RegisterAndUnRegister(Main instance){
 		plugin = instance;
 	}
 

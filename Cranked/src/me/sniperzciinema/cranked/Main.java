@@ -2,13 +2,15 @@
 package me.sniperzciinema.cranked;
 
 import java.sql.Connection;
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayer;
-import me.sniperzciinema.cranked.GameMechanics.CrackedPlayerManager;
+
+import me.sniperzciinema.cranked.ArenaClasses.Arena;
+import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.Listeners.RegisterAndUnRegister;
+import me.sniperzciinema.cranked.Messages.Msgs;
+import me.sniperzciinema.cranked.Messages.StringUtil;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayer;
+import me.sniperzciinema.cranked.PlayerClasses.CrackedPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
-import me.sniperzciinema.cranked.Tools.Msgs;
-import me.sniperzciinema.cranked.Tools.StringUtil;
-import me.sniperzciinema.cranked.Tools.Handlers.Arena;
-import me.sniperzciinema.cranked.Tools.Handlers.ArenaManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,7 +23,7 @@ import code.husky.mysql.MySQL;
 
 public class Main extends JavaPlugin {
 
-	private Listeners listeners = new Listeners(this);
+	private RegisterAndUnRegister listeners = new RegisterAndUnRegister(this);
 	public static Plugin me;
 	public static String cranked = "" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "-[" + ChatColor.DARK_GRAY + ChatColor.BOLD + "Cranked" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "]-" + ChatColor.GRAY;
 

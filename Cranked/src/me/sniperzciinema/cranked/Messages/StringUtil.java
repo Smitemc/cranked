@@ -1,4 +1,4 @@
-package me.sniperzciinema.cranked.Tools;
+package me.sniperzciinema.cranked.Messages;
 
 
 public class StringUtil {

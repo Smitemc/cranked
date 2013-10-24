@@ -1,7 +1,7 @@
 
-package me.sniperzciinema.cranked.GameMechanics;
+package me.sniperzciinema.cranked.PlayerClasses;
 
-import me.sniperzciinema.cranked.Tools.Handlers.Arena;
+import me.sniperzciinema.cranked.ArenaClasses.Arena;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

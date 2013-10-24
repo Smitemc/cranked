@@ -1,9 +1,10 @@
 
-package me.sniperzciinema.cranked.Tools;
+package me.sniperzciinema.cranked.Messages;
 
 import org.bukkit.ChatColor;
 
 import me.sniperzciinema.cranked.Main;
+import me.sniperzciinema.cranked.Tools.Files;
 
 
 public enum Msgs
