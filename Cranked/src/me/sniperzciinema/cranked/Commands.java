@@ -50,7 +50,6 @@ public class Commands implements CommandExecutor {
 						if (ArenaManager.isArenaValid(arena))
 						{
 
-							sender.sendMessage("joined arena");
 							ArenaManager.getArena(arena).getPlayerManager().addPlayer(p);
 						} else
 						{
@@ -87,8 +86,6 @@ public class Commands implements CommandExecutor {
 				} else
 				{
 					ArenaManager.getArena(p).getPlayerManager().removePlayer(p);
-
-					p.sendMessage("left arena");
 				}
 			}
 
@@ -191,7 +188,8 @@ public class Commands implements CommandExecutor {
 					String arena = plugin.creating.get(p.getName());
 					if (ArenaManager.arenaRegistered(arena))
 					{
-
+						ArenaManager.setSpawn(arena, p.getLocation());
+						p.sendMessage(Msgs.Commands_Spawn_Set.getString("<spawn>", String.valueOf(ArenaManager.getArena(arena).getSpawns().size())));
 					} else
 					{
 						p.sendMessage(Msgs.Commands_How_To_Set_Spawn.getString());

@@ -67,10 +67,6 @@ public class ArenaManager {
 	
 	public static void createArena(String name, Location loc) {
 		name = StringUtil.getWord(name);
-		List<String> spawns = new ArrayList<String>();
-		spawns.add(LocationHandler.getLocationToString(loc));
-		Files.arenas.set("Arenas."+ name + ".Spawns", spawns);
-		Files.saveArenas();
 		loadArena(new Arena(name));
 	}
  
@@ -106,6 +102,7 @@ public class ArenaManager {
 	}
  
 	public static boolean isArenaValid(String name){
+		name = StringUtil.getWord(name);
 		return !Files.getArenas().getStringList("Arenas."+ name +".Spawns").isEmpty();
 	}
 	/*
@@ -130,7 +127,13 @@ public class ArenaManager {
 		return null;
 	}
 	
-
+	public static void setSpawn(String arena, Location loc){
+		arena = StringUtil.getWord(arena);
+		List<String> spawns = Files.getArenas().getStringList("Arenas."+arena+".Spawns");
+		spawns.add(LocationHandler.getLocationToString(loc));
+		Files.getArenas().set("Arenas."+arena+".Spawns", spawns);
+		Files.saveArenas();
+	}
 
 	public static String getArenaCreator(Arena arena){
 		if(arena.getCreator() != null)
