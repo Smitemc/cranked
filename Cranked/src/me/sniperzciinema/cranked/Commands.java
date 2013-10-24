@@ -1,6 +1,10 @@
 
 package me.sniperzciinema.cranked;
 
+import me.sniperzciinema.cranked.GameMechanics.Agility;
+import me.sniperzciinema.cranked.GameMechanics.CrackedPlayer;
+import me.sniperzciinema.cranked.GameMechanics.CrackedPlayerManager;
+import me.sniperzciinema.cranked.GameMechanics.Stats;
 import me.sniperzciinema.cranked.Tools.Msgs;
 import me.sniperzciinema.cranked.Tools.Handlers.ArenaManager;
 
@@ -23,22 +27,32 @@ public class Commands implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("Cranked"))
 		{
+			Player p = null;
+			CrackedPlayer cp = null;
+			if (sender instanceof Player)
+			{
+				p = (Player)sender;
+				cp = CrackedPlayerManager.getCrackedPlayer(p);
+			}
 
+			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
+			{
+				Stats.setKills(sender.getName(), Stats.getKills(sender.getName()) + 1);
+				Agility.speedUp((Player) sender, true);
+			}
 			// //////////////////////////////JOIN///////////////////////////////////
 			if (args.length > 0 && args[0].equalsIgnoreCase("JOIN"))
 			{
-				if (!(sender instanceof Player))
+				if (p == null)
 				{
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				Player p = (Player) sender;
-
 				if (!sender.hasPermission("Cracked.Join"))
 				{
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
-				} else if (ArenaManager.getArena(p) != null)
+				} else if (cp.getArena() != null)
 				{
 					sender.sendMessage(Msgs.Error_Already_In_A_Game.getString());
 					return true;
@@ -49,8 +63,8 @@ public class Commands implements CommandExecutor {
 					{
 						if (ArenaManager.isArenaValid(arena))
 						{
-
-							ArenaManager.getArena(arena).getPlayerManager().addPlayer(p);
+							Game.join(cp, ArenaManager.getArena(arena));
+							Agility.speedUp(p, false);
 						} else
 						{
 							sender.sendMessage(Msgs.Error_Missing_Spawns.getString("<arena>", arena));
@@ -67,37 +81,34 @@ public class Commands implements CommandExecutor {
 			// //////////////////////////////LEAVE///////////////////////////////////
 			else if (args.length > 0 && args[0].equalsIgnoreCase("LEAVE"))
 			{
-				if (!(sender instanceof Player))
+				if (p == null)
 				{
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				Player p = (Player) sender;
 				if (!p.hasPermission("Cracked.Join"))
 				{
-
 					p.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
-				} else if (ArenaManager.getArena(p) == null)
+				} else if (cp.getArena() == null)
 				{
-
 					p.sendMessage(Msgs.Error_Not_In_A_Game.getString());
 					return true;
 				} else
 				{
-					ArenaManager.getArena(p).getPlayerManager().removePlayer(p);
+					cp.reset();
+					Agility.resetSpeed(p);
 				}
 			}
 
 			// //////////////////////////////CREATE///////////////////////////////////
 			else if (args.length > 0 && args[0].equalsIgnoreCase("CREATE"))
 			{
-				if (!(sender instanceof Player))
+				if (p == null)
 				{
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				Player p = (Player) sender;
 				if (!sender.hasPermission("Cracked.SetUp"))
 				{
 
@@ -109,12 +120,12 @@ public class Commands implements CommandExecutor {
 					if (!ArenaManager.arenaRegistered(arena))
 					{
 
-						ArenaManager.createArena(args[1], p.getLocation());
+						ArenaManager.createArena(args[1]);
 
 						p.sendMessage(Msgs.Arena_Created.getString("<arena>", arena));
 						p.sendMessage(Msgs.Commands_How_To_Set_Spawn.getString());
 
-						plugin.creating.put(p.getName(), arena);
+						cp.setCreating(arena);
 					} else
 					{
 
@@ -173,19 +184,18 @@ public class Commands implements CommandExecutor {
 			// //////////////////////////////SETSPAWN///////////////////////////////////
 			else if (args.length > 0 && args[0].equalsIgnoreCase("SETSPAWN"))
 			{
-				if (!(sender instanceof Player))
+				if (p == null)
 				{
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				Player p = (Player) sender;
 				if (!p.hasPermission("Cracked.Setup"))
 				{
 					p.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
 				} else
 				{
-					String arena = plugin.creating.get(p.getName());
+					String arena = cp.getCreating();
 					if (ArenaManager.arenaRegistered(arena))
 					{
 						ArenaManager.setSpawn(arena, p.getLocation());

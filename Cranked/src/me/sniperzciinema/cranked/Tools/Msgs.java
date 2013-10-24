@@ -20,6 +20,7 @@ public enum Msgs
 	Error_Not_An_Arena("Error.Not An Arena"),//<arena>
 	Error_Already_An_Arena("Error.Already An Arena"),
 	Error_Missing_Spawns("Error.Missing Spawns"), 
+	Error_Plugin_Unload("Error.Plugin Unload"), 
 	Game_You_Joined_A_Game("Game.You Joined A Game"), 
 	Game_They_Joined_A_Game("Game.They Joined A Game"),//<player> 
 	Game_You_Left_A_Game("Game.You Left A Game"), 

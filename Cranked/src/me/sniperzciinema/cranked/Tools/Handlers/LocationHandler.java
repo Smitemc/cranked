@@ -1,16 +1,10 @@
 
 package me.sniperzciinema.cranked.Tools.Handlers;
 
-import java.util.Random;
-
-
 import me.sniperzciinema.cranked.Main;
-import me.sniperzciinema.cranked.Tools.Files;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 
 
 public class LocationHandler {
@@ -35,17 +29,6 @@ public class LocationHandler {
 		return Loc;
 	}
 	
-
-	public static void respawn(Player player, String arena) {
-		player.setHealth(20.0);
-		player.setFoodLevel(20);
-		player.setFireTicks(0);
-		Random r = new Random();
-		int i = r.nextInt(Files.getArenas().getStringList("Arenas." + arena + ".Spawns").size());
-		String loc = Files.getArenas().getStringList("Arenas." + arena + ".Spawns").get(i);
-		
-		player.teleport(getPlayerLocation(loc));
-	}
 
 	public static String getLocationToString(Location loc) {
 		double ix = loc.getX();

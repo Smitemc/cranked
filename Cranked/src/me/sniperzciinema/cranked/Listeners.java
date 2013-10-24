@@ -12,7 +12,16 @@
  */
 package me.sniperzciinema.cranked;
 
+import me.sniperzciinema.cranked.GameMechanics.CrackedPlayer;
+import me.sniperzciinema.cranked.GameMechanics.CrackedPlayerManager;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 public class Listeners implements Listener{
 	
@@ -22,10 +31,23 @@ public class Listeners implements Listener{
 		plugin = instance;
 	}
 
-//	@EventHandler(priority = EventPriority.NORMAL)
-//	public void onBlockBreak(BlockBreakEvent e){
-//		if(Tron.inGameContains(e.getPlayer().getName()) || Tron.inLobbyContains(e.getPlayer().getName()))
-//			e.setCancelled(true);
-//	}
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onJoinCreateCrackedPlayer(PlayerJoinEvent e){
+		Player p = e.getPlayer();
+		CrackedPlayer cp= new CrackedPlayer(p);
+		CrackedPlayerManager.loadCrackedPlayer(cp);
+	}
+
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onLeaveDeleteCrackedPlayer(PlayerQuitEvent e){
+		CrackedPlayer cp = CrackedPlayerManager.getCrackedPlayer(e.getPlayer());
+		CrackedPlayerManager.deleteCrackedPlayer(cp);
+	}
+
+	@EventHandler(priority = EventPriority.NORMAL)
+	public void onKickedDeleteCrackedPlayer(PlayerKickEvent e){
+		CrackedPlayer cp = CrackedPlayerManager.getCrackedPlayer(e.getPlayer());
+		CrackedPlayerManager.deleteCrackedPlayer(cp);
+	}
 
 }
