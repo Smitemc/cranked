@@ -1,0 +1,9 @@
+name: Cranked
+description: COD Ghosts Cranked for MC
+main: me.sniperzciinema.cranked.Main
+version: 0.0.1
+author: xXSniperzzXx_SD
+commands:
+   Cranked:
+      description: The basic command for Cranked 
+      aliases: [crank, cr]
