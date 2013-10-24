@@ -1,16 +1,14 @@
 
 package me.sniperzciinema.cranked;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import me.sniperzciinema.cranked.ArenaHandlers.Arena;
-import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Tools.Files;
 import me.sniperzciinema.cranked.Tools.StringUtil;
+import me.sniperzciinema.cranked.Tools.Handlers.Arena;
+import me.sniperzciinema.cranked.Tools.Handlers.ArenaManager;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,9 +18,9 @@ public class Main extends JavaPlugin{
 	public static Plugin me;
 	public static String cranked = "" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "-[" + ChatColor.DARK_GRAY + ChatColor.BOLD + "Cranked" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "]-" + ChatColor.GRAY;
 
-	public static ArrayList<Player> playing;
-	public static HashMap<Player, Arena> playingIn;
-
+	public HashMap<String, String> creating = new HashMap<String, String>();
+	
+	
 	public void onEnable(){
 		 me = this;
 		// Register the event listeners

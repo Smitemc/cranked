@@ -1,8 +1,7 @@
-package me.sniperzciinema.cranked.ArenaHandlers;
+package me.sniperzciinema.cranked.Tools.Handlers;
  
 import java.util.List;
 
-import me.sniperzciinema.cranked.PlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
 
 import org.bukkit.entity.Player;

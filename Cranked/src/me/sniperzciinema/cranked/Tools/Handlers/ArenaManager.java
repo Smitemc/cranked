@@ -1,11 +1,10 @@
-package me.sniperzciinema.cranked.ArenaHandlers;
+package me.sniperzciinema.cranked.Tools.Handlers;
  
 import java.util.ArrayList;
 import java.util.List;
  
 import me.sniperzciinema.cranked.Tools.Files;
 import me.sniperzciinema.cranked.Tools.StringUtil;
-import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -19,7 +18,7 @@ public class ArenaManager {
 
 	public static String getPossibleArenas(){
 
-		List<String> possible = new ArrayList<String>();
+		ArrayList<String> possible = new ArrayList<String>();
 		for (Arena arena : arenas)
 		{
 			if(ArenaManager.arenaRegistered(arena)){
@@ -35,12 +34,12 @@ public class ArenaManager {
 			if (possible.size() > 1)
 				possibleString.append(", ");
 		}
-		return possible.toString();
+		return possible.toString().replaceAll("\\[", "").replaceAll("\\]", "");
 	}
 
 	public static String getNotPossibleArenas(){
 
-		List<String> notpossible = new ArrayList<String>();
+		ArrayList<String> notpossible = new ArrayList<String>();
 		for (Arena arena : arenas)
 		{
 			if(ArenaManager.arenaRegistered(arena)){
@@ -56,7 +55,7 @@ public class ArenaManager {
 			if (notpossible.size() > 1)
 				notpossibleString.append(", ");
 		}
-		return notpossible.toString();
+		return notpossible.toString().replaceAll("\\[", "").replaceAll("\\]", "");
 	}
 
 	// Method to register an arena if not registered, just adds it to the list
@@ -67,6 +66,7 @@ public class ArenaManager {
 	}
 	
 	public static void createArena(String name, Location loc) {
+		name = StringUtil.getWord(name);
 		List<String> spawns = new ArrayList<String>();
 		spawns.add(LocationHandler.getLocationToString(loc));
 		Files.arenas.set("Arenas."+ name + ".Spawns", spawns);
@@ -84,7 +84,8 @@ public class ArenaManager {
 		}
 	}
 	public static void removeArena(String name) {
-		Files.arenas.set("Arenas."+ name + ".Spawns", null);
+		name = StringUtil.getWord(name);
+		Files.arenas.set("Arenas."+ name , null);
 		Files.saveArenas();
 		unloadArena(getArena(name));
 	}

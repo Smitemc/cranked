@@ -1,4 +1,4 @@
-package me.sniperzciinema.cranked.ArenaHandlers;
+package me.sniperzciinema.cranked.Tools.Handlers;
 
 public enum State {
 	Started,

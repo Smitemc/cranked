@@ -9,10 +9,9 @@ import me.sniperzciinema.cranked.Main;
 public enum Msgs
 {
 	Format_Line("Format.Line"),
-	Format_Header("Format.Header"), 
+	Format_Header("Format.Header"),
 	Arena_Created("Arena.Created"),
-	Arena_Removed("Arena.Removed"), 
-	Arena_First_Spawn_Set("Arena.First Spawn Set"), 
+	Arena_Removed("Arena.Removed"),  
 	Arena_How_To_Set_More_Spawns("Arena.How To Set More Spawns"),
 	Error_No_Permission("Error.No Permission"), 
 	Error_Game_Already_Started("Error.Games Already Started"), 
@@ -27,8 +26,10 @@ public enum Msgs
 	Game_They_Left_A_Game("Game.They Left A Game"), 
 	Game_Not_Enough_Players("Game.Not Enough Players"), 
 	Commands_How_To_Join("Commands.How To Join"), 
+	Commands_How_To_Set_Spawn("Commands.How To Set Spawn"), 
 	Commands_How_To_Create("Commands.How To Create"), 
-	Commands_How_To_Remove("Commands.How To Remove"), ;
+	Commands_How_To_Remove("Commands.How To Remove"),  
+	Commands_List_Arenas("Commands.List Arenas"), ;
 
 	private String string;
 
@@ -43,8 +44,7 @@ public enum Msgs
 			return ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string));
 		} catch (NullPointerException npe)
 		{
-			npe.printStackTrace();
-			return Main.cranked +"!! Unable to find message !!";
+			return Main.cranked +"Unable to find message: "+string;
 		}
 	}
 
@@ -54,8 +54,7 @@ public enum Msgs
 			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis));
 		} catch (NullPointerException npe)
 		{
-			npe.printStackTrace();
-			return Main.cranked +"!! Unable to find message !!";
+			return Main.cranked +"Unable to find message: "+string;
 		}
 	}
 
@@ -65,8 +64,7 @@ public enum Msgs
 			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2));
 		} catch (NullPointerException npe)
 		{
-			npe.printStackTrace();
-			return Main.cranked +"!! Unable to find message !!";
+			return Main.cranked +"Unable to find message: "+string;
 		}
 	}
 };

@@ -1,11 +1,9 @@
-package me.sniperzciinema.cranked;
+package me.sniperzciinema.cranked.Tools.Handlers;
  
 import java.util.ArrayList;
 import java.util.List;
  
-import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.Tools.Msgs;
-import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;

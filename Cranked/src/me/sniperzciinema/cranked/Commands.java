@@ -1,8 +1,8 @@
 
 package me.sniperzciinema.cranked;
 
-import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Tools.Msgs;
+import me.sniperzciinema.cranked.Tools.Handlers.ArenaManager;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,37 +36,33 @@ public class Commands implements CommandExecutor {
 
 				if (!sender.hasPermission("Cracked.Join"))
 				{
-					sender.sendMessage("No perms");
-					//sender.sendMessage(Msgs.Error_No_Permission.getString());
+					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
 				} else if (ArenaManager.getArena(p) != null)
 				{
-					sender.sendMessage("Already in");
-					//sender.sendMessage(Msgs.Error_Already_In_A_Game.getString());
+					sender.sendMessage(Msgs.Error_Already_In_A_Game.getString());
 					return true;
 				} else if (args.length == 2)
 				{
 					String arena = args[1];
 					if (ArenaManager.arenaRegistered(arena))
 					{
-						if(ArenaManager.isArenaValid(arena)){
+						if (ArenaManager.isArenaValid(arena))
+						{
 
 							sender.sendMessage("joined arena");
 							ArenaManager.getArena(arena).getPlayerManager().addPlayer(p);
 						} else
 						{
-							sender.sendMessage("Missing spawns");
-							//sender.sendMessage(Msgs.Error_Missing_Spawns.getString("<arena>", arena));
+							sender.sendMessage(Msgs.Error_Missing_Spawns.getString("<arena>", arena));
 						}
 					} else
 					{
-						sender.sendMessage("Not An Arena");
-						//sender.sendMessage(Msgs.Error_Not_An_Arena.getString("<arena>", arena));
+						sender.sendMessage(Msgs.Error_Not_An_Arena.getString("<arena>", arena));
 					}
 				} else
 				{
-					sender.sendMessage("How To Join");
-					//sender.sendMessage(Msgs.Commands_How_To_Join.getString());
+					sender.sendMessage(Msgs.Commands_How_To_Join.getString());
 				}
 			}
 			// //////////////////////////////LEAVE///////////////////////////////////
@@ -78,23 +74,21 @@ public class Commands implements CommandExecutor {
 					return true;
 				}
 				Player p = (Player) sender;
-				if (!sender.hasPermission("Cracked.Join"))
+				if (!p.hasPermission("Cracked.Join"))
 				{
 
-					sender.sendMessage("No Perms");
-					//sender.sendMessage(Msgs.Error_No_Permission.getString());
+					p.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
 				} else if (ArenaManager.getArena(p) == null)
 				{
 
-					sender.sendMessage("Not in game");
-					//sender.sendMessage(Msgs.Error_Not_In_A_Game.getString());
+					p.sendMessage(Msgs.Error_Not_In_A_Game.getString());
 					return true;
 				} else
 				{
 					ArenaManager.getArena(p).getPlayerManager().removePlayer(p);
 
-					sender.sendMessage("left arena");
+					p.sendMessage("left arena");
 				}
 			}
 
@@ -110,8 +104,7 @@ public class Commands implements CommandExecutor {
 				if (!sender.hasPermission("Cracked.SetUp"))
 				{
 
-					sender.sendMessage("No Perms");
-					//sender.sendMessage(Msgs.Error_No_Permission.getString());
+					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
 				} else if (args.length == 2)
 				{
@@ -119,23 +112,21 @@ public class Commands implements CommandExecutor {
 					if (!ArenaManager.arenaRegistered(arena))
 					{
 
-						sender.sendMessage("Arena made");
 						ArenaManager.createArena(args[1], p.getLocation());
-						
-						//sender.sendMessage(Msgs.Arena_Created.getString("<arena>", arena));
-						//sender.sendMessage(Msgs.Arena_First_Spawn_Set.getString());
-						//sender.sendMessage(Msgs.Arena_How_To_Set_More_Spawns.getString());
+
+						p.sendMessage(Msgs.Arena_Created.getString("<arena>", arena));
+						p.sendMessage(Msgs.Commands_How_To_Set_Spawn.getString());
+
+						plugin.creating.put(p.getName(), arena);
 					} else
 					{
 
-						sender.sendMessage("Already an arena");
-//						sender.sendMessage(Msgs.Error_Already_An_Arena.getString("<arena>", arena));
+						p.sendMessage(Msgs.Error_Already_An_Arena.getString("<arena>", arena));
 					}
 				} else
 				{
 
-					sender.sendMessage("How to Create");
-					//sender.sendMessage(Msgs.Commands_How_To_Create.getString());
+					p.sendMessage(Msgs.Commands_How_To_Create.getString());
 				}
 
 			}
@@ -143,16 +134,10 @@ public class Commands implements CommandExecutor {
 			// //////////////////////////////REMOVE///////////////////////////////////
 			else if (args.length > 0 && args[0].equalsIgnoreCase("REMOVE"))
 			{
-				if (!(sender instanceof Player))
-				{
-					sender.sendMessage("Expected a player!");
-					return true;
-				}
 				if (!sender.hasPermission("Cracked.SetUp"))
 				{
 
-					sender.sendMessage("No Perms");
-					//sender.sendMessage(Msgs.Error_No_Permission.getString());
+					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
 				} else if (args.length == 2)
 				{
@@ -161,17 +146,14 @@ public class Commands implements CommandExecutor {
 					{
 						ArenaManager.removeArena(args[1]);
 
-						sender.sendMessage("Arena removed");
-//						sender.sendMessage(Msgs.Arena_Removed.getString("<arena>", arena));
+						sender.sendMessage(Msgs.Arena_Removed.getString("<arena>", arena));
 					} else
 					{
-						sender.sendMessage("Not An Arena");
-	//					sender.sendMessage(Msgs.Error_Not_An_Arena.getString("<arena>", arena));
+						sender.sendMessage(Msgs.Error_Not_An_Arena.getString("<arena>", arena));
 					}
 				} else
 				{
-					sender.sendMessage("How to remove");
-				//	sender.sendMessage(Msgs.Commands_How_To_Remove.getString());
+					sender.sendMessage(Msgs.Commands_How_To_Remove.getString());
 				}
 
 			}
@@ -180,16 +162,41 @@ public class Commands implements CommandExecutor {
 			{
 				if (!sender.hasPermission("Cracked.List"))
 				{
-					sender.sendMessage("No Perms");
-					//sender.sendMessage(Msgs.Error_No_Permission.getString());
+					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
-				}else{
-					//TODO: send message of good maps and bad maps
-				}
+				} else
+				{
 
+					sender.sendMessage(Msgs.Format_Header.getString("<title>", "Arenas"));
+					sender.sendMessage(Msgs.Commands_List_Arenas.getString("<validarenas>", ArenaManager.getPossibleArenas(), "<notvalidarenas>", ArenaManager.getNotPossibleArenas()));
+
+					sender.sendMessage(ArenaManager.getPossibleArenas() + " - " + ArenaManager.getNotPossibleArenas());
+				}
 			}
-			else{
-				sender.sendMessage("Test");
+			// //////////////////////////////SETSPAWN///////////////////////////////////
+			else if (args.length > 0 && args[0].equalsIgnoreCase("SETSPAWN"))
+			{
+				if (!(sender instanceof Player))
+				{
+					sender.sendMessage("Expected a player!");
+					return true;
+				}
+				Player p = (Player) sender;
+				if (!p.hasPermission("Cracked.Setup"))
+				{
+					p.sendMessage(Msgs.Error_No_Permission.getString());
+					return true;
+				} else
+				{
+					String arena = plugin.creating.get(p.getName());
+					if (ArenaManager.arenaRegistered(arena))
+					{
+
+					} else
+					{
+						p.sendMessage(Msgs.Commands_How_To_Set_Spawn.getString());
+					}
+				}
 			}
 		}
 
