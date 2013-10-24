@@ -12,7 +12,11 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
- 
+
+
+//TODO: Make PlayerManager not dependant on Arena(Make PlayerManager it's own thing)
+
+
 public class PlayerManager {
  
   private Arena arena; 
