@@ -14,6 +14,7 @@ public class Settings {
 		this.arena = arena;
 	}
 	
+	///////////////////////////////////////////////-Integers-//////////////////////////////////////////////////////
 	public int getGameTime() {
 		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Time.Game"))
 			return Files.getArenas().getInt("Arenas." +arena.getName()+ ".In Game.Time.Game");
@@ -26,22 +27,34 @@ public class Settings {
 			return Files.getArenas().getInt("Arenas." +arena.getName()+ ".In Game.Time.PreGame");
 		else
 			return Files.getConfig().getInt("In Game.Time.PreGame");
-	}
+		}	
 
 	public int getRequiredPlayers() {
-		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".Auto Start.RequiredPlayers"))
-			return Files.getArenas().getInt("Arenas." +arena.getName()+ "Auto Start.RequiredPlayers");
+		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".Auto Start.Required Players"))
+			return Files.getArenas().getInt("Arenas." +arena.getName()+ "Auto Start.Required Players");
 		else
-			return Files.getConfig().getInt("Auto Start.RequiredPlayers");
+			return Files.getConfig().getInt("Auto Start.Required Players");
 	}
+	
+	public int getScorePerKill() {
+		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Time.PreGame"))
+			return Files.getArenas().getInt("Arenas." +arena.getName()+ ".In Game.Time.PreGame");
+		else
+			return Files.getConfig().getInt("In Game.Time.PreGame");
+		}	
 
+	//////////////////////////////////////////////////-BOOLEANS-////////////////////////////////////////////////////
 	public boolean isRequiredPlayersEnabled() {
-		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".Auto Start.Enabled"))
-			return Files.getArenas().getBoolean("Arenas." +arena.getName()+ "Auto Start.Enabled");
+		if(Files.getArenas().contains("Arenas." +arena.getName() + ".Auto Start.Enable"))
+			return Files.getArenas().getBoolean("Arenas." +arena.getName()+ "Auto Start.Enable");
 		else
-			return Files.getConfig().getBoolean("Auto Start.Enabled");
+			return Files.getConfig().getBoolean("Auto Start.Enable");
 	}
 
+	
+	
+	//////////////////////////////////////////////////-FLOATS-///////////////////////////////////////////////////////
+	
 	public float getBonusSpeed() {
 		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Settings.Bonus Speed Per Kill"))
 			return Float.parseFloat(Files.getArenas().getString("Arenas." +arena.getName()+ ".In Game.Settings.Bonus Speed Per Kill"));
@@ -56,6 +69,9 @@ public class Settings {
 			return Float.parseFloat(Files.getConfig().getString("In Game.Settings.Speed PreGame"));
 	}
 	
+	
+	
+	//////////////////////////////////////////////-ITEMS-///////////////////////////////////////////////////////////
 	public ItemStack getDefaultHead() {
 		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".Equipment.Helmet"))
 			return ItemHandler.getItemStack(Files.getArenas().getString("Arenas." +arena.getName()+ ".Equipment.Helmet"));

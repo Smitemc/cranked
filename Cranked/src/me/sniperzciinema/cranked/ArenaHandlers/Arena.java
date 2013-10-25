@@ -10,19 +10,27 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import me.sniperzciinema.cranked.Tools.Files;
+import me.sniperzciinema.cranked.Tools.Settings;
 
 
 public class Arena {
 
-	private ArenaTimers Timer = new ArenaTimers(this);
+
 	private String name;
 	private States state = States.Waiting;
 	private HashMap<Location, Inventory> chests = new HashMap<Location, Inventory>();
 	private HashMap<Location, Material> blocks = new HashMap<Location, Material>();
+	
+	private Settings Settings = new Settings(this);
+	private ArenaTimers Timer = new ArenaTimers(this);
 
 	public Arena(String name)
 	{
 		this.name = name;
+	}
+
+	public Settings getSettings() {
+		return Settings;
 	}
 
 	public String getName() {

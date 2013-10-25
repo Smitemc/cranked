@@ -1,13 +1,11 @@
-package me.sniperzciinema.cranked.Tools;
+package me.sniperzciinema.cranked.GameMechanics;
 
 public enum DeathTypes {
 	
 	Arrow, 
 	Melee,
-	Grenade,
+	OutOfTime,
 	Gun,
-	Snowball,
-	Egg,
 	Other,
 	
 }; 

@@ -11,17 +11,15 @@ import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.Time;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
-import me.sniperzciinema.cranked.Tools.Settings;
 
 
 public class ArenaTimers {
 
 	private Arena arena;
-	private Settings Settings = new Settings(arena);
 	private int timeLeft;
 	private int pregame;
 	private int game;
-
+	
 	public ArenaTimers(Arena arena)
 	{
 		this.arena = arena;
@@ -30,19 +28,10 @@ public class ArenaTimers {
 	public Arena getArena() {
 		return arena;
 	}
-
-	public int getTimePreGame() {
-		return Settings.getPregameTime();
-	}
-
-	public int getGameTime() {
-		return Settings.getGameTime();
-	}
-
+	
 	public int getTimeLeft() {
 		return timeLeft;
 	}
-
 	public void setTimeLeft(int timeLeft) {
 		this.timeLeft = timeLeft;
 	}
@@ -53,6 +42,15 @@ public class ArenaTimers {
 	public void stopGameTimer(){
 		Bukkit.getScheduler().cancelTask(game);
 	}
+
+	public int getTimePreGame() {
+		return arena.getSettings().getPregameTime();
+	}
+
+	public int getGameTime() {
+		return arena.getSettings().getGameTime();
+	}
+
 	public void reset(){
 		stopPreGameTimer();
 		stopGameTimer();

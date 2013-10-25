@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 
+import me.sniperzciinema.cranked.Main;
+
 import org.bukkit.plugin.Plugin;
 
 import code.husky.Database;
@@ -59,8 +61,14 @@ public class MySQL extends Database {
             connection = DriverManager.getConnection("jdbc:mysql://" + this.hostname + ":" + this.port + "/" + this.database, this.user, this.password);
         } catch (SQLException e) {
             plugin.getLogger().log(Level.SEVERE, "Could not connect to MySQL server! because: " + e.getMessage());
+			System.out.println("!Unable to connect to MySQL!");
+			Main.me.getConfig().set("MySql.Enable", false);
+			Main.me.saveConfig();
         } catch (ClassNotFoundException e) {
             plugin.getLogger().log(Level.SEVERE, "JDBC Driver not found!");
+			System.out.println("!Unable to connect to MySQL!");
+			Main.me.getConfig().set("MySql.Enable", false);
+			Main.me.saveConfig();
         }
         return connection;
     }

@@ -4,6 +4,8 @@ package me.sniperzciinema.cranked.PlayerHandlers;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import me.sniperzciinema.cranked.Main;
+import me.sniperzciinema.cranked.GameMechanics.DeathTypes;
+import me.sniperzciinema.cranked.GameMechanics.Deaths;
 
 
 public class CPlayerTimers {
@@ -30,8 +32,18 @@ public class CPlayerTimers {
 	public void reset(){
 		timeSinceLastKill = 0;
 	}
+	public void restartTimer(){
+		stopTimer();
+		 Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.me, new Runnable() {
+				@Override
+				public void run() {
+					
+					startTimer();
+				}
+		 },1L);
+	}
 	public void startTimer(){
-
+		timeSinceLastKill = 0;
 		final Player player = getCrankedPlayer().getPlayer();
 		player.setExp(0.99F);
 		timer = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.me, new Runnable() {
@@ -45,9 +57,8 @@ public class CPlayerTimers {
 				}
 				//GAME STARTS
 				else if(timeSinceLastKill == 30) {
-						//TODO: Kill Player
-					timeSinceLastKill = 0;
-					player.setExp(0.99F);
+					Deaths.playerDies(null, player, DeathTypes.OutOfTime);
+					player.getWorld().createExplosion(player.getLocation(), -1);
 					}
 				}
 		}, 0L, 20L);

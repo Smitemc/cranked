@@ -34,6 +34,7 @@ public class CPlayer {
 	private String creating;
 	private Player player;
 	String name;
+	private Player lastDamager;
 
 	public CPlayer(Player p) {
 		location = p.getLocation();
@@ -84,7 +85,7 @@ public class CPlayer {
 		p.updateInventory();
 		p.setFallDistance(0);
 		p.teleport(location);
-		Agility.resetSpeed(p);
+		p.setWalkSpeed(0.2F);
 		for (PotionEffect effect : player.getActivePotionEffects())
 	        player.removePotionEffect(effect.getType());
 		getTimer().stopTimer();
@@ -97,6 +98,12 @@ public class CPlayer {
 		inventory = null;
 		armor = null;
 		arena = null;
+	}
+	public void setLastDamager(Player p){
+		lastDamager = p;
+	}
+	public Player getLastDamager(){
+		return lastDamager;
 	}
 
 	public void respawn(){
@@ -221,6 +228,15 @@ public class CPlayer {
 	public void setPoints(int points) {
 		this.points = points;
 	}
+	public int getScore(){
+		return Stats.getScore(getName());
+	}
+	public int getKills(){
+		return Stats.getKills(getName());
+	}
+	public int getDeaths(){
+		return Stats.getDeaths(getName());
+	}
 	
 	public void updateSpeed(){
 		Agility.speedUp(getPlayer(), true);
@@ -228,11 +244,13 @@ public class CPlayer {
 	public void resetSpeed(){
 		Agility.resetSpeed(getPlayer());
 	}
-	public void updateStats(int kills, int deaths){
+	public void updateStats(int kills, int deaths, int score){
 		if(kills != 0)
-			Stats.setKills(getName(), Stats.getKills(getName()) + kills);
+			Stats.setKills(getName(), getKills() + kills);
 		if(deaths != 0)
-			Stats.setDeaths(getName(), Stats.getDeaths(getName()) + deaths);
+			Stats.setDeaths(getName(), getDeaths() + deaths);
+		if(score != 0)
+			Stats.setScore(getName(), getScore() + score);
 	}
 	public CPlayerTimers getTimer(){
 		return PlayerTimer;

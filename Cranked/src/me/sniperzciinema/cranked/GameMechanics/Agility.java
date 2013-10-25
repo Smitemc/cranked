@@ -17,7 +17,6 @@ public class Agility {
 			int killStreak = Stats.getKills(p.getName());
 			float regularSpeed = 0.2F;
 			p.setWalkSpeed(regularSpeed + (float)((killStreak >0) ? (Settings.getBonusSpeed()*killStreak) : 0));
-			p.sendMessage(String.valueOf(p.getWalkSpeed()));
 		}
 		else
 			p.setWalkSpeed(Settings.getPreGameSpeed());

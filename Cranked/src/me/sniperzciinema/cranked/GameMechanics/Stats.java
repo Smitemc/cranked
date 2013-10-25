@@ -45,6 +45,27 @@ public class Stats {
 		}
 	}
 
+	
+	public static int getScore(String name) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			return Integer.valueOf(getMySQLStats(name, "Score"));
+		else
+			return Files.getPlayers().getInt("Players." + name + ".Score");
+	}
+
+	public static void setScore(String name, Integer score) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			setMySQLStats(name, "Score", score);
+		else
+		{
+			Files.getPlayers().set("Players." + name + ".Score", score);
+			Files.savePlayers();
+		}
+	}
+
+	
+	
+	
 	private static String getMySQLStats(String name, String stat) {
 		String value = "0";
 

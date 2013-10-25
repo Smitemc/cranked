@@ -17,8 +17,8 @@ Error:
   Plugin Unload: "&cCranked has been unloaded"
   Cant Use Command: "&2You cannot use this command"
 Game:
-  You Join A Game: "&1You have successfully joined a game"
-  They Join A Game: "&9<player>&1 has successfully joined a game"
+  You Joined A Game: "&1You have successfully joined a game"
+  They Joined A Game: "&9<player>&1 has successfully joined a game"
   You Left A Game: "&1You left a game"
   They Left A Game: "&9<player>&1 left a game"
   Not Enought Players: "&bNot enough players to start game"

@@ -1,16 +1,23 @@
 
 package me.sniperzciinema.cranked;
 
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
+import me.sniperzciinema.cranked.Listeners.CrackShotApi;
 import me.sniperzciinema.cranked.Listeners.RegisterAndUnRegister;
+import me.sniperzciinema.cranked.Listeners.MiscListeners;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.StringUtil;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
+import me.sniperzciinema.cranked.Tools.Metrics;
+import me.sniperzciinema.cranked.Tools.Updater;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -23,17 +30,69 @@ import code.husky.mysql.MySQL;
 
 public class Main extends JavaPlugin {
 
-	private RegisterAndUnRegister listeners = new RegisterAndUnRegister(this);
 	public static Plugin me;
 	public static String cranked = "" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "-[" + ChatColor.DARK_GRAY + ChatColor.BOLD + "Cranked" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "]-" + ChatColor.GRAY;
 
 	public static MySQL MySQL = null;
 	public static Connection c = null;
+	
+	public static boolean update;
+	public static String name;
 
 	public void onEnable() {
+
+		System.out.println("===== Cranked =====");
+		if (getConfig().getBoolean("Check For Updates.Enable"))
+		{
+			try
+			{
+				Updater updater = new Updater(this, 0/*NEED TO UPLOAD FIRST TO GET ID*/, getFile(),
+						Updater.UpdateType.NO_DOWNLOAD, false);
+
+				Main.update = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
+				Main.name = updater.getLatestName();
+
+				System.out.println(this.getDescription().getVersion().replaceAll(".", ""));
+				System.out.println(updater.getLatestFileVersion().replaceAll(".", ""));
+
+				int currentVersion = Integer.valueOf(this.getDescription().getVersion().replaceAll("\\.", ""));
+				int newVersion = Integer.valueOf(updater.getLatestFileVersion().replaceAll("\\.", ""));
+
+				if (currentVersion >= newVersion)
+				{
+					System.out.println("You are running a beta version of Cranked!");
+					update = false;
+				}
+
+				else
+					System.out.println("You need to update Cranked to: " + updater.getLatestFileVersion());
+
+			} catch (Exception ex)
+			{
+				System.out.println("The auto-updater tried to contact dev.bukkit.org, but was unsuccessful.");
+			}
+		}
+		try
+		{
+			Metrics metrics = new Metrics(this);
+			metrics.start();
+			System.out.println("Metrics was started!");
+		} catch (IOException e)
+		{
+			System.out.println("Metrics was unable to start...");
+		}
+		
 		me = this;
 		// Register the event listeners
-		getServer().getPluginManager().registerEvents(listeners, this);
+
+		RegisterAndUnRegister register = new RegisterAndUnRegister(this);
+		getServer().getPluginManager().registerEvents(register, this);
+		MiscListeners MiscListeners = new MiscListeners(this);
+		getServer().getPluginManager().registerEvents(MiscListeners, this);
+		if(getServer().getPluginManager().getPlugin("CrackShot") != null){
+			CrackShotApi CrackShotApi = new CrackShotApi(this);
+			getServer().getPluginManager().registerEvents(CrackShotApi, this);
+		}
 		getCommand("Cranked").setExecutor(new Commands(this));
 
 		// Create the default config.yml
@@ -59,19 +118,34 @@ public class Main extends JavaPlugin {
 			{
 				Arena arena = new Arena(StringUtil.getWord(s));
 				ArenaManager.loadArena(arena);
-				System.out.println("Loaded Arena: " + arena);
+				System.out.println("Loaded Arena: " + arena.getName());
 			}
 		else
 			System.out.println("Couldn't Loaded Any Arenas");
 		if (getConfig().getBoolean("MySQL.Enable"))
 		{
+			System.out.println("Attempting to connect to MySQL");
 			MySQL = new MySQL(this, getConfig().getString("MySQL.Host"),
 					getConfig().getString("MySQL.Port"),
 					getConfig().getString("MySQL.Database"),
 					getConfig().getString("MySQL.User"),
 					getConfig().getString("MySQL.Pass"));
 			c = MySQL.openConnection();
+			 try
+				{
+					 Statement state = c.createStatement();
+				
+					state.executeUpdate("CREATE TABLE IF NOT EXISTS Cranked (Player CHAR(16), Kills INT(10), Deaths INT(10), Score INT(10));");
+				} catch (SQLException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("!Unable to connect to MySQL!");
+					getConfig().set("MySql.Enable", false);
+					saveConfig();
+				}
 		}
+		System.out.println("====================");
 
 	}
 
