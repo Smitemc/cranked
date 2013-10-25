@@ -37,7 +37,9 @@ public class Commands implements CommandExecutor {
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
 			{
-				cp.getTimer().startTimer();
+				
+				
+				
 			}
 			// //////////////////////////////JOIN///////////////////////////////////
 			if (args.length > 0 && args[0].equalsIgnoreCase("JOIN"))

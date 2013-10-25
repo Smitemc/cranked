@@ -243,17 +243,16 @@ public class ItemHandler {
 		return is;
 	}
 
-	public static ItemStack[] getItemStackList(List<String> list){
-		System.out.println(list);
+	public static ItemStack[] getItemStackList(List<String> list) {
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-		for(String string : list)
+		for (String string : list)
 		{
-			System.out.println(string);
 			items.add(getItemStack(string));
 		}
 		ItemStack[] stack = items.toArray(new ItemStack[0]);
 		return stack;
 	}
+
 	@SuppressWarnings("deprecation")
 	public static String getItemStackToString(ItemStack i) {
 		String itemCode = "0";

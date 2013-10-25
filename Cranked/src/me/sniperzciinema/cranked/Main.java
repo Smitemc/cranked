@@ -32,7 +32,7 @@ import code.husky.mysql.MySQL;
 public class Main extends JavaPlugin {
 
 	public static Plugin me;
-	public static String cranked = "" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "-[" + ChatColor.DARK_GRAY + ChatColor.BOLD + "Cranked" + ChatColor.GOLD + ChatColor.BOLD + ChatColor.STRIKETHROUGH + "]-" + ChatColor.GRAY;
+	public static String cranked = "" + ChatColor.DARK_GRAY + ChatColor.BOLD + "«" + ChatColor.GOLD + ChatColor.BOLD + "Cranked" + ChatColor.DARK_GRAY + ChatColor.BOLD + "»" + ChatColor.DARK_AQUA + " ";
 
 	public static MySQL MySQL = null;
 	public static Connection c = null;

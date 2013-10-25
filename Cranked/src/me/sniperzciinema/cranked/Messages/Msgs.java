@@ -11,13 +11,14 @@ public enum Msgs
 {
 	Format_Line("Format.Line"),
 	Format_Header("Format.Header"),//<title>
+	Arena_StatusUpdate("Game.Status Update"),//<current>> // <needed>
 	Arena_Created("Arena.Created"),//<arena>
 	Arena_Removed("Arena.Removed"), //<arena>
 	Arena_How_To_Set_More_Spawns("Arena.How To Set More Spawns"),
 	Error_No_Permission("Error.No Permission"), 
 	Error_Game_Already_Started("Error.Games Already Started"), 
 	Error_Not_In_A_Game("Error.Not In A Game"), 
-	Error_Already_In_A_Game("Error.Already In Game"), 
+	Error_Already_In_A_Game("Error.Already In A Game"), 
 	Error_Not_An_Arena("Error.Not An Arena"),//<arena>
 	Error_Already_An_Arena("Error.Already An Arena"),
 	Error_Missing_Spawns("Error.Missing Spawns"), 
