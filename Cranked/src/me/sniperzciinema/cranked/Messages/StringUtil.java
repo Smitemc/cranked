@@ -1,12 +1,12 @@
-package me.sniperzciinema.cranked.Messages;
 
+package me.sniperzciinema.cranked.Messages;
 
 public class StringUtil {
 
-	public static String getWord(String string){
+	public static String getWord(String string) {
 		String s = string;
-		s = s.replaceFirst(String.valueOf(s.charAt(0)), String.valueOf(s.charAt(0)).toUpperCase());
+		if (string != null)
+			s = s.replaceFirst(String.valueOf(s.charAt(0)), String.valueOf(s.charAt(0)).toUpperCase());
 		return s;
-		
 	}
 }

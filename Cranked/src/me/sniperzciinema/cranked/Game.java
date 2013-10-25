@@ -1,33 +1,45 @@
 package me.sniperzciinema.cranked;
 
 import me.sniperzciinema.cranked.ArenaClasses.Arena;
+import me.sniperzciinema.cranked.GameMechanics.Equip;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
 import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.Tools.Settings;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 
 public class Game
 {
-
-    public static void start(Arena arena)
+	
+	public static void start(Arena arena)
     {
+    	for(Player p : arena.getPlayers())
+    		CrankedPlayerManager.getCrackedPlayer(p).respawn();
     	arena.getTimer().startPreGameTimer();
     }
     public static void end(Arena arena)
     {
-    	for(Player p : arena.getPlayers())
-    	removePlayer(CrankedPlayerManager.getCrackedPlayer(p));
-    }
+    	arena.getTimer().reset();
+    	for(Player p : arena.getPlayers()){
+    		CrankedPlayer cp = CrankedPlayerManager.getCrackedPlayer(p);
+    		
+    		removePlayer(cp);
+    		p.sendMessage(Msgs.Game_Ended.getString());
+    		
+    	}
+	}
 
 	public static void join(CrankedPlayer cp, Arena arena) {
+		Settings Settings = new Settings(arena);
 		Player p = cp.getPlayer();
 		
 		cp.setInfo();
 		cp.setArena(arena);
 		for (PotionEffect effect : p.getActivePotionEffects())
 	        p.removePotionEffect(effect.getType());
+			Equip.equipPlayer(p);
 		
 		p.sendMessage(Msgs.Game_You_Joined_A_Game.getString());
 		
@@ -36,9 +48,9 @@ public class Game
 				ppl.sendMessage(Msgs.Game_They_Joined_A_Game.getString("<player>", p.getName()));
 		
 		p.setFallDistance(0);
-		CrankedPlayerManager.respawn(cp);
+		cp.respawn();
 		
-		if(arena.getPlayers().size() >= 1){
+		if( Settings.isRequiredPlayersEnabled() && arena.getPlayers().size() >= Settings.getRequiredPlayers()){
 			start(arena);
 		}
 	}

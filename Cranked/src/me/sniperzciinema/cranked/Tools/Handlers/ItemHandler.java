@@ -1,6 +1,8 @@
 
 package me.sniperzciinema.cranked.Tools.Handlers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 
 import org.bukkit.ChatColor;
@@ -241,6 +243,15 @@ public class ItemHandler {
 		return is;
 	}
 
+	public static ItemStack[] getItemStackList(List<String> list){
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+		for(String string : list)
+		{
+			items.add(getItemStack(string));
+		}
+		ItemStack[] stack = items.toArray(new ItemStack[0]);
+		return stack;
+	}
 	@SuppressWarnings("deprecation")
 	public static String getItemStackToString(ItemStack i) {
 		String itemCode = "0";

@@ -5,6 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
+
+import me.sniperzciinema.cranked.Main;
+
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -20,7 +23,15 @@ public class Files {
 	public static File messagesFile = null;
 
 	
-	
+	public static void reloadConfig(){
+		Main.me.reloadConfig();
+	}
+	public static void saveConfig(){
+		Main.me.saveConfig();
+	}
+	public static FileConfiguration getConfig(){
+		return Main.me.getConfig();
+	}
 
 	// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Reload Arenas File

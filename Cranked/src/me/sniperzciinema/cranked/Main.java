@@ -37,8 +37,17 @@ public class Main extends JavaPlugin {
 		getCommand("Cranked").setExecutor(new Commands(this));
 
 		// Create the default config.yml
-		getConfig().options().copyDefaults();
-		saveConfig();
+		Files.getArenas().options().copyDefaults(true);
+		Files.saveArenas();
+		Files.getPlayers().options().copyDefaults(true);
+		Files.savePlayers();
+		Files.getArenas().options().copyDefaults(true);
+		Files.saveArenas();
+		Files.getMessages().options().copyDefaults(true);
+		Files.saveMessages();
+		Files.getConfig().options().copyDefaults(true);
+		Files.saveConfig();
+		
 
 		for (Player p : Bukkit.getOnlinePlayers())
 		{

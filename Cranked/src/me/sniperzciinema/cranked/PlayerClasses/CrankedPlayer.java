@@ -1,7 +1,12 @@
 
 package me.sniperzciinema.cranked.PlayerClasses;
 
+import java.util.Random;
+
 import me.sniperzciinema.cranked.ArenaClasses.Arena;
+import me.sniperzciinema.cranked.GameMechanics.Agility;
+import me.sniperzciinema.cranked.GameMechanics.Stats;
+import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -12,7 +17,9 @@ import org.bukkit.potion.PotionEffect;
 
 
 public class CrankedPlayer {
+	private int points = 0;
 	private int killstreak = 0;
+	private PlayerTimer PlayerTimer = new PlayerTimer(this);
 	private long timeJoined;
 	private GameMode gamemode;
 	private int level;
@@ -53,6 +60,12 @@ public class CrankedPlayer {
 		armor = player.getInventory().getArmorContents();
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
+		
+		player.setGameMode(GameMode.ADVENTURE);
+		player.setLevel(0);
+		player.setExp(0.0F);
+		player.setHealth(20);
+		player.setFoodLevel(20);
 	}
 
 	@SuppressWarnings("deprecation")
@@ -70,8 +83,10 @@ public class CrankedPlayer {
 		p.updateInventory();
 		p.setFallDistance(0);
 		p.teleport(location);
+		Agility.resetSpeed(p);
 		for (PotionEffect effect : player.getActivePotionEffects())
 	        player.removePotionEffect(effect.getType());
+		getTimer().stopTimer();
 		location = null;
 		gamemode = null;
 		level = 0;
@@ -82,7 +97,18 @@ public class CrankedPlayer {
 		armor = null;
 		arena = null;
 	}
-	
+
+	public void respawn(){
+		Player p = getPlayer();
+		p.setHealth(20.0);
+		p.setFoodLevel(20);
+		p.setFireTicks(0);
+		Random r = new Random();
+		int i = r.nextInt(getArena().getSpawns().size());
+		String loc = getArena().getSpawns().get(i);
+		
+		p.teleport(LocationHandler.getPlayerLocation(loc));
+	}
 	public int getKillstreak() {
 		return killstreak;
 	}
@@ -178,21 +204,37 @@ public class CrankedPlayer {
 	public void setCreating(String creating) {
 		this.creating = creating;
 	}
-	
+
 	public Player getPlayer() {
 		return player;
-	}
-	
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 	
 	public String getName() {
 		return name;
 	}
+
+	public int getPoints() {
+		return points;
+	}
 	
-	public void setName(String name) {
-		this.name = name;
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	
+	public void updateSpeed(){
+		Agility.speedUp(getPlayer(), true);
+	}
+	public void resetSpeed(){
+		Agility.resetSpeed(getPlayer());
+	}
+	public void updateStats(int kills, int deaths){
+		if(kills != 0)
+			Stats.setKills(getName(), Stats.getKills(getName()) + kills);
+		if(deaths != 0)
+			Stats.setDeaths(getName(), Stats.getDeaths(getName()) + deaths);
+	}
+	public PlayerTimer getTimer(){
+		return PlayerTimer;
 	}
 
 }

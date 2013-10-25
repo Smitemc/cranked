@@ -33,6 +33,10 @@ public class Arena {
 		return Files.getArenas().getString("Arenas." + name + ".Creator");
 	}
 
+	public void setCreator(String maker) {
+		Files.getArenas().set("Arenas." + name + ".Creator", maker);
+	}
+
 	public State getState() {
 		return state;
 	}

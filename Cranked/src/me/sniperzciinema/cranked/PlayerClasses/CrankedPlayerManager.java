@@ -2,10 +2,6 @@ package me.sniperzciinema.cranked.PlayerClasses;
  
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
- 
-import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
-
 import org.bukkit.entity.Player;
  
 public class CrankedPlayerManager {
@@ -39,9 +35,12 @@ public class CrankedPlayerManager {
  	public static void deleteCrackedPlayer(CrankedPlayer cp) {
 		players.remove(cp);
 	}
- 
+
 	public static boolean isCrackedPlayer(CrankedPlayer cp) {
 		return players.contains(cp);
+	}
+	public static boolean isCrackedPlayer(Player p) {
+		return players.contains(getCrackedPlayer(p));
 	}
 	public static void setInfo(CrankedPlayer cp){
 		cp.setInfo();
@@ -50,27 +49,6 @@ public class CrankedPlayerManager {
 		cp.reset();
 	}
 	
-	public static void respawn(Player p){
-		p.setHealth(20.0);
-		p.setFoodLevel(20);
-		p.setFireTicks(0);
-		Random r = new Random();
-		int i = r.nextInt(getCrackedPlayer(p).getArena().getSpawns().size());
-		String loc = getCrackedPlayer(p).getArena().getSpawns().get(i);
-		
-		p.teleport(LocationHandler.getPlayerLocation(loc));
-	}
-	public static void respawn(CrankedPlayer cp){
-		Player p = cp.getPlayer();
-		p.setHealth(20.0);
-		p.setFoodLevel(20);
-		p.setFireTicks(0);
-		Random r = new Random();
-		int i = r.nextInt(cp.getArena().getSpawns().size());
-		String loc = cp.getArena().getSpawns().get(i);
-		
-		p.teleport(LocationHandler.getPlayerLocation(loc));
-	}
 	
 	public static boolean arenaRegistered(Player player) {
 		return (getCrackedPlayer(player) != null);

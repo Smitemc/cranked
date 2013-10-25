@@ -1,0 +1,27 @@
+# Default Cranked Config, last edited in version 0.0.1
+MySQL:
+  Enable: false
+  Host: 127.0.0.1
+  Port: 25565
+  Database: minecraft
+  Username: user
+  Password: pass
+In Game:
+  Time:
+    PreGame: 10
+    Game: 300
+  Settings:
+    Bonus Speed PreGame: 0.4
+    Bonus Speed Per Kill: 0.05
+Auto Start:
+  Enable: true
+  Required Players: 4
+Equipment:
+  Head: '298'
+  Chest: '299'
+  Legs: '300'
+  Feet: '301'
+  Items:
+  - 272-34@100
+  - '261'
+  - 262,64

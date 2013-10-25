@@ -32,7 +32,6 @@ public enum Msgs
 	Game_PreGame_Time_Left("Game.PreGame Time Left"),// <time>
 	Game_Time_Left("Game.Game Time Left"), // <time>
 	Game_Ended("Game.Ended"),
-	Commands_How_To_Join("Commands.How To Join"), 
 	Commands_How_To_Set_Spawn("Commands.How To Set Spawn"), 
 	Commands_Spawn_Set("Commands.Spawn Set"), //<spawns>
 	Commands_How_To_Create("Commands.How To Create"), 
@@ -47,7 +46,7 @@ public enum Msgs
 	}
 
 	public String getString() {
-		String line = "\n";
+		String line = (string == "Format.Line" || string == "Format.Header") ? "":"\n";
 		try
 		{
 			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string))+line;
@@ -58,7 +57,7 @@ public enum Msgs
 	}
 
 	public String getString(String replacethis, String withthis) {
-		String line = "\n";
+		String line = (string == "Format.Line" || string == "Format.Header") ? "":"\n";
 		try
 		{
 			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis))+line;
@@ -69,7 +68,7 @@ public enum Msgs
 	}
 
 	public String getString(String replacethis, String withthis, String replacethis2, String withthis2) {
-		String line = "\n";
+		String line = (string == "Format.Line" || string == "Format.Header") ? "":"\n";
 		try
 		{
 			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2))+line;

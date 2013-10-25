@@ -28,6 +28,23 @@ public class Stats {
 		}
 	}
 
+	public static int getDeaths(String name) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			return Integer.valueOf(getMySQLStats(name, "Deaths"));
+		else
+			return Files.getPlayers().getInt("Players." + name + ".Deaths");
+	}
+
+	public static void setDeaths(String name, Integer deaths) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			setMySQLStats(name, "Deaths", deaths);
+		else
+		{
+			Files.getPlayers().set("Players." + name + ".Deaths", deaths);
+			Files.savePlayers();
+		}
+	}
+
 	private static String getMySQLStats(String name, String stat) {
 		String value = "0";
 

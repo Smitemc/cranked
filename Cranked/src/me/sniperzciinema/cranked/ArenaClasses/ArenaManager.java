@@ -21,6 +21,18 @@ public class ArenaManager {
 		return arenas;
 	}
 
+	public static ArrayList<Arena> getValidArenas(){
+
+		ArrayList<Arena> possible = new ArrayList<Arena>();
+		for (Arena arena : arenas)
+		{
+			if(ArenaManager.arenaRegistered(arena)){
+				if(isArenaValid(arena.getName()))
+					possible.add(arena);
+			}
+		}
+		return possible;
+	}
 	public static String getPossibleArenas(){
 
 		ArrayList<String> possible = new ArrayList<String>();
@@ -125,6 +137,9 @@ public class ArenaManager {
 	}
 	public static Arena getArena(CrankedPlayer cp){
 		return cp.getArena();
+	}
+	public static Arena getArena(Player p){
+		return CrankedPlayerManager.getCrackedPlayer(p).getArena();
 	}
 	
 	public static void setSpawn(String arena, Location loc){

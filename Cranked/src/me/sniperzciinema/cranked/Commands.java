@@ -2,8 +2,8 @@
 package me.sniperzciinema.cranked;
 
 import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.Extras.Menus;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
-import me.sniperzciinema.cranked.GameMechanics.Stats;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
 import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
@@ -37,8 +37,7 @@ public class Commands implements CommandExecutor {
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
 			{
-				Stats.setKills(sender.getName(), Stats.getKills(sender.getName()) + 1);
-				Agility.speedUp((Player) sender, true);
+				cp.getTimer().startTimer();
 			}
 			// //////////////////////////////JOIN///////////////////////////////////
 			if (args.length > 0 && args[0].equalsIgnoreCase("JOIN"))
@@ -75,7 +74,7 @@ public class Commands implements CommandExecutor {
 					}
 				} else
 				{
-					sender.sendMessage(Msgs.Commands_How_To_Join.getString());
+					Menus.chooseArena(p);
 				}
 			}
 			// //////////////////////////////LEAVE///////////////////////////////////
@@ -121,11 +120,11 @@ public class Commands implements CommandExecutor {
 					{
 
 						ArenaManager.createArena(args[1]);
-
 						p.sendMessage(Msgs.Arena_Created.getString("<arena>", arena));
-						p.sendMessage(Msgs.Commands_How_To_Set_Spawn.getString());
-
+						p.sendMessage(Msgs.Arena_How_To_Set_More_Spawns.getString());
 						cp.setCreating(arena);
+						if(args.length == 3)
+							ArenaManager.getArena(arena).setCreator(args[2]);
 					} else
 					{
 
@@ -177,8 +176,6 @@ public class Commands implements CommandExecutor {
 
 					sender.sendMessage(Msgs.Format_Header.getString("<title>", "Arenas"));
 					sender.sendMessage(Msgs.Commands_List_Arenas.getString("<validarenas>", ArenaManager.getPossibleArenas(), "<notvalidarenas>", ArenaManager.getNotPossibleArenas()));
-
-					sender.sendMessage(ArenaManager.getPossibleArenas() + " - " + ArenaManager.getNotPossibleArenas());
 				}
 			}
 			// //////////////////////////////SETSPAWN///////////////////////////////////
@@ -199,7 +196,7 @@ public class Commands implements CommandExecutor {
 					if (ArenaManager.arenaRegistered(arena))
 					{
 						ArenaManager.setSpawn(arena, p.getLocation());
-						p.sendMessage(Msgs.Commands_Spawn_Set.getString("<spawn>", String.valueOf(ArenaManager.getArena(arena).getSpawns().size())));
+						p.sendMessage(Msgs.Commands_Spawn_Set.getString("<spawns>", String.valueOf(ArenaManager.getArena(arena).getSpawns().size())));
 					} else
 					{
 						p.sendMessage(Msgs.Commands_How_To_Set_Spawn.getString());
