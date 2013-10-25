@@ -2,9 +2,9 @@
 package me.sniperzciinema.cranked.Listeners;
 
 import me.sniperzciinema.cranked.Main;
-import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Messages.Msgs;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -39,17 +39,17 @@ public class MiscListeners implements Listener {
 	// Disable dropping items if the player is in game
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerDropItem(PlayerDropItemEvent e) {
-		if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
+		if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
 			e.setCancelled(true);
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerBreakBlock(BlockBreakEvent e) {
 		if (!e.isCancelled())
-			if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
+			if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
 			{
 				e.getBlock().getDrops().clear();
-				if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena().getBlock(e.getBlock().getLocation()) == null)
+				if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena().getBlock(e.getBlock().getLocation()) == null)
 					ArenaManager.getArena(e.getPlayer()).setBlock(e.getBlock().getLocation(), e.getBlock().getType());
 				else
 					ArenaManager.getArena(e.getPlayer()).setBlock(e.getBlock().getLocation(), null);
@@ -61,7 +61,7 @@ public class MiscListeners implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		if (!e.isCancelled())
-			if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
+			if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
 			{
 				if (e.getAction() == Action.RIGHT_CLICK_BLOCK)
 				{
@@ -69,7 +69,7 @@ public class MiscListeners implements Listener {
 					if (e.getClickedBlock().getType() == Material.CHEST)
 					{
 						Chest chest = (Chest) b.getState();
-						if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena().getChest(b.getLocation()) == null)
+						if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena().getChest(b.getLocation()) == null)
 							ArenaManager.getArena(e.getPlayer()).setChest(b.getLocation(), chest.getBlockInventory());
 					}
 				}
@@ -80,9 +80,9 @@ public class MiscListeners implements Listener {
 	@EventHandler(priority = EventPriority.LOW)
 	public void onPlayerBlockPlace(BlockPlaceEvent e) {
 		if (!e.isCancelled())
-			if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
+			if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
 			{
-				if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena().getBlock(e.getBlock().getLocation()) == null)
+				if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena().getBlock(e.getBlock().getLocation()) == null)
 					ArenaManager.getArena(e.getPlayer()).setBlock(e.getBlock().getLocation(), Material.AIR);
 			}
 	}
@@ -100,7 +100,7 @@ public class MiscListeners implements Listener {
 			msg = e.getMessage();
 		}
 
-		if (CrankedPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
+		if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
 			if (!e.getPlayer().isOp())
 			{
 
@@ -125,7 +125,7 @@ public class MiscListeners implements Listener {
 		{
 			Player player = (Player) e.getTarget();
 
-			if (CrankedPlayerManager.getCrackedPlayer(player).getArena() != null)
+			if (CPlayerManager.getCrackedPlayer(player).getArena() != null)
 				e.setCancelled(true);
 		}
 	}
@@ -137,7 +137,7 @@ public class MiscListeners implements Listener {
 		{
 			Player player = (Player) e.getTarget();
 
-			if (CrankedPlayerManager.getCrackedPlayer(player).getArena() != null)
+			if (CPlayerManager.getCrackedPlayer(player).getArena() != null)
 				e.setCancelled(true);
 		}
 	}
@@ -150,7 +150,7 @@ public class MiscListeners implements Listener {
 			Player player = (Player) e.getEntity();
 			if (plugin.getConfig().getBoolean("Disable Hunger"))
 
-				if (CrankedPlayerManager.getCrackedPlayer(player).getArena() != null)
+				if (CPlayerManager.getCrackedPlayer(player).getArena() != null)
 					e.setCancelled(true);
 		}
 	}
@@ -160,7 +160,7 @@ public class MiscListeners implements Listener {
 	public void PlayerTryEnchant(PrepareItemEnchantEvent e) {
 		Player player = e.getEnchanter();
 
-		if (CrankedPlayerManager.getCrackedPlayer(player).getArena() != null)
+		if (CPlayerManager.getCrackedPlayer(player).getArena() != null)
 			e.setCancelled(true);
 	}
 
@@ -172,7 +172,7 @@ public class MiscListeners implements Listener {
 			if (e.getEntity() instanceof Player)
 			{
 				Player player = (Player) e.getEntity();
-				if (CrankedPlayerManager.getCrackedPlayer(player).getArena() != null)
+				if (CPlayerManager.getCrackedPlayer(player).getArena() != null)
 				{
 					e.getProjectile().remove();
 					e.setCancelled(true);

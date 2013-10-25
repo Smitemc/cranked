@@ -1,5 +1,5 @@
 
-package me.sniperzciinema.cranked.ArenaClasses;
+package me.sniperzciinema.cranked.ArenaHandlers;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,9 +14,9 @@ import me.sniperzciinema.cranked.Tools.Files;
 
 public class Arena {
 
-	private Timer Timer = new Timer(this);
+	private ArenaTimers Timer = new ArenaTimers(this);
 	private String name;
-	private State state = State.Waiting;
+	private States state = States.Waiting;
 	private HashMap<Location, Inventory> chests = new HashMap<Location, Inventory>();
 	private HashMap<Location, Material> blocks = new HashMap<Location, Material>();
 
@@ -38,11 +38,11 @@ public class Arena {
 		Files.saveArenas();
 	}
 
-	public State getState() {
+	public States getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(States state) {
 		this.state = state;
 	}
 
@@ -79,7 +79,7 @@ public class Arena {
 		blocks.put(loc, mat);
 	}
 
-	public Timer getTimer() {
+	public ArenaTimers getTimer() {
 		return Timer;
 	}
 

@@ -1,23 +1,23 @@
 
-package me.sniperzciinema.cranked.PlayerClasses;
+package me.sniperzciinema.cranked.PlayerHandlers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import me.sniperzciinema.cranked.Main;
 
 
-public class PlayerTimer {
+public class CPlayerTimers {
 
-	private CrankedPlayer cp;
+	private CPlayer cp;
 	private int timeSinceLastKill = 0;
 	private int timer;
 	
-	public PlayerTimer(CrankedPlayer cp)
+	public CPlayerTimers(CPlayer cp)
 	{
 		this.cp = cp;
 	}
 
-	public CrankedPlayer getCrankedPlayer() {
+	public CPlayer getCrankedPlayer() {
 		return cp;
 	}
 

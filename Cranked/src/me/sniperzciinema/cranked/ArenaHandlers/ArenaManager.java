@@ -1,11 +1,11 @@
-package me.sniperzciinema.cranked.ArenaClasses;
+package me.sniperzciinema.cranked.ArenaHandlers;
  
 import java.util.ArrayList;
 import java.util.List;
 
 import me.sniperzciinema.cranked.Messages.StringUtil;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
 import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
@@ -135,11 +135,11 @@ public class ArenaManager {
 		}
 		return null;
 	}
-	public static Arena getArena(CrankedPlayer cp){
+	public static Arena getArena(CPlayer cp){
 		return cp.getArena();
 	}
 	public static Arena getArena(Player p){
-		return CrankedPlayerManager.getCrackedPlayer(p).getArena();
+		return CPlayerManager.getCrackedPlayer(p).getArena();
 	}
 	
 	public static void setSpawn(String arena, Location loc){
@@ -157,7 +157,7 @@ public class ArenaManager {
 	}
 	public static List<Player> getPlayers(Arena arena){
 		List<Player> players = new ArrayList<Player>();
-		for(CrankedPlayer cp : CrankedPlayerManager.getPlayers()){
+		for(CPlayer cp : CPlayerManager.getPlayers()){
 			if(cp.getArena() == arena)
 				players.add(cp.getPlayer());
 		}

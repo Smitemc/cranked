@@ -1,7 +1,7 @@
 
 package me.sniperzciinema.cranked.GameMechanics;
 
-import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Tools.Settings;
 
 import org.bukkit.Sound;

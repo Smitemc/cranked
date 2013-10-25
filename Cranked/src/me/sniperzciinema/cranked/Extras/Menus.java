@@ -4,8 +4,8 @@ package me.sniperzciinema.cranked.Extras;
 import java.util.Random;
 
 import me.sniperzciinema.cranked.Main;
-import me.sniperzciinema.cranked.ArenaClasses.Arena;
-import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.ArenaHandlers.Arena;
+import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Tools.IconMenu;
 

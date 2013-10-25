@@ -1,12 +1,12 @@
 
 package me.sniperzciinema.cranked;
 
-import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Extras.Menus;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.Messages.Msgs;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,11 +28,11 @@ public class Commands implements CommandExecutor {
 		if (cmd.getName().equalsIgnoreCase("Cranked"))
 		{
 			Player p = null;
-			CrankedPlayer cp = null;
+			CPlayer cp = null;
 			if (sender instanceof Player)
 			{
 				p = (Player)sender;
-				cp = CrankedPlayerManager.getCrackedPlayer(p);
+				cp = CPlayerManager.getCrackedPlayer(p);
 			}
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))

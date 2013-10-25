@@ -2,7 +2,7 @@ package me.sniperzciinema.cranked.Tools;
 
 import org.bukkit.inventory.ItemStack;
 
-import me.sniperzciinema.cranked.ArenaClasses.Arena;
+import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.Tools.Handlers.ItemHandler;
 
 

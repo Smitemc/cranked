@@ -1,5 +1,5 @@
 
-package me.sniperzciinema.cranked.ArenaClasses;
+package me.sniperzciinema.cranked.ArenaHandlers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -10,11 +10,11 @@ import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.Time;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Settings;
 
 
-public class Timer {
+public class ArenaTimers {
 
 	private Arena arena;
 	private Settings Settings = new Settings(arena);
@@ -22,7 +22,7 @@ public class Timer {
 	private int pregame;
 	private int game;
 
-	public Timer(Arena arena)
+	public ArenaTimers(Arena arena)
 	{
 		this.arena = arena;
 	}
@@ -62,7 +62,7 @@ public class Timer {
 		timeLeft = getTimePreGame();
 
 		for(Player player : arena.getPlayers()){
-			CrankedPlayerManager.getCrackedPlayer(player).respawn();
+			CPlayerManager.getCrackedPlayer(player).respawn();
 			player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 128));
 			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,  Integer.MAX_VALUE, 1), true);
 		}
@@ -90,7 +90,7 @@ public class Timer {
 		stopPreGameTimer();
 		timeLeft = getGameTime();
 		for(Player p: arena.getPlayers()){
-			CrankedPlayerManager.getCrackedPlayer(p).getTimer().startTimer();
+			CPlayerManager.getCrackedPlayer(p).getTimer().startTimer();
 			Agility.resetSpeed(p);
 			for (PotionEffect effect : p.getActivePotionEffects())
 		        p.removePotionEffect(effect.getType());

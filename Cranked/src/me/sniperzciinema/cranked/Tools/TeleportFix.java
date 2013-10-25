@@ -3,7 +3,7 @@ package me.sniperzciinema.cranked.Tools;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 
 import org.bukkit.Server;
 import org.bukkit.entity.Player;

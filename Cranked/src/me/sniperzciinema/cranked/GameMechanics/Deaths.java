@@ -1,8 +1,8 @@
 
 package me.sniperzciinema.cranked.GameMechanics;
 
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
 import org.bukkit.entity.Player;
 
@@ -10,8 +10,8 @@ import org.bukkit.entity.Player;
 public class Deaths {
 
 	public static void playerDies(Player killer, Player killed) {
-		CrankedPlayer cKiller = CrankedPlayerManager.getCrackedPlayer(killer);
-		CrankedPlayer cKilled = CrankedPlayerManager.getCrackedPlayer(killed);
+		CPlayer cKiller = CPlayerManager.getCrackedPlayer(killer);
+		CPlayer cKilled = CPlayerManager.getCrackedPlayer(killed);
 
 		cKiller.setKillstreak(cKiller.getKillstreak() + 1);
 		cKiller.updateSpeed();

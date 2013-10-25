@@ -1,9 +1,9 @@
 
-package me.sniperzciinema.cranked.PlayerClasses;
+package me.sniperzciinema.cranked.PlayerHandlers;
 
 import java.util.Random;
 
-import me.sniperzciinema.cranked.ArenaClasses.Arena;
+import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.GameMechanics.Equip;
 import me.sniperzciinema.cranked.GameMechanics.Stats;
@@ -17,10 +17,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 
-public class CrankedPlayer {
+public class CPlayer {
 	private int points = 0;
 	private int killstreak = 0;
-	private PlayerTimer PlayerTimer = new PlayerTimer(this);
+	private CPlayerTimers PlayerTimer = new CPlayerTimers(this);
 	private long timeJoined;
 	private GameMode gamemode;
 	private int level;
@@ -35,7 +35,7 @@ public class CrankedPlayer {
 	private Player player;
 	String name;
 
-	public CrankedPlayer(Player p) {
+	public CPlayer(Player p) {
 		location = p.getLocation();
 		name = p.getName();
 		gamemode = p.getGameMode();
@@ -234,7 +234,7 @@ public class CrankedPlayer {
 		if(deaths != 0)
 			Stats.setDeaths(getName(), Stats.getDeaths(getName()) + deaths);
 	}
-	public PlayerTimer getTimer(){
+	public CPlayerTimers getTimer(){
 		return PlayerTimer;
 	}
 

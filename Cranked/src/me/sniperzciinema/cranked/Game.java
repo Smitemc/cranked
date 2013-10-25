@@ -1,9 +1,9 @@
 package me.sniperzciinema.cranked;
 
-import me.sniperzciinema.cranked.ArenaClasses.Arena;
+import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.Messages.Msgs;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Settings;
 
 import org.bukkit.entity.Player;
@@ -15,14 +15,14 @@ public class Game
 	public static void start(Arena arena)
     {
     	for(Player p : arena.getPlayers())
-    		CrankedPlayerManager.getCrackedPlayer(p).respawn();
+    		CPlayerManager.getCrackedPlayer(p).respawn();
     	arena.getTimer().startPreGameTimer();
     }
     public static void end(Arena arena)
     {
     	arena.getTimer().reset();
     	for(Player p : arena.getPlayers()){
-    		CrankedPlayer cp = CrankedPlayerManager.getCrackedPlayer(p);
+    		CPlayer cp = CPlayerManager.getCrackedPlayer(p);
     		
     		removePlayer(cp);
     		p.sendMessage(Msgs.Game_Ended.getString());
@@ -30,7 +30,7 @@ public class Game
     	}
 	}
 
-	public static void join(CrankedPlayer cp, Arena arena) {
+	public static void join(CPlayer cp, Arena arena) {
 		Settings Settings = new Settings(arena);
 		Player p = cp.getPlayer();
 		
@@ -53,7 +53,7 @@ public class Game
 		}
 	}
  
-	public static void removePlayer(CrankedPlayer cp) {
+	public static void removePlayer(CPlayer cp) {
 		
 		cp.getPlayer().sendMessage(Msgs.Game_You_Left_A_Game.getString());
 		

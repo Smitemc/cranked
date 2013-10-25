@@ -2,8 +2,8 @@
 package me.sniperzciinema.cranked.Listeners;
 
 import me.sniperzciinema.cranked.Main;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
-import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,20 +24,20 @@ public class RegisterAndUnRegister implements Listener{
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onJoinCreateCrackedPlayer(PlayerJoinEvent e){
 		Player p = e.getPlayer();
-		CrankedPlayer cp= new CrankedPlayer(p);
-		CrankedPlayerManager.loadCrackedPlayer(cp);
+		CPlayer cp= new CPlayer(p);
+		CPlayerManager.loadCrackedPlayer(cp);
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onLeaveDeleteCrackedPlayer(PlayerQuitEvent e){
-		CrankedPlayer cp = CrankedPlayerManager.getCrackedPlayer(e.getPlayer());
-		CrankedPlayerManager.deleteCrackedPlayer(cp);
+		CPlayer cp = CPlayerManager.getCrackedPlayer(e.getPlayer());
+		CPlayerManager.deleteCrackedPlayer(cp);
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onKickedDeleteCrackedPlayer(PlayerKickEvent e){
-		CrankedPlayer cp = CrankedPlayerManager.getCrackedPlayer(e.getPlayer());
-		CrankedPlayerManager.deleteCrackedPlayer(cp);
+		CPlayer cp = CPlayerManager.getCrackedPlayer(e.getPlayer());
+		CPlayerManager.deleteCrackedPlayer(cp);
 	}
 
 }
