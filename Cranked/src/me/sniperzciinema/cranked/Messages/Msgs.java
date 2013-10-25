@@ -22,6 +22,7 @@ public enum Msgs
 	Error_Already_An_Arena("Error.Already An Arena"),
 	Error_Missing_Spawns("Error.Missing Spawns"), 
 	Error_Plugin_Unload("Error.Plugin Unload"), 
+	Error_Cant_Use_Command("Error.Cant Use Command"),
 	Game_You_Joined_A_Game("Game.You Joined A Game"), 
 	Game_They_Joined_A_Game("Game.They Joined A Game"),//<player> 
 	Game_You_Left_A_Game("Game.You Left A Game"), 
@@ -29,13 +30,14 @@ public enum Msgs
 	Game_Not_Enough_Players("Game.Not Enough Players"), 
 	Game_Players_Needed("Game.Players Needed"),//<current>> // <needed>
 	Game_PreGame_Time_Left("Game.PreGame Time Left"),// <time>
-	Game_Game_Time_Left("Game.Game Time Left"), // <time>
+	Game_Time_Left("Game.Game Time Left"), // <time>
+	Game_Ended("Game.Ended"),
 	Commands_How_To_Join("Commands.How To Join"), 
 	Commands_How_To_Set_Spawn("Commands.How To Set Spawn"), 
 	Commands_Spawn_Set("Commands.Spawn Set"), //<spawns>
 	Commands_How_To_Create("Commands.How To Create"), 
 	Commands_How_To_Remove("Commands.How To Remove"),  
-	Commands_List_Arenas("Commands.List Arenas"), ; //<validarenas> // <notvalidarenas>
+	Commands_List_Arenas("Commands.List Arenas") ; //<validarenas> // <notvalidarenas>
 
 	private String string;
 
@@ -45,32 +47,35 @@ public enum Msgs
 	}
 
 	public String getString() {
+		String line = "\n";
 		try
 		{
-			return ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string));
+			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string))+line;
 		} catch (NullPointerException npe)
 		{
-			return Main.cranked +"Unable to find message: "+string;
+			return Main.cranked +"Unable to find message: "+string+line;
 		}
 	}
 
 	public String getString(String replacethis, String withthis) {
+		String line = "\n";
 		try
 		{
-			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis));
+			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis))+line;
 		} catch (NullPointerException npe)
 		{
-			return Main.cranked +"Unable to find message: "+string;
+			return Main.cranked +"Unable to find message: "+string+line;
 		}
 	}
 
 	public String getString(String replacethis, String withthis, String replacethis2, String withthis2) {
+		String line = "\n";
 		try
 		{
-			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2));
+			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2))+line;
 		} catch (NullPointerException npe)
 		{
-			return Main.cranked +"Unable to find message: "+string;
+			return Main.cranked +"Unable to find message: "+string+line;
 		}
 	}
 };
