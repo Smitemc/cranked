@@ -22,10 +22,10 @@ public class Settings {
 	}
 	
 	public int getPregameTime() {
-		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Time.Pre-Game"))
-			return Files.getArenas().getInt("Arenas." +arena.getName()+ ".In Game.Time.Pre-Game");
+		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Time.PreGame"))
+			return Files.getArenas().getInt("Arenas." +arena.getName()+ ".In Game.Time.PreGame");
 		else
-			return Files.getConfig().getInt("In Game.Time.Pre-Game");
+			return Files.getConfig().getInt("In Game.Time.PreGame");
 	}
 
 	public int getRequiredPlayers() {
@@ -44,16 +44,16 @@ public class Settings {
 
 	public float getBonusSpeed() {
 		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Settings.Bonus Speed Per Kill"))
-			return (float)Files.getArenas().get("Arenas." +arena.getName()+ ".In Game.Settings.Bonus Speed Per Kill");
+			return Float.parseFloat(Files.getArenas().getString("Arenas." +arena.getName()+ ".In Game.Settings.Bonus Speed Per Kill"));
 		else
-			return (float)Files.getConfig().get("In Game.Settings.Bonus Speed Per Kill");
+			return Float.parseFloat(Files.getConfig().getString("In Game.Settings.Bonus Speed Per Kill"));
 	}
 
 	public float getPreGameSpeed() {
-		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Settings.Pre-Game Speed Bonus"))
-			return (float)Files.getArenas().get("Arenas." +arena.getName()+ ".In Game.Settings.Speed Bonus Pre-Game");
+		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".In Game.Settings.Speed PreGame"))
+			return Float.parseFloat(Files.getArenas().getString("Arenas." +arena.getName()+ ".In Game.Settings.Speed PreGame"));
 		else
-			return (float)Files.getConfig().get("In Game.Settings.Speed Bonus Pre-Game");
+			return Float.parseFloat(Files.getConfig().getString("In Game.Settings.Speed PreGame"));
 	}
 	
 	public ItemStack getDefaultHead() {

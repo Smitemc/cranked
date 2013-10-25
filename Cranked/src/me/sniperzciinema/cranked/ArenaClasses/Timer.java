@@ -8,7 +8,6 @@ import org.bukkit.potion.PotionEffectType;
 import me.sniperzciinema.cranked.Game;
 import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
-import me.sniperzciinema.cranked.GameMechanics.Equip;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.Time;
 import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
@@ -63,7 +62,7 @@ public class Timer {
 		timeLeft = getTimePreGame();
 
 		for(Player player : arena.getPlayers()){
-			Equip.equipPlayer(player);
+			CrankedPlayerManager.getCrackedPlayer(player).respawn();
 			player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, Integer.MAX_VALUE, 128));
 			player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,  Integer.MAX_VALUE, 1), true);
 		}

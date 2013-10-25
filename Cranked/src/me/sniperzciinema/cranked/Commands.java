@@ -55,7 +55,7 @@ public class Commands implements CommandExecutor {
 				{
 					sender.sendMessage(Msgs.Error_Already_In_A_Game.getString());
 					return true;
-				} else if (args.length == 2)
+				} else if (args.length >= 2)
 				{
 					String arena = args[1];
 					if (ArenaManager.arenaRegistered(arena))
@@ -113,7 +113,7 @@ public class Commands implements CommandExecutor {
 
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
-				} else if (args.length == 2)
+				} else if (args.length >= 2)
 				{
 					String arena = args[1];
 					if (!ArenaManager.arenaRegistered(arena))
@@ -125,6 +125,9 @@ public class Commands implements CommandExecutor {
 						cp.setCreating(arena);
 						if(args.length == 3)
 							ArenaManager.getArena(arena).setCreator(args[2]);
+						else
+							ArenaManager.getArena(arena).setCreator("Unkown");
+								
 					} else
 					{
 
@@ -146,7 +149,7 @@ public class Commands implements CommandExecutor {
 
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
-				} else if (args.length == 2)
+				} else if (args.length >= 2)
 				{
 					String arena = args[1];
 					if (ArenaManager.arenaRegistered(arena))

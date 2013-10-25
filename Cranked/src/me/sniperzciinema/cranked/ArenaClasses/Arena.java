@@ -35,6 +35,7 @@ public class Arena {
 
 	public void setCreator(String maker) {
 		Files.getArenas().set("Arenas." + name + ".Creator", maker);
+		Files.saveArenas();
 	}
 
 	public State getState() {

@@ -6,6 +6,7 @@ import java.util.Random;
 import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.ArenaClasses.Arena;
 import me.sniperzciinema.cranked.ArenaClasses.ArenaManager;
+import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Tools.IconMenu;
 
 import org.bukkit.Bukkit;
@@ -30,7 +31,10 @@ public class Menus {
 						{
 
 							public void run() {
-								event.getPlayer().performCommand("Cranked Join " + ChatColor.stripColor(event.getName()));
+								if(ArenaManager.isArenaValid(ChatColor.stripColor(event.getName())))
+									event.getPlayer().performCommand("Cranked Join " + ChatColor.stripColor(event.getName()));
+								else
+									event.getPlayer().sendMessage(Msgs.Error_Missing_Spawns.getString());
 							}
 						}, 2);
 					}

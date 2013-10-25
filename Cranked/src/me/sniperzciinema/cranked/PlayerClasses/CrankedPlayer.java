@@ -5,6 +5,7 @@ import java.util.Random;
 
 import me.sniperzciinema.cranked.ArenaClasses.Arena;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
+import me.sniperzciinema.cranked.GameMechanics.Equip;
 import me.sniperzciinema.cranked.GameMechanics.Stats;
 import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
@@ -106,8 +107,8 @@ public class CrankedPlayer {
 		Random r = new Random();
 		int i = r.nextInt(getArena().getSpawns().size());
 		String loc = getArena().getSpawns().get(i);
-		
 		p.teleport(LocationHandler.getPlayerLocation(loc));
+		Equip.equipPlayer(p);
 	}
 	public int getKillstreak() {
 		return killstreak;

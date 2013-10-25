@@ -151,10 +151,9 @@ public class ArenaManager {
 	}
 
 	public static String getArenaCreator(Arena arena){
-		if(arena.getCreator() != null)
-			return arena.getCreator();
-		else 
-			return "Unkown";
+		if(arena.getCreator() == null)
+			arena.setCreator("Unkown");
+		return arena.getCreator();
 	}
 	public static List<Player> getPlayers(Arena arena){
 		List<Player> players = new ArrayList<Player>();

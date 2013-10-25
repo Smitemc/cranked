@@ -1,7 +1,6 @@
 package me.sniperzciinema.cranked;
 
 import me.sniperzciinema.cranked.ArenaClasses.Arena;
-import me.sniperzciinema.cranked.GameMechanics.Equip;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayer;
 import me.sniperzciinema.cranked.PlayerClasses.CrankedPlayerManager;
@@ -39,7 +38,6 @@ public class Game
 		cp.setArena(arena);
 		for (PotionEffect effect : p.getActivePotionEffects())
 	        p.removePotionEffect(effect.getType());
-			Equip.equipPlayer(p);
 		
 		p.sendMessage(Msgs.Game_You_Joined_A_Game.getString());
 		

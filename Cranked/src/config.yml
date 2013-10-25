@@ -11,13 +11,13 @@ In Game:
     PreGame: 10
     Game: 300
   Settings:
-    Bonus Speed PreGame: 0.4
+    Speed PreGame: 0.4
     Bonus Speed Per Kill: 0.05
 Auto Start:
   Enable: true
   Required Players: 4
 Equipment:
-  Head: '298'
+  Helmet: '298'
   Chest: '299'
   Legs: '300'
   Feet: '301'
