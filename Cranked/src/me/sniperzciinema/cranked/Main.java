@@ -9,6 +9,7 @@ import java.sql.Statement;
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Listeners.CrackShotApi;
+import me.sniperzciinema.cranked.Listeners.DamageEvents;
 import me.sniperzciinema.cranked.Listeners.RegisterAndUnRegister;
 import me.sniperzciinema.cranked.Listeners.MiscListeners;
 import me.sniperzciinema.cranked.Messages.Msgs;
@@ -85,6 +86,8 @@ public class Main extends JavaPlugin {
 		me = this;
 		// Register the event listeners
 
+		DamageEvents damage = new DamageEvents(this);
+		getServer().getPluginManager().registerEvents(damage, this);
 		RegisterAndUnRegister register = new RegisterAndUnRegister(this);
 		getServer().getPluginManager().registerEvents(register, this);
 		MiscListeners MiscListeners = new MiscListeners(this);
@@ -92,6 +95,7 @@ public class Main extends JavaPlugin {
 		if(getServer().getPluginManager().getPlugin("CrackShot") != null){
 			CrackShotApi CrackShotApi = new CrackShotApi(this);
 			getServer().getPluginManager().registerEvents(CrackShotApi, this);
+			System.out.println("CrackShot is loaded up and ready for use!");
 		}
 		getCommand("Cranked").setExecutor(new Commands(this));
 
@@ -113,6 +117,7 @@ public class Main extends JavaPlugin {
 			CPlayer cp = new CPlayer(p);
 			CPlayerManager.loadCrackedPlayer(cp);
 		}
+		System.out.println("Loading Arenas...");
 		if (Files.getArenas().getConfigurationSection("Arenas") != null)
 			for (String s : Files.getArenas().getConfigurationSection("Arenas").getKeys(false))
 			{
@@ -121,7 +126,7 @@ public class Main extends JavaPlugin {
 				System.out.println("Loaded Arena: " + arena.getName());
 			}
 		else
-			System.out.println("Couldn't Loaded Any Arenas");
+			System.out.println("Couldn't Find Any Arenas");
 		if (getConfig().getBoolean("MySQL.Enable"))
 		{
 			System.out.println("Attempting to connect to MySQL");
@@ -145,6 +150,7 @@ public class Main extends JavaPlugin {
 					saveConfig();
 				}
 		}
+		System.out.println("Using Players.yml for stats");
 		System.out.println("====================");
 
 	}

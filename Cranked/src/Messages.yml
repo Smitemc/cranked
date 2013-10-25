@@ -1,5 +1,5 @@
 Format:
-  Header: "&6««««««««««««««<title>»»»»»»»»»»»»»»»»»"
+  Header: "&e&o««««««««««««««<title>»»»»»»»»»»»»»»»»»"
   Line: "&m&e==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==" 
 Arena:
   Created: "&cYou have created &3<arena>"
@@ -32,4 +32,24 @@ Commands:
   How To Create: "&fUse the &7/CR Create <arena> &fcommand to create an arena"
   How To Remove: "&7Use the &f/CR Remove <arena> &7command to remove an arena"
   List Arenas: "Arenas: &a<validarenas>, &8<notvalidarenas>"  
+Deaths:
+  Arrow:
+    - "&c<killer> &e&ohas shot &7<killed>"
+    - "&c<killer> &e&ohas looked at &7<killed>, and killed them..."
+    - "&c<killer> &e&ohas slayed &7<killed>"
+    - "&c<killer> &e&ohas killed &7<killed>"
+  Melee:
+    - "&c<killer> &e&ohas killed &7<killed>"
+    - "&c<killer> &e&ohas slayed &7<killed>"
+    - "&c<killer> &e&ohas decapitated &7<killed>"
+    - "&c<killer> &e&ohas sliced &7<killed> into hundreds of peices"
+    - "&c<killer> &e&ohas looked at &7<killed>, and killed them..."
+  Gun:
+    - "&c<killer> &e&ohas mowed &7<killed> down"
+    - "&c<killer> &e&ohas made swiss cheese out of &7<killed>"
+    - "&c<killer> &e&o shot &7<killed>"
+  OutOfTime:
+    - "&7<killed> &e&ohas exploaded"
+  Other:
+    - "&7<killed> &e&ohas died"
   

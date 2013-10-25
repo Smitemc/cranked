@@ -24,13 +24,13 @@ public class Deaths {
 		CPlayer cKilled = CPlayerManager.getCrackedPlayer(killed);
 		cKilled.setKillstreak(0);
 		cKilled.updateSpeed();
-		cKilled.getTimer().restartTimer();
+		cKilled.getTimer().stopTimer();
 		cKilled.updateStats(0, 1, 0);
 		cKilled.respawn();
 		
 		
 		for(Player p : cKilled.getArena().getPlayers())
-			p.sendMessage(DeathMessages.getDeathMessage(death, killer.getName(), killed.getName()));
+			p.sendMessage(DeathMessages.getDeathMessage(killer, killed, death));
 	}
 
 }

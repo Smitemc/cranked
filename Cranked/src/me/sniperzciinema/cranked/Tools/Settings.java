@@ -70,9 +70,9 @@ public class Settings {
 	}
 	
 	
-	
 	//////////////////////////////////////////////-ITEMS-///////////////////////////////////////////////////////////
-	public ItemStack getDefaultHead() {
+	
+ 	public ItemStack getDefaultHead() {
 		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".Equipment.Helmet"))
 			return ItemHandler.getItemStack(Files.getArenas().getString("Arenas." +arena.getName()+ ".Equipment.Helmet"));
 		else
@@ -102,11 +102,11 @@ public class Settings {
 
 
 	public ItemStack[] getDefaultItems() {
-		if(!Files.getArenas().contains("Arenas." +arena.getName()+ ".Equipment.Items"))
+		if(Files.getArenas().contains("Arenas." +arena.getName()+ ".Equipment.Items"))
 			return ItemHandler.getItemStackList(Files.getArenas().getStringList("Arenas." +arena.getName()+ ".Equipment.Items"));
 		else
 			return ItemHandler.getItemStackList(Files.getConfig().getStringList("Equipment.Items"));
-	}
+			}
 	
 	
 }

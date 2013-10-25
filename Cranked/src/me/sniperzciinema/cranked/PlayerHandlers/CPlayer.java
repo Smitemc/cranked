@@ -88,6 +88,7 @@ public class CPlayer {
 		p.setWalkSpeed(0.2F);
 		for (PotionEffect effect : player.getActivePotionEffects())
 	        player.removePotionEffect(effect.getType());
+		points = 0;
 		getTimer().stopTimer();
 		location = null;
 		gamemode = null;
@@ -111,6 +112,7 @@ public class CPlayer {
 		p.setHealth(20.0);
 		p.setFoodLevel(20);
 		p.setFireTicks(0);
+		p.setExp(1.0F);
 		Random r = new Random();
 		int i = r.nextInt(getArena().getSpawns().size());
 		String loc = getArena().getSpawns().get(i);

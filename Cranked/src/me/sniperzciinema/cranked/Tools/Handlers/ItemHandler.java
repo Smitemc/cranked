@@ -244,9 +244,11 @@ public class ItemHandler {
 	}
 
 	public static ItemStack[] getItemStackList(List<String> list){
+		System.out.println(list);
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 		for(String string : list)
 		{
+			System.out.println(string);
 			items.add(getItemStack(string));
 		}
 		ItemStack[] stack = items.toArray(new ItemStack[0]);
@@ -272,7 +274,7 @@ public class ItemHandler {
 					itemCode = itemCode + "@" + ench.getValue();
 			}
 			if (i.getItemMeta().getDisplayName() != null)
-				itemCode = itemCode + "%" + i.getItemMeta().getDisplayName().replaceAll(" ", "_").replaceAll("§", "&");
+				itemCode = itemCode + "%" + i.getItemMeta().getDisplayName().replaceAll(" ", "_").replaceAll("ï¿½", "&");
 		}
 		return itemCode;
 	}
