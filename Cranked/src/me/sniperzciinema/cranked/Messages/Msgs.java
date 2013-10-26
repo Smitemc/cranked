@@ -9,6 +9,7 @@ import me.sniperzciinema.cranked.Tools.Files;
 
 public enum Msgs
 {
+	//List of all Messages, and beside are some variables for them.
 	Format_Line("Format.Line"),
 	Format_Header("Format.Header"),//<title>
 	Arena_StatusUpdate("Game.Status Update"),//<current>> // <needed>
@@ -46,6 +47,7 @@ public enum Msgs
 		string = s;
 	}
 
+	//Get the message from the Messages.yml, well replacing and variables given
 	public String getString() {
 		String line = (string == "Format.Line" || string == "Format.Header") ? "":"\n";
 		try

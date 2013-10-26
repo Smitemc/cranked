@@ -19,13 +19,14 @@ import org.bukkit.potion.PotionEffect;
 
 
 public class CPlayer {
+
 	private Player player;
 	String name;
 	private int points = 0;
 	private int killstreak = 0;
 	private CPlayerTimers PlayerTimer = new CPlayerTimers(this);
-	private ScoreBoard ScoreBoard = new ScoreBoard(player);
-	private long timeJoined;
+	private ScoreBoard ScoreBoard = new ScoreBoard(this);
+	//private long timeJoined;
 	private GameMode gamemode;
 	private int level;
 	private float exp;
@@ -38,7 +39,8 @@ public class CPlayer {
 	private String creating;
 	private Player lastDamager;
 
-	public CPlayer(Player p) {
+	public CPlayer(Player p)
+	{
 		location = p.getLocation();
 		name = p.getName();
 		gamemode = p.getGameMode();
@@ -52,7 +54,9 @@ public class CPlayer {
 		p.getInventory().setArmorContents(null);
 		player = p;
 	}
-	public void setInfo(){
+
+	// Set all their info into their CPlayer
+	public void setInfo() {
 		location = player.getLocation();
 		name = player.getName();
 		gamemode = player.getGameMode();
@@ -64,7 +68,7 @@ public class CPlayer {
 		armor = player.getInventory().getArmorContents();
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
-		
+
 		player.setGameMode(GameMode.ADVENTURE);
 		player.setLevel(0);
 		player.setExp(0.0F);
@@ -72,6 +76,7 @@ public class CPlayer {
 		player.setFoodLevel(20);
 	}
 
+	// Method to reset the player to how they were before they joined an arena
 	@SuppressWarnings("deprecation")
 	public void reset() {
 		Player p = Bukkit.getPlayerExact(name);
@@ -89,7 +94,7 @@ public class CPlayer {
 		p.teleport(location);
 		p.setWalkSpeed(0.2F);
 		for (PotionEffect effect : player.getActivePotionEffects())
-	        player.removePotionEffect(effect.getType());
+			player.removePotionEffect(effect.getType());
 		points = 0;
 		getTimer().stopTimer();
 		location = null;
@@ -102,14 +107,19 @@ public class CPlayer {
 		armor = null;
 		arena = null;
 	}
-	public void setLastDamager(Player p){
+
+	// Set the last damager for the player
+	public void setLastDamager(Player p) {
 		lastDamager = p;
 	}
-	public Player getLastDamager(){
+
+	// Get the last damager for the player
+	public Player getLastDamager() {
 		return lastDamager;
 	}
 
-	public void respawn(){
+	// Respawn the player
+	public void respawn() {
 		Player p = getPlayer();
 		p.setHealth(20.0);
 		p.setFoodLevel(20);
@@ -121,145 +131,187 @@ public class CPlayer {
 		p.teleport(LocationHandler.getPlayerLocation(loc));
 		Equip.equipPlayer(p);
 	}
+
+	// Get the players current killStreak
 	public int getKillstreak() {
 		return killstreak;
 	}
-	
+
+	// Set the players current killStreak
 	public void setKillstreak(int killstreak) {
 		this.killstreak = killstreak;
 	}
-	
-	public long getTimeJoined() {
-		return timeJoined;
-	}
-	
-	public void setTimeJoined(long timeJoined) {
-		this.timeJoined = timeJoined;
-	}
-	
+
+	// public long getTimeJoined() {
+	// return timeJoined;
+	// }
+
+	// public void setTimeJoined(long timeJoined) {
+	// this.timeJoined = timeJoined;
+	// }
+
+	// Get the players saved gamemode
 	public GameMode getGamemode() {
 		return gamemode;
 	}
-	
+
+	// Set the players saved gamemode
 	public void setGamemode(GameMode gamemode) {
 		this.gamemode = gamemode;
 	}
-	
+
+	// Set the players saved level
 	public int getLevel() {
 		return level;
 	}
-	
+
+	// Set the players saved level
 	public void setLevel(int level) {
 		this.level = level;
 	}
-	
+
+	// Get the players saved exp
 	public float getExp() {
 		return exp;
 	}
-	
+
+	// Set the players saved exp
 	public void setExp(float exp) {
 		this.exp = exp;
 	}
-	
+
+	// Get the players saved health
 	public double getHealth() {
 		return health;
 	}
-	
+
+	// Set the players saved health
 	public void setHealth(double health) {
 		this.health = health;
 	}
-	
+
+	// Get the players saved food
 	public int getFood() {
 		return food;
 	}
-	
+
+	// Set the players saved food
 	public void setFood(int food) {
 		this.food = food;
 	}
-	
+
+	// Get the players saved armor
 	public ItemStack[] getArmor() {
 		return armor;
 	}
-	
+
+	// Set the players saved armor
 	public void setArmor(ItemStack[] armor) {
 		this.armor = armor;
 	}
-	
+
+	// Get the players saved inventory
 	public ItemStack[] getInventory() {
 		return inventory;
 	}
-	
+
+	// Set the players saved inventory
 	public void setInventory(ItemStack[] inventory) {
 		this.inventory = inventory;
 	}
-	
+
+	// Get the players saved location
 	public Location getLocation() {
 		return location;
 	}
-	
+
+	// Set the players saved location
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
+
+	// Get the players arena
 	public Arena getArena() {
 		return arena;
 	}
-	
+
+	// Set the players arena
 	public void setArena(Arena arena) {
 		this.arena = arena;
 	}
-	
+
+	// Get the arena the players editing
 	public String getCreating() {
 		return creating;
 	}
-	
+
+	// Set the arena the players editing
 	public void setCreating(String creating) {
 		this.creating = creating;
 	}
 
+	// Get the Bukkit player
 	public Player getPlayer() {
 		return player;
 	}
-	
+
+	// Get the players name
 	public String getName() {
 		return name;
 	}
 
+	// Get the players Points
 	public int getPoints() {
 		return points;
 	}
-	
+
+	// Set the players points
 	public void setPoints(int points) {
 		this.points = points;
 	}
-	public int getScore(){
+
+	// Get the players score
+	public int getScore() {
 		return Stats.getScore(getName());
 	}
-	public int getKills(){
+
+	// Get the players Kills
+	public int getKills() {
 		return Stats.getKills(getName());
 	}
-	public int getDeaths(){
+
+	// Get the players deaths
+	public int getDeaths() {
 		return Stats.getDeaths(getName());
 	}
-	
-	public void updateSpeed(){
+
+	// Update the players speed depending on their killstreak
+	public void updateSpeed() {
 		Agility.speedUp(getPlayer(), true);
 	}
-	public void resetSpeed(){
+
+	// Reset the players speed to default
+	public void resetSpeed() {
 		Agility.resetSpeed(getPlayer());
 	}
-	public void updateStats(int kills, int deaths, int score){
-		if(kills != 0)
+
+	// Update the kills and deaths and score that are saved in file
+	public void updateStats(int kills, int deaths, int score) {
+		if (kills != 0)
 			Stats.setKills(getName(), getKills() + kills);
-		if(deaths != 0)
+		if (deaths != 0)
 			Stats.setDeaths(getName(), getDeaths() + deaths);
-		if(score != 0)
+		if (score != 0)
 			Stats.setScore(getName(), getScore() + score);
 	}
-	public ScoreBoard getScoreBoard(){
+
+	// Get the players scoreboard
+	public ScoreBoard getScoreBoard() {
 		return ScoreBoard;
 	}
-	public CPlayerTimers getTimer(){
+
+	// Get the players timers
+	public CPlayerTimers getTimer() {
 		return PlayerTimer;
 	}
 

@@ -14,17 +14,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemHandler {
 
-	public static ItemStack getItemStack(String Path) {
-		ItemStack is;
-		if (getItem(Path) != null)
-		{
-			is = new ItemStack(getItem(Path));
-			is.setDurability(getItemData(Path));
-		} else
-			is = new ItemStack(Material.AIR);
-		return is;
-	}
-
+	// Get the items ID from the path
 	public static Integer getItemID(String Path) {
 		String itemid = null;
 		String string = Path;
@@ -61,6 +51,7 @@ public class ItemHandler {
 		return i;
 	}
 
+	// Get the items durability from the path
 	public static Short getItemData(String Path) {
 		String itemdata = null;
 		String string = Path;
@@ -99,6 +90,7 @@ public class ItemHandler {
 		return s;
 	}
 
+	// Get the items amount from the path
 	public static Integer getItemAmount(String Path) {
 		String itemdata = null;
 		String string = Path;
@@ -132,6 +124,8 @@ public class ItemHandler {
 		return i;
 	}
 
+	// Get the items Enchantment from the path(Used a little differently then
+	// the rest(Refer to getItemStack))
 	public static int getItemEnchant(String Path) {
 		String itemdata = null;
 		String string = Path;
@@ -163,6 +157,8 @@ public class ItemHandler {
 		return i;
 	}
 
+	// Get the items Enchantment level from the path(Used a little differently
+	// then the rest(Refer to getItemStack))
 	public static int getItemEnchantLvl(String Path) {
 		String itemdata = null;
 		String string = Path;
@@ -194,6 +190,7 @@ public class ItemHandler {
 		return i;
 	}
 
+	// Get the items name from the path
 	public static String getItemName(String Path) {
 		String itemName = null;
 		if (Path.contains("%"))
@@ -207,17 +204,20 @@ public class ItemHandler {
 		return itemName;
 	}
 
+	// Take all methods to get a new ItemStack
 	@SuppressWarnings("deprecation")
-	public static ItemStack getItem(String location) {
+	public static ItemStack getItemStack(String location) {
 		ItemStack is = null;
+		// Make sure the ItemID isn't null, if so set the id, and amount
 		if (Material.getMaterial(getItemID(location)) != null)
 			is = new ItemStack(Material.getMaterial(getItemID(location)),
 					getItemAmount(String.valueOf(location)));
 		else
 			is = new ItemStack(Material.AIR);
 
+		// Sets the durability
 		is.setDurability(getItemData(location));
-
+		// Sets the custom name
 		if (!(getItemName(location) == null))
 		{
 			ItemMeta im = is.getItemMeta();
@@ -225,15 +225,19 @@ public class ItemHandler {
 			im.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
 			is.setItemMeta(im);
 		}
+		// Make sure we're not trying to enchant air
 		if (is.getType() != Material.AIR)
+			// If the string contains a -
 			if (location.contains("-"))
 			{
 				int i;
+				// Split the sting to get ALL enchantments listed
 				String enchants[] = location.split("-");
 				for (i = 1; i != enchants.length; i++)
 				{
 					if (enchants[i] != null)
 					{
+						// Add the enchantment
 						enchants[i] = "-" + enchants[i];
 
 						is.addUnsafeEnchantment(Enchantment.getById(getItemEnchant(enchants[i])), getItemEnchantLvl(enchants[i]));
@@ -243,6 +247,7 @@ public class ItemHandler {
 		return is;
 	}
 
+	// Loop through a list of these Item Codes and make a ItemStack[]
 	public static ItemStack[] getItemStackList(List<String> list) {
 		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 		for (String string : list)
@@ -253,6 +258,7 @@ public class ItemHandler {
 		return stack;
 	}
 
+	// Take the item in the players hand and convert it into a code.
 	@SuppressWarnings("deprecation")
 	public static String getItemStackToString(ItemStack i) {
 		String itemCode = "0";

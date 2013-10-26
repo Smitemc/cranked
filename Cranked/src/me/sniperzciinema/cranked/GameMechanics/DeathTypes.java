@@ -1,11 +1,10 @@
+
 package me.sniperzciinema.cranked.GameMechanics;
 
-public enum DeathTypes {
-	
-	Arrow, 
-	Melee,
-	OutOfTime,
-	Gun,
-	Other,
-	
-}; 
+public enum DeathTypes
+{
+	// List of possible ways to die
+
+	Arrow, Melee, OutOfTime, Gun, Other,
+
+};

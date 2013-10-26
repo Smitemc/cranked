@@ -11,6 +11,7 @@ import me.sniperzciinema.cranked.Tools.Files;
 
 public class Stats {
 
+	// Get the kills from the location required
 	public static int getKills(String name) {
 		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
 			return Integer.valueOf(getMySQLStats(name, "Kills"));
@@ -18,6 +19,7 @@ public class Stats {
 			return Files.getPlayers().getInt("Players." + name + ".Kills");
 	}
 
+	// Set the kills to the location required
 	public static void setKills(String name, Integer kills) {
 		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
 			setMySQLStats(name, "Kills", kills);
@@ -28,6 +30,7 @@ public class Stats {
 		}
 	}
 
+	// Get the deaths from the location required
 	public static int getDeaths(String name) {
 		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
 			return Integer.valueOf(getMySQLStats(name, "Deaths"));
@@ -35,6 +38,7 @@ public class Stats {
 			return Files.getPlayers().getInt("Players." + name + ".Deaths");
 	}
 
+	// Set the Deaths to the location required
 	public static void setDeaths(String name, Integer deaths) {
 		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
 			setMySQLStats(name, "Deaths", deaths);
@@ -45,7 +49,7 @@ public class Stats {
 		}
 	}
 
-	
+	// Get the score from the location required
 	public static int getScore(String name) {
 		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
 			return Integer.valueOf(getMySQLStats(name, "Score"));
@@ -53,6 +57,7 @@ public class Stats {
 			return Files.getPlayers().getInt("Players." + name + ".Score");
 	}
 
+	// Set the Score to the location required
 	public static void setScore(String name, Integer score) {
 		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
 			setMySQLStats(name, "Score", score);
@@ -63,9 +68,7 @@ public class Stats {
 		}
 	}
 
-	
-	
-	
+	// Method to get the MySQL Stats (Untested...)
 	private static String getMySQLStats(String name, String stat) {
 		String value = "0";
 
@@ -96,6 +99,7 @@ public class Stats {
 		return value;
 	}
 
+	// Method to set the MySQL Stats (Untested...)
 	private static void setMySQLStats(String name, String stat, int value) {
 		Statement statement;
 		try

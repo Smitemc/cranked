@@ -53,8 +53,6 @@ public class DamageEvents implements Listener {
 						e.setCancelled(true);
 					}
 
-					// Before a zombie is chosen
-
 					// If the game has fully started
 					else
 					{

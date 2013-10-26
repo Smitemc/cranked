@@ -1,5 +1,6 @@
+
 package me.sniperzciinema.cranked.ArenaHandlers;
- 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,34 +12,41 @@ import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
- 
+
+
 public class ArenaManager {
- 
+
 	private static List<Arena> arenas = new ArrayList<Arena>();
- 
-	public static List<Arena> getArenas(){
+
+	// Return the list of arenas
+	public static List<Arena> getArenas() {
 		return arenas;
 	}
 
-	public static ArrayList<Arena> getValidArenas(){
+	// return a list of Valid Areas
+	public static ArrayList<Arena> getValidArenas() {
 
 		ArrayList<Arena> possible = new ArrayList<Arena>();
 		for (Arena arena : arenas)
 		{
-			if(ArenaManager.arenaRegistered(arena)){
-				if(isArenaValid(arena.getName()))
+			if (ArenaManager.arenaRegistered(arena))
+			{
+				if (isArenaValid(arena.getName()))
 					possible.add(arena);
 			}
 		}
 		return possible;
 	}
-	public static String getPossibleArenas(){
+
+	// Return a string of valid arenas
+	public static String getPossibleArenas() {
 
 		ArrayList<String> possible = new ArrayList<String>();
 		for (Arena arena : arenas)
 		{
-			if(ArenaManager.arenaRegistered(arena)){
-				if(isArenaValid(arena.getName()))
+			if (ArenaManager.arenaRegistered(arena))
+			{
+				if (isArenaValid(arena.getName()))
 					possible.add(arena.getName());
 			}
 		}
@@ -53,13 +61,15 @@ public class ArenaManager {
 		return possible.toString().replaceAll("\\[", "").replaceAll("\\]", "");
 	}
 
-	public static String getNotPossibleArenas(){
+	// Return a list of nonvalid arenas
+	public static String getNotPossibleArenas() {
 
 		ArrayList<String> notpossible = new ArrayList<String>();
 		for (Arena arena : arenas)
 		{
-			if(ArenaManager.arenaRegistered(arena)){
-				if(!isArenaValid(arena.getName()))
+			if (ArenaManager.arenaRegistered(arena))
+			{
+				if (!isArenaValid(arena.getName()))
 					notpossible.add(arena.getName());
 			}
 		}
@@ -74,80 +84,101 @@ public class ArenaManager {
 		return notpossible.toString().replaceAll("\\[", "").replaceAll("\\]", "");
 	}
 
+	// Add the arena to arenas
 	public static void loadArena(Arena arena) {
-		if (!arenaRegistered(arena)) {
+		if (!arenaRegistered(arena))
+		{
 			arenas.add(arena);
 		}
 	}
-	
+
+	// Create the area
 	public static void createArena(String name) {
 		name = StringUtil.getWord(name);
 		loadArena(new Arena(name));
 	}
- 
+
+	// unload the arena
 	public static void unloadArena(Arena arena) {
-		if (arenaRegistered(arena)) {
+		if (arenaRegistered(arena))
+		{
 			arenas.remove(arena);
 		}
 	}
+
+	// Delete the arena
 	public static void removeArena(String name) {
 		name = StringUtil.getWord(name);
-		Files.arenas.set("Arenas."+ name , null);
+		Files.arenas.set("Arenas." + name, null);
 		Files.saveArenas();
 		unloadArena(getArena(name));
 	}
+
+	// Check if the arena is registered
 	public static boolean arenaRegistered(Arena arena) {
 		return arenas.contains(arena);
 	}
- 
+
+	// Check if the arena is registered
 	public static boolean arenaRegistered(String name) {
 		name = StringUtil.getWord(name);
 		return (getArena(name) != null);
 	}
- 
-	public static boolean isArenaValid(String name){
+
+	// Check if the arena is avalid
+	public static boolean isArenaValid(String name) {
 		name = StringUtil.getWord(name);
-		return !Files.getArenas().getStringList("Arenas."+ name +".Spawns").isEmpty();
+		return !Files.getArenas().getStringList("Arenas." + name + ".Spawns").isEmpty();
 	}
-	
+
+	// Return the players arenas
 	public static Arena getArena(String name) {
 		name = StringUtil.getWord(name);
-		for (Arena arena : arenas) {
-			if (arena.getName().equals(name)) {
+		for (Arena arena : arenas)
+		{
+			if (arena.getName().equals(name))
+			{
 				return arena;
 			}
 		}
 		return null;
 	}
-	public static Arena getArena(CPlayer cp){
+
+	// Return the Players arena
+	public static Arena getArena(CPlayer cp) {
 		return cp.getArena();
 	}
-	public static Arena getArena(Player p){
+
+	// Get the players arena
+	public static Arena getArena(Player p) {
 		return CPlayerManager.getCrackedPlayer(p).getArena();
 	}
-	
-	public static void setSpawn(String arena, Location loc){
+
+	// Set a spawn for the arena
+	public static void setSpawn(String arena, Location loc) {
 		arena = StringUtil.getWord(arena);
-		List<String> spawns = Files.getArenas().getStringList("Arenas."+arena+".Spawns");
+		List<String> spawns = Files.getArenas().getStringList("Arenas." + arena + ".Spawns");
 		spawns.add(LocationHandler.getLocationToString(loc));
-		Files.getArenas().set("Arenas."+arena+".Spawns", spawns);
+		Files.getArenas().set("Arenas." + arena + ".Spawns", spawns);
 		Files.saveArenas();
 	}
 
-	public static String getArenaCreator(Arena arena){
-		if(arena.getCreator() == null)
+	// Get the creator for a arena
+	public static String getArenaCreator(Arena arena) {
+		if (arena.getCreator() == null)
 			arena.setCreator("Unkown");
 		return arena.getCreator();
 	}
-	public static List<Player> getPlayers(Arena arena){
+
+	// Return all users in that arena
+	public static List<Player> getPlayers(Arena arena) {
 		List<Player> players = new ArrayList<Player>();
-		for(CPlayer cp : CPlayerManager.getPlayers()){
-			if(cp.getArena() == arena)
+		for (CPlayer cp : CPlayerManager.getPlayers())
+		{
+			if (cp.getArena() == arena)
 				players.add(cp.getPlayer());
 		}
 		return players;
 	}
 
-
-	
 }

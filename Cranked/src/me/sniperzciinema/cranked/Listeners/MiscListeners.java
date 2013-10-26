@@ -26,6 +26,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 
+//TODO: Set up all listeners to work with settings
+
 
 public class MiscListeners implements Listener {
 

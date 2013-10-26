@@ -62,12 +62,6 @@ public class Settings {
 	}
 
 	// ////////////////////////////////////////////////-BOOLEANS-////////////////////////////////////////////////////
-	public boolean isRequiredPlayersEnabled() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Auto Start.Enable"))
-			return Files.getArenas().getBoolean("Arenas." + arena.getName() + "Auto Start.Enable");
-		else
-			return Files.getConfig().getBoolean("Auto Start.Enable");
-	}
 
 	// ////////////////////////////////////////////////-FLOATS-///////////////////////////////////////////////////////
 
@@ -123,9 +117,9 @@ public class Settings {
 	}
 	// /////////////////////////////////////////////-LIST-////////////////////////////////////////
 	public List<String> getScoreBoardRows() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".ScoreBoard."+arena.getState()+".Rows"))
-			return Files.getArenas().getStringList("Arenas." + arena.getName() + ".ScoreBoard."+arena.getState()+".Rows");
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".ScoreBoard."+arena.getState()))
+			return Files.getArenas().getStringList("Arenas." + arena.getName() + ".ScoreBoard."+arena.getState());
 		else
-			return Files.getConfig().getStringList("ScoreBoard."+arena.getState()+".Rows");
+			return Files.getConfig().getStringList("ScoreBoard."+arena.getState());
 	}
 }

@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 
 public class Equip {
 	
+	//Method to equip the player(Normally used with respawning)
 	@SuppressWarnings("deprecation")
 	public static void equipPlayer(Player p) {
 		Settings Settings = new Settings(ArenaManager.getArena(p));

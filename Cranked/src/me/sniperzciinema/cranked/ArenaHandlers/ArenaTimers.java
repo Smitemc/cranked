@@ -21,7 +21,6 @@ public class ArenaTimers {
 	private int game;
 	private int updater;
 	private int updateTime;
-	private boolean updateScoreBoard = true;
 
 	public ArenaTimers(Arena arena)
 	{
@@ -32,34 +31,42 @@ public class ArenaTimers {
 		return arena;
 	}
 
+	// Get the time left for the current stage
 	public int getTimeLeft() {
 		return timeLeft;
 	}
 
+	// Set the time left for the current stage
 	public void setTimeLeft(int timeLeft) {
 		this.timeLeft = timeLeft;
 	}
 
+	// Stop the pregame timer
 	public void stopPreGameTimer() {
 		Bukkit.getScheduler().cancelTask(pregame);
 	}
 
+	// stop the game timer
 	public void stopGameTimer() {
 		Bukkit.getScheduler().cancelTask(game);
 	}
 
+	// Stop the Waiting update timer
 	public void stopUpdaterTimer() {
 		Bukkit.getScheduler().cancelTask(updater);
 	}
 
+	// Get the pregame time limit
 	public int getTimePreGame() {
 		return arena.getSettings().getPregameTime();
 	}
 
+	// Get the waiting Status Update time delays
 	public int getWaitingStatusUpdateTime() {
 		return arena.getSettings().getWaitingStatusUpdateTime();
 	}
 
+	// Restart the waiting status timer
 	public void restartUpdaterTimer() {
 		stopUpdaterTimer();
 		Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.me, new Runnable()
@@ -73,54 +80,56 @@ public class ArenaTimers {
 		}, 1L);
 	}
 
+	// The waiting status updater
 	public void startUpdaterTimer() {
-		if (arena.getSettings().isRequiredPlayersEnabled())
+		updateTime = getWaitingStatusUpdateTime();
+		updater = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.me, new Runnable()
 		{
-			updateTime = getWaitingStatusUpdateTime();
-			updater = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.me, new Runnable()
-			{
 
-				@Override
-				public void run() {
-					if (updateTime != -1)
-					{
-						updateTime -= 1;
+			@Override
+			public void run() {
 
-						updateScoreBoard = !updateScoreBoard;
-						if(updateScoreBoard)	
-							for (Player player : arena.getPlayers())
-								CPlayerManager.getCrackedPlayer(player).getScoreBoard().updateScoreBoard();
-					}
+				// Check the time, if it's not 0, subtract 1
+				if (updateTime != 0)
+				{
+					updateTime -= 1;
 
-					// Send update
-					else if (updateTime == -1)
-					{
-						for (Player player : arena.getPlayers())
-						{
-							player.sendMessage(Msgs.Arena_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
-						}
-						restartUpdaterTimer();
-					}
 				}
-			}, 0L, 20L);
-		}
+
+				// Send current game status
+				else if (updateTime == 0)
+				{
+					for (Player player : arena.getPlayers())
+					{
+						player.sendMessage(Msgs.Arena_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
+					}
+					restartUpdaterTimer();
+				}
+			}
+		}, 0L, 20L);
 	}
 
+	// Get the game time limit
 	public int getGameTime() {
 		return arena.getSettings().getGameTime();
 	}
 
+	// Reset the game
 	public void resetGame() {
 		stopPreGameTimer();
 		stopGameTimer();
 		timeLeft = getTimePreGame();
 	}
 
+	// Start the pregame timer(Holds them in place)
 	public void startPreGameTimer() {
+
+		// Set the info
 		stopUpdaterTimer();
 		timeLeft = getTimePreGame();
 		arena.setState(States.PreGame);
 
+		// Apply potions
 		for (Player player : arena.getPlayers())
 		{
 			CPlayerManager.getCrackedPlayer(player).respawn();
@@ -134,14 +143,18 @@ public class ArenaTimers {
 
 			@Override
 			public void run() {
+				// Check the time, if it's not 0, subtract 1
 				if (timeLeft != -1)
 				{
 					timeLeft -= 1;
 					for (Player player : arena.getPlayers())
 					{
-
+						// For some reason i need to we the walk time in here,
+						// as if i don't it bugs out...
 						player.setLevel(timeLeft);
 						player.setWalkSpeed(0.0F);
+						// Tell the player how much time is left if it's a
+						// certain value
 						if (timeLeft == (getGameTime() / 4) * 3 || timeLeft == getGameTime() / 2 || timeLeft == getGameTime() / 4 || timeLeft == 5 || timeLeft == 4 || timeLeft == 3 || timeLeft == 2 || timeLeft == 1)
 							player.sendMessage(Msgs.Game_PreGame_Time_Left.getString("<time>", Time.getTime((long) timeLeft)));
 					}
@@ -155,12 +168,15 @@ public class ArenaTimers {
 		}, 0L, 20L);
 	}
 
+	// Start Game timer
 	public void startGameTimer() {
+		// Set info
 		stopPreGameTimer();
 		arena.setState(States.Started);
 		timeLeft = getGameTime();
 		for (Player p : arena.getPlayers())
 		{
+			// Reset the players speed(Previous stages played with their speed)
 			CPlayerManager.getCrackedPlayer(p).getTimer().startTimer();
 			Agility.resetSpeed(p);
 			for (PotionEffect effect : p.getActivePotionEffects())
@@ -171,20 +187,12 @@ public class ArenaTimers {
 
 			@Override
 			public void run() {
+				// Check the time, if it's not 0, subtract 1
 				if (timeLeft != -1)
 				{
 					timeLeft -= 1;
 
-					updateScoreBoard = !updateScoreBoard;
-
-					for (Player player : arena.getPlayers())
-					{
-						player.setLevel(timeLeft);
-						if(updateScoreBoard)	
-								CPlayerManager.getCrackedPlayer(player).getScoreBoard().updateScoreBoard();
-
-					}
-
+					// Display time if it's a certain value
 					if (timeLeft == (getGameTime() / 4) * 3 || timeLeft == getGameTime() / 2 || timeLeft == getGameTime() / 4 || timeLeft == 60 || timeLeft == 10 || timeLeft == 9 || timeLeft == 8 || timeLeft == 7 || timeLeft == 6 || timeLeft == 5 || timeLeft == 4 || timeLeft == 3 || timeLeft == 2 || timeLeft == 1)
 						for (Player player : arena.getPlayers())
 						{
@@ -192,7 +200,7 @@ public class ArenaTimers {
 						}
 
 				}
-				// GAME STARTS
+				// GAME ENDS
 				else if (timeLeft == -1)
 				{
 					Game.end(arena);

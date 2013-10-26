@@ -1,8 +1,10 @@
-package me.sniperzciinema.cranked.Messages;
 
+package me.sniperzciinema.cranked.Messages;
 
 public class Time {
 
+	// Method to take the time from seconds and convert it into a nice looking
+	// message
 	public static String getTime(Long Time) {
 		String times = null;
 		Long time = Time;
