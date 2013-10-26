@@ -38,6 +38,8 @@ public class CPlayer {
 	private Arena arena;
 	private String creating;
 	private Player lastDamager;
+	private int kills;
+	private int deaths;
 
 	public CPlayer(Player p)
 	{
@@ -275,13 +277,33 @@ public class CPlayer {
 		return Stats.getScore(getName());
 	}
 
-	// Get the players Kills
+	//get the players kills this game
 	public int getKills() {
+		return kills;
+	}
+
+	//Set the players kills this game
+	public void setKills(int kills) {
+		this.kills = kills;
+	}
+
+	//Get the players deaths this game
+	public int getDeaths() {
+		return deaths;
+	}
+
+	//Set the players deaths
+	public void setDeaths(int deaths) {
+		this.deaths = deaths;
+	}
+
+	// Get the players overall Kills
+	public int getOverallKills() {
 		return Stats.getKills(getName());
 	}
 
-	// Get the players deaths
-	public int getDeaths() {
+	// Get the players overall deaths
+	public int getOverallDeaths() {
 		return Stats.getDeaths(getName());
 	}
 
@@ -298,9 +320,9 @@ public class CPlayer {
 	// Update the kills and deaths and score that are saved in file
 	public void updateStats(int kills, int deaths, int score) {
 		if (kills != 0)
-			Stats.setKills(getName(), getKills() + kills);
+			Stats.setKills(getName(), getOverallKills() + kills);
 		if (deaths != 0)
-			Stats.setDeaths(getName(), getDeaths() + deaths);
+			Stats.setDeaths(getName(), getOverallDeaths() + deaths);
 		if (score != 0)
 			Stats.setScore(getName(), getScore() + score);
 	}

@@ -1,10 +1,13 @@
 
 package me.sniperzciinema.cranked;
 
+import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
+import me.sniperzciinema.cranked.ArenaHandlers.States;
 import me.sniperzciinema.cranked.Extras.Menus;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.Messages.Msgs;
+import me.sniperzciinema.cranked.Messages.Time;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
@@ -59,20 +62,41 @@ public class Commands implements CommandExecutor {
 					return true;
 				} else if (args.length >= 2)
 				{
-					String arena = args[1];
-					if (ArenaManager.arenaRegistered(arena))
+					String arenaName = args[1];
+					if (ArenaManager.arenaRegistered(arenaName))
 					{
-						if (ArenaManager.isArenaValid(arena))
+						if (ArenaManager.isArenaValid(arenaName))
 						{
-							Game.join(cp, ArenaManager.getArena(arena));
+							Game.join(cp, ArenaManager.getArena(arenaName));
+							Arena arena = cp.getArena();
+							// Info the players of their current situation
+							p.sendMessage(Msgs.Format_Line.getString());
+							p.sendMessage("");
+							p.sendMessage(Msgs.Game_You_Joined_A_Game.getString("<arena>", cp.getArena().getName()));
+							p.sendMessage(Msgs.Arena_Creator.getString("<creator>", arena.getCreator()));
+							p.sendMessage("");
+							if (arena.getState() == States.Waiting)
+							{
+								p.sendMessage(Msgs.Arena_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
+							} else if (arena.getState() == States.Started)
+							{
+								p.sendMessage(Msgs.Game_Time_Left.getString("<time>", Time.getTime((long) arena.getTimer().getTimeLeft())));
+							}
+							p.sendMessage("");
+							p.sendMessage(Msgs.Format_Line.getString());
+							for (Player ppl : cp.getArena().getPlayers())
+								if (ppl != cp.getPlayer())
+									ppl.sendMessage(Msgs.Game_They_Joined_A_Game.getString("<player>", p.getName(), "<arena>", cp.getArena().getName()));
+
+							
 							Agility.speedUp(p, false);
 						} else
 						{
-							sender.sendMessage(Msgs.Error_Missing_Spawns.getString("<arena>", arena));
+							sender.sendMessage(Msgs.Error_Missing_Spawns.getString("<arena>", arenaName));
 						}
 					} else
 					{
-						sender.sendMessage(Msgs.Error_Not_An_Arena.getString("<arena>", arena));
+						sender.sendMessage(Msgs.Error_Not_An_Arena.getString("<arena>", arenaName));
 					}
 				} else
 				{
@@ -97,7 +121,22 @@ public class Commands implements CommandExecutor {
 					return true;
 				} else
 				{
-					cp.reset();
+					Arena arena = cp.getArena();
+					Game.leave(cp);
+
+					// Tell the player they left
+					p.sendMessage(Msgs.Format_Line.getString());
+					p.sendMessage("");
+					p.sendMessage(Msgs.Game_You_Left_A_Game.getString("<arena>", arena.getName()));
+					p.sendMessage("");
+					p.sendMessage(Msgs.Format_Line.getString());
+					// Update the other players on the situation
+					for (Player ppl : arena.getPlayers())
+					{
+						CPlayerManager.getCrackedPlayer(ppl).getScoreBoard().updateScoreBoard();
+						ppl.sendMessage(Msgs.Game_They_Left_A_Game.getString("<player>", cp.getName(), "<arena>", arena.getName()));
+					}
+
 					Agility.resetSpeed(p);
 				}
 			}
@@ -205,6 +244,38 @@ public class Commands implements CommandExecutor {
 					} else
 					{
 						p.sendMessage(Msgs.Commands_How_To_Set_Spawn.getString());
+					}
+				}
+			}
+			// //////////////////////////////SETSPAWN///////////////////////////////////
+			else if (args.length > 0 && args[0].equalsIgnoreCase("SETARENA"))
+			{
+				if (p == null)
+				{
+					sender.sendMessage("Expected a player!");
+					return true;
+				}
+				if (!p.hasPermission("Cracked.Setup"))
+				{
+					p.sendMessage(Msgs.Error_No_Permission.getString());
+					return true;
+				} else
+				{
+					if(args.length == 2){
+						
+						
+						if (ArenaManager.arenaRegistered(args[1]))
+						{
+							cp.setCreating(args[1]);
+							p.sendMessage(Msgs.Commands_Arena_Is_Set.getString("<arena>", args[1]));
+						} 
+						else
+						{
+							sender.sendMessage(Msgs.Error_Not_An_Arena.getString("<arena>", args[1]));
+						}		
+					}
+					else{
+						p.sendMessage(Msgs.Commands_How_To_Set_Arena.getString());
 					}
 				}
 			}

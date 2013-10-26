@@ -26,8 +26,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.Plugin;
 
-//TODO: Set up all listeners to work with settings
 
+//TODO: Set up breaking/placing blocks to work with listeners
 
 public class MiscListeners implements Listener {
 
@@ -42,7 +42,8 @@ public class MiscListeners implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerDropItem(PlayerDropItemEvent e) {
 		if (CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena() != null)
-			e.setCancelled(true);
+			if (!CPlayerManager.getCrackedPlayer(e.getPlayer()).getArena().getSettings().canDropBlocks())
+				e.setCancelled(true);
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -150,9 +151,8 @@ public class MiscListeners implements Listener {
 		if (!e.isCancelled())
 		{
 			Player player = (Player) e.getEntity();
-			if (plugin.getConfig().getBoolean("Disable Hunger"))
-
-				if (CPlayerManager.getCrackedPlayer(player).getArena() != null)
+			if (CPlayerManager.getCrackedPlayer(player).getArena() != null)
+				if (!CPlayerManager.getCrackedPlayer(player).getArena().getSettings().canLooseHunger())
 					e.setCancelled(true);
 		}
 	}

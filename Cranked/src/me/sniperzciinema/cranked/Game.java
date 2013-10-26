@@ -7,6 +7,7 @@ import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Settings;
+import me.sniperzciinema.cranked.Tools.Sort;
 
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -23,19 +24,33 @@ public class Game {
 		arena.getTimer().startPreGameTimer();
 	}
 
-	public static void end(Arena arena) {
+	public static void end(Arena arena, Boolean timeRanOut) {
 
 		// Reset the timers and state
 		arena.getTimer().resetGame();
 		arena.setState(States.Waiting);
 
+		Player[] winners = Sort.top3(arena.getPlayers());
+		int place = 0;
 		// Reset all players, inform them the game ended
 		for (Player p : arena.getPlayers())
 		{
 			CPlayer cp = CPlayerManager.getCrackedPlayer(p);
+			p.sendMessage(Msgs.Format_Line.getString());
+			if (timeRanOut)
+				p.sendMessage(Msgs.GameOver_Times_Up.getString());
 
-			removePlayer(cp);
-			p.sendMessage(Msgs.Game_Ended.getString());
+			p.sendMessage("");
+			for (Player winner : winners)
+			{
+				if (winner != null)
+					p.sendMessage(Msgs.GameOver_Winners.getString("<place", String.valueOf(place), "<player>", winner.getName()));
+				place++;
+			}
+
+			p.sendMessage("");
+			p.sendMessage(Msgs.Format_Line.getString());
+			leave(cp);
 		}
 
 	}
@@ -57,12 +72,7 @@ public class Game {
 
 		for (PotionEffect effect : p.getActivePotionEffects())
 			p.removePotionEffect(effect.getType());
-		// Info the players of their current situation
-		p.sendMessage(Msgs.Game_You_Joined_A_Game.getString("<arena>", cp.getArena().getName()));
 
-		for (Player ppl : cp.getArena().getPlayers())
-			if (ppl != cp.getPlayer())
-				ppl.sendMessage(Msgs.Game_They_Joined_A_Game.getString("<player>", p.getName(), "<arena>", cp.getArena().getName()));
 		// Spawn in the player
 		p.setFallDistance(0);
 		cp.respawn();
@@ -74,22 +84,11 @@ public class Game {
 		}
 	}
 
-	public static void removePlayer(CPlayer cp) {
+	public static void leave(CPlayer cp) {
 		Arena arena = cp.getArena();
-
 		// Reset the player
 		cp.reset();
 		cp.getScoreBoard().updateScoreBoard();
-
-		// Tell the player they left
-		cp.getPlayer().sendMessage(Msgs.Game_You_Left_A_Game.getString("<arena>", arena.getName()));
-
-		// Update the other players on the situation
-		for (Player ppl : arena.getPlayers())
-		{
-			CPlayerManager.getCrackedPlayer(ppl).getScoreBoard().updateScoreBoard();
-			ppl.sendMessage(Msgs.Game_They_Left_A_Game.getString("<player>", cp.getName(), "<arena>", arena.getName()));
-		}
 
 		// If there's noone left in the arena, reset it
 		if (arena.getPlayers().size() == 0)

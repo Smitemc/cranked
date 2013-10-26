@@ -63,6 +63,20 @@ public class Settings {
 
 	// ////////////////////////////////////////////////-BOOLEANS-////////////////////////////////////////////////////
 
+
+	public boolean canDropBlocks() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Misc.Can Drop Blocks"))
+			return Files.getArenas().getBoolean("Arenas." + arena.getName() + ".In Game.Misc.Can Drop Blocks");
+		else
+			return Files.getConfig().getBoolean("In Game.Misc.Can Drop Blocks");
+	}
+
+	public boolean canLooseHunger() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Misc.Can Loose Hunger"))
+			return Files.getArenas().getBoolean("Arenas." + arena.getName() + ".In Game.Misc.Can Loose Hunger");
+		else
+			return Files.getConfig().getBoolean("In Game.Misc.Can Loose Hunger");
+	}
 	// ////////////////////////////////////////////////-FLOATS-///////////////////////////////////////////////////////
 
 	public float getBonusSpeed() {

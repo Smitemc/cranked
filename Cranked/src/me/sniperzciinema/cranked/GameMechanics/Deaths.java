@@ -1,6 +1,7 @@
 
 package me.sniperzciinema.cranked.GameMechanics;
 
+import me.sniperzciinema.cranked.Game;
 import me.sniperzciinema.cranked.Messages.DeathMessages;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
@@ -11,12 +12,13 @@ public class Deaths {
 
 	// Method that handles all deaths in the arenas
 	public static void playerDies(Player killer, Player killed, DeathTypes death) {
-
+		CPlayer cKiller = null;
+		
 		// Only do the killers parts if the killer isn't here, this way we can
 		// still make them suicide safetly
 		if (killer != null)
 		{
-			CPlayer cKiller = CPlayerManager.getCrackedPlayer(killer);
+			cKiller = CPlayerManager.getCrackedPlayer(killer);
 			// Restart their last kill timer
 			cKiller.getTimer().restartTimer();
 			// Update their stats
@@ -40,6 +42,13 @@ public class Deaths {
 		// Tell players that <killer> killed <killed>
 		for (Player p : cKilled.getArena().getPlayers())
 			p.sendMessage(DeathMessages.getDeathMessage(killer, killed, death));
+		
+		
+		//Check if they reached the max kills, if so end the game
+		if(cKiller != null){
+			if(cKiller.getPoints() >= cKiller.getArena().getSettings().getPointsToWin())
+				Game.end(cKiller.getArena(), false);
+		}
 	}
 
 }

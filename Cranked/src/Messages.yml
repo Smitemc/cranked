@@ -3,9 +3,11 @@ Format:
   Line: '&a&m==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=='
 Arena:
   Created: "&aYou have created &b&o<arena>."
-  How To Set More Spawns: "&9Use the &f&o/CR SetSpawn &9to add more spawns."  
+  Creator: "&a&lMade by: &f&o<creator>"
+  How To Set More Spawns: "&9Use the &f&o/&oCR SetSpawn &9to add more spawns."  
   Removed: "&f&f&o<arena> &7has been removed."
-  How To Remove Arenas: "&9Use the &f/CR Remove <arena> &7to remove arenas."
+  How To Remove Arenas: "&9Use the &f/&oCR Remove <arena> &7to remove arenas."
+  How To Remove Arenas: "&9Use the &f/&oCR Remove <arena> &7to remove arenas."
 Error:
   No Permission: "&c&oYou do not have permission the to execute this command!"
   Game Already Started: "&c&oThe game has already started..."
@@ -17,21 +19,23 @@ Error:
   Plugin Unload: "&6&lCranked &9has been unloaded, so the game has ended..."
   Cant Use Command: "&c&oYou cannot use this command in &6&lCranked..."
 Game:
-  Status Update: "&7Waiting for &f&o<needed> &7more players."
+  Status Update: "&7We have &f&o<current>/<needed> &7players before the game starts."
   You Joined A Game: "&a&lYou have joined &f&o<arena>."
   They Joined A Game: "&a<player>&1 has joined &f&o<arena>."
   You Left A Game: "&c&lYou left &f&o<arena>."
   They Left A Game: "&c&l<player> left &f&o<arena>."
   Not Enough Players: "&cTheres not enough players to start game!"
-  Players Needed: "&c&o<current>&4/&c&o<needed> &3players in the game"
+  Players Needed: "&c&o<current>&4/&o&c&o<needed> &3players in the game"
   PreGame Time Left: "&e&l<time>!"
   Time Left: "&e&l<time> &7left!"
   Ended: "&bThe game has ended!"
 Commands:
-  How To Set Spawn: "&aSet an Arena first, with &e/CR SetArena <arena>"
+  How To Set Spawn: "&aSet an Arena first, with &e/&oCR SetArena <arena>"
+  How To Set Arena: "&aUse &e/&oCR SetArena <arena>"
   Spawn Set: "&7Spawn #&f<spawns> &7 set."
-  How To Create: "&7Use the &e/CR Create <arena> &7to create an arena"
-  How To Remove: "&7Use the &e/CR Remove <arena> &7to remove an arena"
+  Arena Is Set: "&7You have selected: &f&o<arena>."
+  How To Create: "&7Use the &e/&oCR Create <arena> &7to create an arena"
+  How To Remove: "&7Use the &e/&oCR Remove <arena> &7to remove an arena"
   List Arenas: "Arenas: &a<validarenas>, &8<notvalidarenas>"  
 Deaths:
   Arrow:

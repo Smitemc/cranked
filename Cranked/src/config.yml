@@ -2,7 +2,7 @@
 MySQL:
   Enable: false
   Host: 127.0.0.1
-  Port: 25565
+  Port: 3306
   Database: minecraft
   Username: user
   Password: pass
@@ -18,6 +18,9 @@ In Game:
     Score Per Kill: 10
   Points:
     MaxPoints: 30
+  Misc:
+    Can Drop Items: false
+    Can Loose Food: false
 Auto Start:
   Enable: true
   Required Players: 4

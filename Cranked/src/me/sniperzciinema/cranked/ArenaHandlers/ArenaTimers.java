@@ -203,7 +203,7 @@ public class ArenaTimers {
 				// GAME ENDS
 				else if (timeLeft == -1)
 				{
-					Game.end(arena);
+					Game.end(arena, true);
 				}
 			}
 		}, 0L, 20L);

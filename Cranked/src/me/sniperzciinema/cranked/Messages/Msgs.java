@@ -14,6 +14,7 @@ public enum Msgs
 	Format_Header("Format.Header"),//<title>
 	Arena_StatusUpdate("Game.Status Update"),//<current>> // <needed>
 	Arena_Created("Arena.Created"),//<arena>
+	Arena_Creator("Arena.Creator"), // <creator>>
 	Arena_Removed("Arena.Removed"), //<arena>
 	Arena_How_To_Set_More_Spawns("Arena.How To Set More Spawns"),
 	Error_No_Permission("Error.No Permission"), 
@@ -25,6 +26,9 @@ public enum Msgs
 	Error_Missing_Spawns("Error.Missing Spawns"), 
 	Error_Plugin_Unload("Error.Plugin Unload"), 
 	Error_Cant_Use_Command("Error.Cant Use Command"),
+	GameOver_Winners("GameOver.Winners"),
+	GameOver_Times_Up("GameOver.Times Up"),
+	GameOver_Max_Points_Reached("GameOver.Max Points Reached"),
 	Game_You_Joined_A_Game("Game.You Joined A Game"), 
 	Game_They_Joined_A_Game("Game.They Joined A Game"),//<player> 
 	Game_You_Left_A_Game("Game.You Left A Game"), 
@@ -35,9 +39,11 @@ public enum Msgs
 	Game_Time_Left("Game.Game Time Left"), // <time>
 	Game_Ended("Game.Ended"),
 	Commands_How_To_Set_Spawn("Commands.How To Set Spawn"), 
+	Commands_How_To_Set_Arena("Commands.How To Set Arena"), 
 	Commands_Spawn_Set("Commands.Spawn Set"), //<spawns>
 	Commands_How_To_Create("Commands.How To Create"), 
-	Commands_How_To_Remove("Commands.How To Remove"),  
+	Commands_How_To_Remove("Commands.How To Remove"), 
+	Commands_Arena_Is_Set("Commands.Arena Is Set"),  
 	Commands_List_Arenas("Commands.List Arenas") ; //<validarenas> // <notvalidarenas>
 
 	private String string;
@@ -49,35 +55,35 @@ public enum Msgs
 
 	//Get the message from the Messages.yml, well replacing and variables given
 	public String getString() {
-		String line = (string == "Format.Line" || string == "Format.Header") ? "":"\n";
+		String prefix = (string.equals("Format.Line") ? "" : Main.cranked);
 		try
 		{
-			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string))+line;
+			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string));
 		} catch (NullPointerException npe)
 		{
-			return Main.cranked +"Unable to find message: "+string+line;
+			return prefix +"Unable to find message: "+string;
 		}
 	}
 
 	public String getString(String replacethis, String withthis) {
-		String line = (string == "Format.Line" || string == "Format.Header") ? "":"\n";
+		String prefix = (string.equals("Format.Line") ? "" : Main.cranked);
 		try
 		{
-			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis))+line;
+			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis));
 		} catch (NullPointerException npe)
 		{
-			return Main.cranked +"Unable to find message: "+string+line;
+			return prefix +"Unable to find message: "+string;
 		}
 	}
 
 	public String getString(String replacethis, String withthis, String replacethis2, String withthis2) {
-		String line = (string == "Format.Line" || string == "Format.Header") ? "":"\n";
+		String prefix = (string.equals("Format.Line") ? "" : Main.cranked);
 		try
 		{
-			return Main.cranked + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2))+line;
+			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2));
 		} catch (NullPointerException npe)
 		{
-			return Main.cranked +"Unable to find message: "+string+line;
+			return prefix +"Unable to find message: "+string;
 		}
 	}
 };
