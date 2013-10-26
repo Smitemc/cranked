@@ -2,6 +2,7 @@
 package me.sniperzciinema.cranked;
 
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
+import me.sniperzciinema.cranked.ArenaHandlers.States;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
@@ -21,6 +22,7 @@ public class Game {
 
 	public static void end(Arena arena) {
 		arena.getTimer().resetGame();
+		arena.setState(States.Waiting);
 		for (Player p : arena.getPlayers())
 		{
 			CPlayer cp = CPlayerManager.getCrackedPlayer(p);

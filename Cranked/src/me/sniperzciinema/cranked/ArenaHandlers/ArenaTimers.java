@@ -21,6 +21,7 @@ public class ArenaTimers {
 	private int game;
 	private int updater;
 	private int updateTime;
+	private boolean updateScoreBoard = true;
 
 	public ArenaTimers(Arena arena)
 	{
@@ -55,8 +56,8 @@ public class ArenaTimers {
 		return arena.getSettings().getPregameTime();
 	}
 
-	public int getUpdaterTime() {
-		return arena.getSettings().getStatusUpdateTime();
+	public int getWaitingStatusUpdateTime() {
+		return arena.getSettings().getWaitingStatusUpdateTime();
 	}
 
 	public void restartUpdaterTimer() {
@@ -75,7 +76,7 @@ public class ArenaTimers {
 	public void startUpdaterTimer() {
 		if (arena.getSettings().isRequiredPlayersEnabled())
 		{
-			updateTime = getUpdaterTime();
+			updateTime = getWaitingStatusUpdateTime();
 			updater = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.me, new Runnable()
 			{
 
@@ -84,6 +85,11 @@ public class ArenaTimers {
 					if (updateTime != -1)
 					{
 						updateTime -= 1;
+
+						updateScoreBoard = !updateScoreBoard;
+						if(updateScoreBoard)	
+							for (Player player : arena.getPlayers())
+								CPlayerManager.getCrackedPlayer(player).getScoreBoard().updateScoreBoard();
 					}
 
 					// Send update
@@ -113,6 +119,7 @@ public class ArenaTimers {
 	public void startPreGameTimer() {
 		stopUpdaterTimer();
 		timeLeft = getTimePreGame();
+		arena.setState(States.PreGame);
 
 		for (Player player : arena.getPlayers())
 		{
@@ -150,6 +157,7 @@ public class ArenaTimers {
 
 	public void startGameTimer() {
 		stopPreGameTimer();
+		arena.setState(States.Started);
 		timeLeft = getGameTime();
 		for (Player p : arena.getPlayers())
 		{
@@ -157,7 +165,6 @@ public class ArenaTimers {
 			Agility.resetSpeed(p);
 			for (PotionEffect effect : p.getActivePotionEffects())
 				p.removePotionEffect(effect.getType());
-
 		}
 		game = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.me, new Runnable()
 		{
@@ -168,9 +175,14 @@ public class ArenaTimers {
 				{
 					timeLeft -= 1;
 
+					updateScoreBoard = !updateScoreBoard;
+
 					for (Player player : arena.getPlayers())
 					{
 						player.setLevel(timeLeft);
+						if(updateScoreBoard)	
+								CPlayerManager.getCrackedPlayer(player).getScoreBoard().updateScoreBoard();
+
 					}
 
 					if (timeLeft == (getGameTime() / 4) * 3 || timeLeft == getGameTime() / 2 || timeLeft == getGameTime() / 4 || timeLeft == 60 || timeLeft == 10 || timeLeft == 9 || timeLeft == 8 || timeLeft == 7 || timeLeft == 6 || timeLeft == 5 || timeLeft == 4 || timeLeft == 3 || timeLeft == 2 || timeLeft == 1)

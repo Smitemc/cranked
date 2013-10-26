@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
  
 public class ArenaManager {
  
-  // An list to hold all of the arenas
 	private static List<Arena> arenas = new ArrayList<Arena>();
  
 	public static List<Arena> getArenas(){
@@ -75,7 +74,6 @@ public class ArenaManager {
 		return notpossible.toString().replaceAll("\\[", "").replaceAll("\\]", "");
 	}
 
-	// Method to register an arena if not registered, just adds it to the list
 	public static void loadArena(Arena arena) {
 		if (!arenaRegistered(arena)) {
 			arenas.add(arena);
@@ -87,10 +85,6 @@ public class ArenaManager {
 		loadArena(new Arena(name));
 	}
  
-	/*
-	 * Removing a registered arena, a case of this would be a command to delete
-	 * an arena
-	 */
 	public static void unloadArena(Arena arena) {
 		if (arenaRegistered(arena)) {
 			arenas.remove(arena);
@@ -102,17 +96,10 @@ public class ArenaManager {
 		Files.saveArenas();
 		unloadArena(getArena(name));
 	}
- 
-	// Method to check if the arena has already been registered
 	public static boolean arenaRegistered(Arena arena) {
 		return arenas.contains(arena);
 	}
  
-	/*
-	 * Method to check if an arena by a name has been registered. Example case
-	 * would be a creation command saying that you can't have two arenas by the
-	 * same name registered
-	 */
 	public static boolean arenaRegistered(String name) {
 		name = StringUtil.getWord(name);
 		return (getArena(name) != null);
@@ -122,10 +109,7 @@ public class ArenaManager {
 		name = StringUtil.getWord(name);
 		return !Files.getArenas().getStringList("Arenas."+ name +".Spawns").isEmpty();
 	}
-	/*
-	 * Gets the arena by it's name. If you don't want it to return null, check
-	 * if it exists first
-	 */
+	
 	public static Arena getArena(String name) {
 		name = StringUtil.getWord(name);
 		for (Arena arena : arenas) {

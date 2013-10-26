@@ -1,6 +1,8 @@
 
 package me.sniperzciinema.cranked.Tools;
 
+import java.util.List;
+
 import org.bukkit.inventory.ItemStack;
 
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
@@ -31,11 +33,11 @@ public class Settings {
 			return Files.getConfig().getInt("In Game.Time.PreGame");
 	}
 
-	public int getStatusUpdateTime() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Time.Status Update"))
-			return Files.getArenas().getInt("Arenas." + arena.getName() + ".In Game.Time.Status Update");
+	public int getWaitingStatusUpdateTime() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Time.Waiting Status Update"))
+			return Files.getArenas().getInt("Arenas." + arena.getName() + ".In Game.Time.Waiting Status Update");
 		else
-			return Files.getConfig().getInt("In Game.Time.Status Update");
+			return Files.getConfig().getInt("In Game.Time.Waiting Status Update");
 	}
 
 	public int getRequiredPlayers() {
@@ -46,10 +48,10 @@ public class Settings {
 	}
 
 	public int getScorePerKill() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Time.PreGame"))
-			return Files.getArenas().getInt("Arenas." + arena.getName() + ".In Game.Time.PreGame");
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Score.PerKill"))
+			return Files.getArenas().getInt("Arenas." + arena.getName() + ".In Game.Score.PerKill");
 		else
-			return Files.getConfig().getInt("In Game.Time.PreGame");
+			return Files.getConfig().getInt("In Game.Score.PerKill");
 	}
 
 	public int getPointsToWin() {
@@ -70,17 +72,17 @@ public class Settings {
 	// ////////////////////////////////////////////////-FLOATS-///////////////////////////////////////////////////////
 
 	public float getBonusSpeed() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Settings.Bonus Speed Per Kill"))
-			return Float.parseFloat(Files.getArenas().getString("Arenas." + arena.getName() + ".In Game.Settings.Bonus Speed Per Kill"));
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Speed.Bonus Per Kill"))
+			return Float.parseFloat(Files.getArenas().getString("Arenas." + arena.getName() + ".In Game.Speed.Bonus Per Kill"));
 		else
-			return Float.parseFloat(Files.getConfig().getString("In Game.Settings.Bonus Speed Per Kill"));
+			return Float.parseFloat(Files.getConfig().getString("In Game.Speed.Bonus Per Kill"));
 	}
 
-	public float getPreGameSpeed() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Settings.Speed PreGame"))
-			return Float.parseFloat(Files.getArenas().getString("Arenas." + arena.getName() + ".In Game.Settings.Speed PreGame"));
+	public float getWaitingSpeed() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".In Game.Speed.Bonus Well Waiting"))
+			return Float.parseFloat(Files.getArenas().getString("Arenas." + arena.getName() + ".In Game.Speed.Bonus Well Waiting"));
 		else
-			return Float.parseFloat(Files.getConfig().getString("In Game.Settings.Speed PreGame"));
+			return Float.parseFloat(Files.getConfig().getString("In Game.Speed.Bonus Well Waiting"));
 	}
 
 	// ////////////////////////////////////////////-ITEMS-///////////////////////////////////////////////////////////
@@ -119,5 +121,11 @@ public class Settings {
 		else
 			return ItemHandler.getItemStackList(Files.getConfig().getStringList("Equipment.Items"));
 	}
-
+	// /////////////////////////////////////////////-LIST-////////////////////////////////////////
+	public List<String> getScoreBoardRows() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".ScoreBoard."+arena.getState()+".Rows"))
+			return Files.getArenas().getStringList("Arenas." + arena.getName() + ".ScoreBoard."+arena.getState()+".Rows");
+		else
+			return Files.getConfig().getStringList("ScoreBoard."+arena.getState()+".Rows");
+	}
 }

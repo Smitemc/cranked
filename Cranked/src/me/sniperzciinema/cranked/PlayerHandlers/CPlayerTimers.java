@@ -13,6 +13,7 @@ public class CPlayerTimers {
 	private CPlayer cp;
 	private int timeSinceLastKill = 0;
 	private int timer;
+	private boolean updateScoreBoard = true;
 
 	public CPlayerTimers(CPlayer cp)
 	{
@@ -49,6 +50,7 @@ public class CPlayerTimers {
 	}
 
 	public void startTimer() {
+		
 		timeSinceLastKill = 0;
 		final Player player = getCrankedPlayer().getPlayer();
 		player.setExp(0.99F);
@@ -61,8 +63,12 @@ public class CPlayerTimers {
 				{
 					timeSinceLastKill += 1;
 
+					updateScoreBoard = !updateScoreBoard;
+					
+					if(updateScoreBoard)
+						CPlayerManager.getCrackedPlayer(player).getScoreBoard().updateScoreBoard();
 					if (player.getExp() != 0.0F)
-						player.setExp(player.getExp() - 0.0333333333333333333333333333333333333333F);
+						player.setExp(player.getExp() -(float)(1/30));
 				}
 				// GAME STARTS
 				else if (timeSinceLastKill == 30)

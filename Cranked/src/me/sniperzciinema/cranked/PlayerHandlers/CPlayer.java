@@ -8,6 +8,7 @@ import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.GameMechanics.Equip;
 import me.sniperzciinema.cranked.GameMechanics.Stats;
 import me.sniperzciinema.cranked.Tools.Handlers.LocationHandler;
+import me.sniperzciinema.cranked.Extras.ScoreBoard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -18,9 +19,12 @@ import org.bukkit.potion.PotionEffect;
 
 
 public class CPlayer {
+	private Player player;
+	String name;
 	private int points = 0;
 	private int killstreak = 0;
 	private CPlayerTimers PlayerTimer = new CPlayerTimers(this);
+	private ScoreBoard ScoreBoard = new ScoreBoard(player);
 	private long timeJoined;
 	private GameMode gamemode;
 	private int level;
@@ -32,8 +36,6 @@ public class CPlayer {
 	private Location location;
 	private Arena arena;
 	private String creating;
-	private Player player;
-	String name;
 	private Player lastDamager;
 
 	public CPlayer(Player p) {
@@ -253,6 +255,9 @@ public class CPlayer {
 			Stats.setDeaths(getName(), getDeaths() + deaths);
 		if(score != 0)
 			Stats.setScore(getName(), getScore() + score);
+	}
+	public ScoreBoard getScoreBoard(){
+		return ScoreBoard;
 	}
 	public CPlayerTimers getTimer(){
 		return PlayerTimer;

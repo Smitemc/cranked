@@ -10,10 +10,12 @@ In Game:
   Time:
     PreGame: 10
     Game: 300
-    Status Update: 30
-  Settings:
-    Speed PreGame: 0.4
-    Bonus Speed Per Kill: 0.05
+    Waiting Status Update: 30
+  Speed:
+    Bonus Well Waiting: 0.4
+    Bonus Per Kill: 0.05
+  Score:
+    Score Per Kill: 10
   Points:
     MaxPoints: 30
 Auto Start:
@@ -28,6 +30,23 @@ Equipment:
     - 272-34@100
     - '261'
     - 262,64
+ScoreBoard:
+  Waiting:
+    - " "
+    - "&a&lPlayers In:"
+    - "&f<playersin>"
+    - " "
+  Started:
+    - " "
+    - "&a&lKills:"
+    - "&f<kills>"
+    - " "
+    - "&c&lDeaths:"
+    - "&f<deaths>"
+    - " "
+    - "&6&lKill Streak:"
+    - "&f<killstreak>"
+    - " "
 Blocks to use for join GUI:
 - STONE
 - GRASS

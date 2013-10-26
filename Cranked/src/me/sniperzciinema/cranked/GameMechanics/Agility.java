@@ -19,7 +19,7 @@ public class Agility {
 			p.setWalkSpeed(regularSpeed + (float)((killStreak >0) ? (Settings.getBonusSpeed()*killStreak) : 0));
 		}
 		else
-			p.setWalkSpeed(Settings.getPreGameSpeed());
+			p.setWalkSpeed(Settings.getWaitingSpeed());
 	}
 	public static void resetSpeed(Player p){
 		p.setWalkSpeed(0.2F);
