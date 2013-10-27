@@ -10,14 +10,19 @@ import me.sniperzciinema.cranked.Tools.Files;
 public enum Msgs
 {
 	//List of all Messages, and beside are some variables for them.
-	Format_Line("Format.Line"),
 	Format_Header("Format.Header"),//<title>
-	Arena_StatusUpdate("Game.Status Update"),//<current>> // <needed>
+	Format_Line("Format.Line"),
 	Arena_Created("Arena.Created"),//<arena>
 	Arena_Creator("Arena.Creator"), // <creator>>
 	Arena_Removed("Arena.Removed"), //<arena>
-	Arena_Information("Arena.Information"), //<arena> // <creator>>
 	Arena_How_To_Set_More_Spawns("Arena.How To Set More Spawns"),
+	Arena_Information("Arena.Information"), //<arena> // <creator>>
+	Arena_Spawn_Set("Arena.Spawn Set"), //<spawn>
+	Arena_Arena_Is_Set("Arena.Arena Is Set"), 
+	Arena_Spawns("Arena.Spawns"),//<spawns>> 
+	Arena_Spawn_Removed("Arena.Spawn Removed"), //<spawn>>
+	Arena_Tpd_To_Spawn("Arena.Tpd To Spawn"),//<spawn> 
+	Arena_List_Arenas("Arena.List Arenas"), //<validarenas> // <notvalidarenas>
 	Error_No_Permission("Error.No Permission"), 
 	Error_Game_Already_Started("Error.Games Already Started"), 
 	Error_Not_In_A_Game("Error.Not In A Game"), 
@@ -35,6 +40,7 @@ public enum Msgs
 	Game_Start("Game.Start"),
 	Game_Starting("Game.Starting"),
 	Game_You_Joined_A_Game("Game.You Joined A Game"), 
+	Game_StatusUpdate("Game.Status Update"),//<current>> // <needed>
 	Game_They_Joined_A_Game("Game.They Joined A Game"),//<player> 
 	Game_You_Left_A_Game("Game.You Left A Game"), 
 	Game_They_Left_A_Game("Game.They Left A Game"), //<player>>
@@ -45,11 +51,28 @@ public enum Msgs
 	Game_Ended("Game.Ended"),
 	Commands_How_To_Set_Spawn("Commands.How To Set Spawn"), 
 	Commands_How_To_Set_Arena("Commands.How To Set Arena"), 
-	Commands_Spawn_Set("Commands.Spawn Set"), //<spawns>
 	Commands_How_To_Create("Commands.How To Create"), 
 	Commands_How_To_Remove("Commands.How To Remove"), 
-	Commands_Arena_Is_Set("Commands.Arena Is Set"),  
-	Commands_List_Arenas("Commands.List Arenas") ; //<validarenas> // <notvalidarenas>
+	Commands_How_To_Info("Commands.How To Info"), 
+	Commands_How_To_Join("Commands.How To Join"), 
+	Commands_How_To_Leave("Commands.How To Leave"),  
+	Commands_How_To_Suicide("Commands.How To Suicide"),
+	Commands_How_To_Arenas("Commands.How To Arenas"),  
+	Commands_How_To_Show_Arena_Spawns("Commands.How To Show Arena Spawns"), 
+	Commands_How_To_Tp_To_Arena_Spawns("Commands.How To Tp To Arena Spawns"), 
+	Commands_How_To_Delete_Arena_Spawns("Commands.How To Delete Arena Spawns"), 
+	Commands_How_To_Admin("Commands.How To Admin"),  
+	Info_Players_In("Info.Players In"),//<current>>
+	Info_Game_State("Info.Game State"),//<state>
+	Info_Time_Left("Info.Time Left"), // <time>
+	Info_Required_Players_To_Start("Info.Required Players To Start"),
+	Info_Time_Limit("Info.Time Limit"),//<time>
+	Info_Max_Points("Info.Max Points"),//<points>
+	Info_Creator("Info.Max Creator"),//<creator>
+	Stats_Score("Stats.Score"),//<value>
+	Stats_Kills("Stats.Kills"),//<value>
+	Stats_Deaths("Stats.Deaths"),//<value>
+	;
 
 	private String string;
 

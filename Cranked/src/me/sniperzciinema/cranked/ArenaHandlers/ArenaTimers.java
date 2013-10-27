@@ -101,7 +101,7 @@ public class ArenaTimers {
 				{
 					for (Player player : arena.getPlayers())
 					{
-						player.sendMessage(Msgs.Arena_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
+						player.sendMessage(Msgs.Game_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
 					}
 					restartUpdaterTimer();
 				}

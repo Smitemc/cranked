@@ -148,7 +148,6 @@ public class Main extends JavaPlugin {
 					state.executeUpdate("CREATE TABLE IF NOT EXISTS Cranked (Player CHAR(16), Kills INT(10), Deaths INT(10), Score INT(10));");
 				} catch (SQLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 					System.out.println("!Unable to connect to MySQL!");
 					getConfig().set("MySql.Enable", false);

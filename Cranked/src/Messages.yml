@@ -1,14 +1,17 @@
 Format:
-  Header: '&e&l>&e&m--------------««&4&l<title>&e&o&m»»--------------&l<'
-  Line: '&e&l>&e&m-------------------------------------------------&l<'
+  Header: '&e&l>&e&m-----------««&4&l<title>&e&o&m»»-----------&l<'
+  Line: '&e&l>&e&m-------------------------------------------&l<'
 Arena:
+  Arena Is Set: "&7You have selected: &f&o<arena>."
   Created: "&aYou have created &b&o<arena>."
-  Creator: "&a&lMade by: &f&o<creator>"
-  Information: "&a&lArena: &f&o<arena> - &a&lMade by: &f&o<creator>"
+  Creator: "&a&lMade by: &f&o<creator>."
   How To Set More Spawns: "&9Use the &f&o/&oCR SetSpawn &9to add more spawns."  
+  Information: "&a&lArena: &f&o<arena> - &a&lMade by: &f&o<creator>"
+  List Arenas: "Arenas: &a<validarenas>, &8<notvalidarenas>."
   Removed: "&f&f&o<arena> &7has been removed."
-  How To Remove Arenas: "&9Use the &f/&oCR Remove <arena> &7to remove arenas."
-  How To Remove Arenas: "&9Use the &f/&oCR Remove <arena> &7to remove arenas."
+  Spawn Set: "&7Spawn #&f<spawn> &7 set."
+  Spawn Removed: "&7Spawn #&f<spawn> &7 removed."
+  Tpd To Spawn: "&7Teleported to spawn #&f&o<spawn>&7."
 Error:
   No Permission: "&c&oYou do not have permission the to execute this command!"
   Game Already Started: "&c&oThe game has already started..."
@@ -34,16 +37,34 @@ Game:
   Starting: "&6&lThe game has started!"
   Ended: "    &9&lThe Game Has Ended!"
 GameOver:
-  Times Up: "&6&lTimes Up!"
-  Winners: "&a<place>. &e&l<player>"
+  Times Up: "&6&lTimes Up!."
+  Winners: "&a<place>. &e&l<player>."
 Commands:
-  How To Set Spawn: "&aSet an Arena first, with &e/&oCR SetArena <arena>"
-  How To Set Arena: "&aUse &e/&oCR SetArena <arena>"
-  Spawn Set: "&7Spawn #&f<spawns> &7 set."
-  Arena Is Set: "&7You have selected: &f&o<arena>."
-  How To Create: "&7Use the &e/&oCR Create <arena> &7to create an arena"
-  How To Remove: "&7Use the &e/&oCR Remove <arena> &7to remove an arena"
-  List Arenas: "Arenas: &a<validarenas>, &8<notvalidarenas>"  
+  How To Set Spawn: "&e&o/CR SetSpawn &7- &fSet a spawn"
+  How To Set Arena: "&e&o/CR SetArena <Arena> &7- &fSet an Arena"
+  How To Create: "&e&o/CR Create <Arena> &7- &fCreate an Arena"
+  How To Remove: "&e&o/CR Remove <Arena> &7- &fRemove an Arena"
+  How To Info: "&e&o/CR Info &7- &fSee Arena info"
+  How To Join: "&e&o/CR Join [Arena]&7- &fJoin an arena"
+  How To Leave: "&e&o/CR Leave &7- &fLeave the arena"
+  How To Suicide: "&e&o/CR Suicide &7- &fSuicide if you're stuck"
+  How To Arenas: "&e&o/CR Arenas &7- &fSee all arenas"
+  How To Show Arena Spawns: "&e&o/CR Spawns &7- &fShow arena Spawns"
+  How To Tp To Arena Spawns: "&e&o/CR TpSpawn <Spawn>&7 - &fTp to arena Spawns"
+  How To Delete Arena Spawns: "&e&o/CR DelSpawns <Spawn> &7- &fDelete arena Spawns"
+  How To Admin: "&e&o/CR Admins &7- &fShow Admin Commands"
+Info:
+  Players In: "&e&lThere are currently &f&o<current> &e&lplayers playing."
+  Game State: "&9&lGame State: &f&o<state>"
+  Time Left: "&4&lTime Left: &f&o<time>"
+  Required Players To Start: "&5&lAuto Start At: &f&o<needed>"
+  Time Limit: "&6&lTime Limit: &f&o<time>"
+  Max Points: "&9&lMax Points: &f&o<points>"
+  Creator: "&a&lMade by: &f&o<creator>"
+Stats:
+  Score: "&9Score: &b&o<value>"
+  Kills: "&2Kills: &a&o<value>"
+  Deaths: "&4Deaths: &c&o<value>"
 Deaths:
   Arrow:
     - "&c<killer> &e&ohas shot &7<killed>"
