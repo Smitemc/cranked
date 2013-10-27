@@ -15,7 +15,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class RankingsToggle implements Listener {
 
-	// Disable dropping items if the player is in game
+	// Show rankings when a player sneaks
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerToggleSneak(PlayerToggleSneakEvent e) {
 		if (CPlayerManager.getCrankedPlayer(e.getPlayer()).getArena() != null){
@@ -24,8 +24,6 @@ public class RankingsToggle implements Listener {
 					cp.getScoreBoard().showStats();
 				else
 					cp.getScoreBoard().showRankings();
-				e.setCancelled(true);
-				e.getPlayer().setSneaking(false);
 		}
 	}
 }
