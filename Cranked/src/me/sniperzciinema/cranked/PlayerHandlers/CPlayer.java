@@ -38,8 +38,8 @@ public class CPlayer {
 	private Arena arena;
 	private String creating;
 	private Player lastDamager;
-	private int kills;
-	private int deaths;
+	private int kills = 0;
+	private int deaths = 0;
 
 	public CPlayer(Player p)
 	{
@@ -97,6 +97,9 @@ public class CPlayer {
 		p.setWalkSpeed(0.2F);
 		for (PotionEffect effect : player.getActivePotionEffects())
 			player.removePotionEffect(effect.getType());
+		kills = 0;
+		deaths = 0;
+		killstreak = 0;
 		points = 0;
 		getTimer().stopTimer();
 		location = null;

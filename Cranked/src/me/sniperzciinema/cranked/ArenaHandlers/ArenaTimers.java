@@ -133,6 +133,8 @@ public class ArenaTimers {
 		for (Player player : arena.getPlayers())
 		{
 			CPlayerManager.getCrackedPlayer(player).respawn();
+			CPlayerManager.getCrackedPlayer(player).getScoreBoard().updateScoreBoard();
+			
 			player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,
 					Integer.MAX_VALUE, 128));
 			player.addPotionEffect(new PotionEffect(
@@ -144,7 +146,7 @@ public class ArenaTimers {
 			@Override
 			public void run() {
 				// Check the time, if it's not 0, subtract 1
-				if (timeLeft != -1)
+				if (timeLeft != 0)
 				{
 					timeLeft -= 1;
 					for (Player player : arena.getPlayers())
@@ -160,7 +162,7 @@ public class ArenaTimers {
 					}
 				}
 				// GAME STARTS
-				else if (timeLeft == -1)
+				else if (timeLeft == 0)
 				{
 					startGameTimer();
 				}
@@ -173,14 +175,15 @@ public class ArenaTimers {
 		// Set info
 		stopPreGameTimer();
 		arena.setState(States.Started);
+		
 		timeLeft = getGameTime();
 		for (Player p : arena.getPlayers())
 		{
-			// Reset the players speed(Previous stages played with their speed)
-			CPlayerManager.getCrackedPlayer(p).getTimer().startTimer();
+			CPlayerManager.getCrackedPlayer(p).getScoreBoard().updateScoreBoard();
 			Agility.resetSpeed(p);
 			for (PotionEffect effect : p.getActivePotionEffects())
 				p.removePotionEffect(effect.getType());
+			p.sendMessage(Msgs.Game_Start.getString());
 		}
 		game = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Main.me, new Runnable()
 		{
@@ -188,10 +191,13 @@ public class ArenaTimers {
 			@Override
 			public void run() {
 				// Check the time, if it's not 0, subtract 1
-				if (timeLeft != -1)
+				if (timeLeft != 0)
 				{
 					timeLeft -= 1;
-
+					for (Player player : arena.getPlayers())
+					{
+							player.setLevel(timeLeft);
+					}
 					// Display time if it's a certain value
 					if (timeLeft == (getGameTime() / 4) * 3 || timeLeft == getGameTime() / 2 || timeLeft == getGameTime() / 4 || timeLeft == 60 || timeLeft == 10 || timeLeft == 9 || timeLeft == 8 || timeLeft == 7 || timeLeft == 6 || timeLeft == 5 || timeLeft == 4 || timeLeft == 3 || timeLeft == 2 || timeLeft == 1)
 						for (Player player : arena.getPlayers())
@@ -201,7 +207,7 @@ public class ArenaTimers {
 
 				}
 				// GAME ENDS
-				else if (timeLeft == -1)
+				else if (timeLeft == 0)
 				{
 					Game.end(arena, true);
 				}

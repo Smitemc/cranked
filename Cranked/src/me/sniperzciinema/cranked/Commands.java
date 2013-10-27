@@ -6,6 +6,8 @@ import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.ArenaHandlers.States;
 import me.sniperzciinema.cranked.Extras.Menus;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
+import me.sniperzciinema.cranked.GameMechanics.DeathTypes;
+import me.sniperzciinema.cranked.GameMechanics.Deaths;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.Time;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
@@ -40,9 +42,7 @@ public class Commands implements CommandExecutor {
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
 			{
-				
-				
-				
+				Deaths.playerDies(p, null, DeathTypes.Melee);
 			}
 			// //////////////////////////////JOIN///////////////////////////////////
 			if (args.length > 0 && args[0].equalsIgnoreCase("JOIN"))
@@ -74,10 +74,12 @@ public class Commands implements CommandExecutor {
 							p.sendMessage("");
 							p.sendMessage(Msgs.Game_You_Joined_A_Game.getString("<arena>", cp.getArena().getName()));
 							p.sendMessage(Msgs.Arena_Creator.getString("<creator>", arena.getCreator()));
-							p.sendMessage("");
 							if (arena.getState() == States.Waiting)
 							{
 								p.sendMessage(Msgs.Arena_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
+							} else if (arena.getState() == States.PreGame)
+							{
+								p.sendMessage(Msgs.Game_Starting.getString("<time>", Time.getTime((long) arena.getTimer().getTimeLeft())));
 							} else if (arena.getState() == States.Started)
 							{
 								p.sendMessage(Msgs.Game_Time_Left.getString("<time>", Time.getTime((long) arena.getTimer().getTimeLeft())));

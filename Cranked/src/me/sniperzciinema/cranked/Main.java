@@ -161,7 +161,7 @@ public class Main extends JavaPlugin {
 			{
 				if(cp.getArena() != null){
 					cp.getPlayer().sendMessage(Msgs.Error_Plugin_Unload.getString());
-					cp.reset();
+					Game.leave(cp);
 				}
 			}
 		if (getConfig().getBoolean("MySQL.Enable"))

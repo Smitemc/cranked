@@ -6,50 +6,59 @@ MySQL:
   Database: minecraft
   Username: user
   Password: pass
-In Game:
-  Time:
-    PreGame: 10
-    Game: 300
-    Waiting Status Update: 30
-  Speed:
-    Bonus Well Waiting: 0.4
-    Bonus Per Kill: 0.05
-  Score:
-    Score Per Kill: 10
-  Points:
-    MaxPoints: 30
-  Misc:
-    Can Drop Items: false
-    Can Loose Food: false
-Auto Start:
-  Enable: true
-  Required Players: 4
-Equipment:
-  Helmet: '298'
-  Chest: '299'
-  Legs: '300'
-  Feet: '301'
-  Items:
-    - 272-34@100
-    - '261'
-    - 262,64
-ScoreBoard:
-  Waiting:
-    - " "
-    - "&a&lPlayers In:"
-    - "&f<playersin>"
-    - " "
-  Started:
-    - " "
-    - "&a&lKills:"
-    - "&f<kills>"
-    - " "
-    - "&c&lDeaths:"
-    - "&f<deaths>"
-    - " "
-    - "&6&lKill Streak:"
-    - "&f<killstreak>"
-    - " "
+Settings:
+  Global:
+    Time:
+      PreGame: 10
+      Game: 300
+      Waiting Status Update: 60
+    Speed:
+      Bonus Well Waiting: 0.6
+      Bonus Per Kill: 0.075
+    Score:
+      Score Per Kill: 10
+    Points:
+      MaxPoints: 30
+    Misc:
+      Can Drop Items: false
+      Can Loose Food: false
+    Auto Start:
+      Required Players: 4
+    Equipment:
+      Helmet: '298'
+      Chest: '299'
+      Legs: '300'
+      Feet: '301'
+      Items:
+        - 272-34@100
+        - '261'
+        - 262,64
+    ScoreBoard:
+      Waiting:
+        - " "
+        - " Waiting For"
+        - " More Players"
+        - " "
+        - "&a&lPlayers In:"
+        - "&f<players>"
+        - " "
+        - "&lPlayers Needed:"
+        - "&f<neededplayers>"
+        - " "
+      Started:
+        - " "
+        - "&9&lPoints:"
+        - "&9&l<points>"
+        - " "
+        - "&a&lKills:"
+        - "&a&o<kills>"
+        - " "
+        - "&c&lDeaths:"
+        - "&c&o<deaths>"
+        - " "
+        - "&6&lKill Streak:"
+        - "&6&o<killstreak>"
+        - " "
 Blocks to use for join GUI:
 - STONE
 - GRASS

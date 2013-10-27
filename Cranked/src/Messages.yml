@@ -18,6 +18,7 @@ Error:
   Missing Spawns: "&c&oThere are no spawns for this arena..."
   Plugin Unload: "&6&lCranked &9has been unloaded, so the game has ended..."
   Cant Use Command: "&c&oYou cannot use this command in &6&lCranked..."
+  Max Speed: "&cYou can't go any faster!"
 Game:
   Status Update: "&7We have &f&o<current>/<needed> &7players before the game starts."
   You Joined A Game: "&a&lYou have joined &f&o<arena>."
@@ -26,9 +27,14 @@ Game:
   They Left A Game: "&c&l<player> left &f&o<arena>."
   Not Enough Players: "&cTheres not enough players to start game!"
   Players Needed: "&c&o<current>&4/&o&c&o<needed> &3players in the game"
-  PreGame Time Left: "&e&l<time>!"
-  Time Left: "&e&l<time> &7left!"
+  PreGame Time Left: "Starting in: &e&l<time>!"
+  Game Time Left: "Time left: &e&l<time> &9left!"
+  Start: "&a&lKill them all &4>:D!"
+  Starting: "&6&lThe game has started!"
   Ended: "&bThe game has ended!"
+GameOver:
+  Times Up: "&6&lTimes Up!"
+  Winners: "&a<place>. &e&l<player>"
 Commands:
   How To Set Spawn: "&aSet an Arena first, with &e/&oCR SetArena <arena>"
   How To Set Arena: "&aUse &e/&oCR SetArena <arena>"

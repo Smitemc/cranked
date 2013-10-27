@@ -2,6 +2,8 @@
 package me.sniperzciinema.cranked.GameMechanics;
 
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
+import me.sniperzciinema.cranked.Messages.Msgs;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Settings;
 
 import org.bukkit.entity.Player;
@@ -17,10 +19,14 @@ public class Agility {
 		if (byKillStreak)
 		{
 			// Get their kills and the regular speed
-			int killStreak = Stats.getKills(p.getName());
+			int killStreak = CPlayerManager.getCrackedPlayer(p).getKillstreak();
 			float regularSpeed = 0.2F;
 			// Set their speed accordingly
+			try{
 			p.setWalkSpeed(regularSpeed + (float) ((killStreak > 0) ? (Settings.getBonusSpeed() * killStreak) : 0));
+			}catch(IllegalArgumentException IAE){
+				p.sendMessage(Msgs.Error_Max_Speed.getString());
+			}
 		} else
 			// Set their speed to what ever the Waiting Bonus Speed it
 			p.setWalkSpeed(Settings.getWaitingSpeed());

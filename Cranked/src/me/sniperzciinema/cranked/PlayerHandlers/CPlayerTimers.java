@@ -67,22 +67,19 @@ public class CPlayerTimers {
 
 			@Override
 			public void run() {
-				// Check the time, if it's not 0, subtract 1, editing the
+				// Check the time, if it's not add, subtract 1, editing the
 				// players exp as we go
 				if (timeSinceLastKill != 30)
 				{
 					timeSinceLastKill += 1;
 
-					if (player.getExp() != 0.0F)
-						player.setExp(player.getExp() - (float) (1 / 30));
+					player.setExp(player.getExp() - (float)1/30);
 				}
-				// GAME STARTS
 				else if (timeSinceLastKill == 30)
 				{
 					// Times up and they didnt get a kill, so we'll kill them
 					// with a bang(That doesn't break blocks)!
 					Deaths.playerDies(null, player, DeathTypes.OutOfTime);
-					player.getWorld().createExplosion(player.getLocation(), -1);
 				}
 			}
 		}, 0L, 20L);

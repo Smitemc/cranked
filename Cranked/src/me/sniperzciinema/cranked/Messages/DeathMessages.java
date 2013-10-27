@@ -4,6 +4,7 @@ package me.sniperzciinema.cranked.Messages;
 import java.util.Random;
 
 import me.sniperzciinema.cranked.GameMechanics.DeathTypes;
+import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
 
 import org.bukkit.ChatColor;
@@ -22,8 +23,9 @@ public class DeathMessages {
 		// Replace color codes, and killer and killed names
 		msg = ChatColor.translateAlternateColorCodes('&', msg);
 		if (killer != null)
-			msg = msg.replaceAll("<killer>", killer.getName());
-		msg = msg.replaceAll("<killed>", killed.getName());
+			msg = msg.replaceAll("<killer>", killer.getName()+"("+CPlayerManager.getCrackedPlayer(killer).getPoints()+")");
+		if (killed != null)
+		msg = msg.replaceAll("<killed>", killed.getName() +"("+CPlayerManager.getCrackedPlayer(killed).getPoints()+")");
 		return msg;
 	}
 }

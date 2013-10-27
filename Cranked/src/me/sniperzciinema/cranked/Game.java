@@ -44,7 +44,7 @@ public class Game {
 			for (Player winner : winners)
 			{
 				if (winner != null)
-					p.sendMessage(Msgs.GameOver_Winners.getString("<place", String.valueOf(place), "<player>", winner.getName()));
+					p.sendMessage(Msgs.GameOver_Winners.getString("<place>", String.valueOf(place+1), "<player>", winner.getName()));
 				place++;
 			}
 
@@ -69,6 +69,7 @@ public class Game {
 		// Set the players info
 		cp.setInfo();
 		cp.setArena(arena);
+		cp.getScoreBoard().updateScoreBoard();
 
 		for (PotionEffect effect : p.getActivePotionEffects())
 			p.removePotionEffect(effect.getType());
@@ -91,8 +92,18 @@ public class Game {
 		cp.getScoreBoard().updateScoreBoard();
 
 		// If there's noone left in the arena, reset it
-		if (arena.getPlayers().size() == 0)
+		if (arena.getPlayers().size() <= 1)
+			
 			arena.getTimer().stopUpdaterTimer();
+			arena.getTimer().stopGameTimer();
+			arena.getTimer().stopPreGameTimer();
+			for(Player p : arena.getPlayers()){
+				p.sendMessage(Msgs.Error_Not_Enough_Players.getString());
+				CPlayer cpp = CPlayerManager.getCrackedPlayer(p);
+				cpp.reset();
+				cpp.getScoreBoard().updateScoreBoard();
+
+			}
 	}
 
 }

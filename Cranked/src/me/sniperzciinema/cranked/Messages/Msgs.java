@@ -26,9 +26,13 @@ public enum Msgs
 	Error_Missing_Spawns("Error.Missing Spawns"), 
 	Error_Plugin_Unload("Error.Plugin Unload"), 
 	Error_Cant_Use_Command("Error.Cant Use Command"),
+	Error_Not_Enough_Players("Error.Not Enough Players"),
+	Error_Max_Speed("Error.Max Speed"),
 	GameOver_Winners("GameOver.Winners"),
 	GameOver_Times_Up("GameOver.Times Up"),
 	GameOver_Max_Points_Reached("GameOver.Max Points Reached"),
+	Game_Start("Game.Start"),
+	Game_Starting("Game.Starting"),
 	Game_You_Joined_A_Game("Game.You Joined A Game"), 
 	Game_They_Joined_A_Game("Game.They Joined A Game"),//<player> 
 	Game_You_Left_A_Game("Game.You Left A Game"), 
