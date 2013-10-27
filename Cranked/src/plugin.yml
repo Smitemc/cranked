@@ -4,6 +4,17 @@ main: me.sniperzciinema.cranked.Main
 version: 0.0.1
 author: xXSniperzzXx_SD
 commands:
-   Cranked:
-      description: The basic command for Cranked 
-      aliases: [crank, cr]
+  Cranked:
+    description: The basic command for Cranked 
+    aliases: [crank, cr]
+permissions:
+
+  Cranked.Join:
+    default: true
+    children:
+      Cranked.List: true
+      
+  Cranked.Admin:
+    default: op
+    children:
+      Cranked.SetUp: true

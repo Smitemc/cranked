@@ -105,4 +105,24 @@ public class Arena {
 		return Timer;
 	}
 
+	public void reset() {
+		getTimer().stopGameTimer();
+		getTimer().stopPreGameTimer();
+		getTimer().stopUpdaterTimer();
+		setState(States.Waiting);
+		// Clear blocks
+		if (!this.getBlocks().isEmpty())
+			for (Location loc : this.getBlocks().keySet())
+				this.setBlock(loc, this.getBlock(loc));
+
+		this.getBlocks().clear();
+
+		// Clear Chests too
+		if (!this.getChests().isEmpty())
+			for (Location loc : this.getChests().keySet())
+				if (loc.getBlock().getType() == Material.CHEST)
+					this.setChest(loc, this.getChest(loc));
+
+	}
+
 }

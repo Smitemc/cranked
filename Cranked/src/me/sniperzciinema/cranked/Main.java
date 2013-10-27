@@ -18,6 +18,7 @@ import me.sniperzciinema.cranked.Messages.StringUtil;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Files;
+import me.sniperzciinema.cranked.Tools.IconMenu;
 import me.sniperzciinema.cranked.Tools.Metrics;
 import me.sniperzciinema.cranked.Tools.Updater;
 
@@ -167,6 +168,8 @@ public class Main extends JavaPlugin {
 					cp.getPlayer().sendMessage(Msgs.Error_Plugin_Unload.getString());
 					Game.leave(cp);
 				}
+				if(IconMenu.hasMenuOpen(cp.getPlayer()))
+					cp.getPlayer().closeInventory();
 			}
 		if (getConfig().getBoolean("MySQL.Enable"))
 		{

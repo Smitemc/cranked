@@ -2,7 +2,6 @@
 package me.sniperzciinema.cranked;
 
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
-import me.sniperzciinema.cranked.ArenaHandlers.States;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
@@ -27,8 +26,7 @@ public class Game {
 	public static void end(Arena arena, Boolean timeRanOut) {
 
 		// Reset the timers and state
-		arena.getTimer().resetGame();
-		arena.setState(States.Waiting);
+		arena.reset();
 
 		Player[] winners = Sort.topPoints(arena.getPlayers(), 3);
 		int place = 0;
@@ -46,7 +44,7 @@ public class Game {
 			for (Player winner : winners)
 			{
 				if (winner != null)
-					p.sendMessage(Msgs.GameOver_Winners.getString("<place>", String.valueOf(place+1), "<player>", winner.getName() + "("+CPlayerManager.getCrankedPlayer(winner).getPoints()+")"));
+					p.sendMessage(Msgs.GameOver_Winners.getString("<place>", String.valueOf(place + 1), "<player>", winner.getName() + "(" + CPlayerManager.getCrankedPlayer(winner).getPoints() + ")"));
 				place++;
 			}
 
@@ -55,6 +53,9 @@ public class Game {
 			p.sendMessage(Msgs.Arena_Creator.getString("<creator>", arena.getCreator()));
 			p.sendMessage(Msgs.Format_Line.getString());
 			leave(cp);
+
+			// Set back any blocks that were broken well playing in the
+			// arena(This includes chests)
 		}
 
 	}
@@ -92,22 +93,22 @@ public class Game {
 	public static void leave(CPlayer cp) {
 		Arena arena = cp.getArena();
 		// Reset the player
+		
 		cp.reset();
 		cp.getScoreBoard().showStats();
 
 		// If there's noone left in the arena, reset it
 		if (arena.getPlayers().size() <= 1)
-			
-			arena.getTimer().stopUpdaterTimer();
-			arena.getTimer().stopGameTimer();
-			arena.getTimer().stopPreGameTimer();
-			for(Player p : arena.getPlayers()){
+		{
+			arena.reset();
+			for (Player p : arena.getPlayers())
+			{
 				p.sendMessage(Msgs.Error_Not_Enough_Players.getString());
 				CPlayer cpp = CPlayerManager.getCrankedPlayer(p);
 				cpp.reset();
 				cpp.getScoreBoard().showStats();
-
 			}
+		}
 	}
 
 }

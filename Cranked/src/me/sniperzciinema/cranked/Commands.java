@@ -6,8 +6,6 @@ import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.ArenaHandlers.States;
 import me.sniperzciinema.cranked.Extras.Menus;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
-import me.sniperzciinema.cranked.GameMechanics.DeathTypes;
-import me.sniperzciinema.cranked.GameMechanics.Deaths;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.Time;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
@@ -42,7 +40,6 @@ public class Commands implements CommandExecutor {
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
 			{
-				Deaths.playerDies(p, null, DeathTypes.Melee);
 			}
 			// //////////////////////////////JOIN///////////////////////////////////
 			if (args.length > 0 && args[0].equalsIgnoreCase("JOIN"))
@@ -52,7 +49,7 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				if (!sender.hasPermission("Cranked.Join"))
+				if (!sender.hasPermission("Cranked.Join") && !sender.hasPermission("Cranked.Join."+args[1]))
 				{
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;

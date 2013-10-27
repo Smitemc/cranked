@@ -1,6 +1,7 @@
 
 package me.sniperzciinema.cranked.Tools;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
@@ -19,6 +20,7 @@ import org.bukkit.plugin.Plugin;
 
 public class IconMenu implements Listener {
 
+	private static ArrayList<Player> openedFor = new ArrayList<Player>();
 	private String name;
 	private int size;
 	private OptionClickEventHandler handler;
@@ -27,6 +29,9 @@ public class IconMenu implements Listener {
 	private String[] optionNames;
 	private ItemStack[] optionIcons;
 
+	public static boolean hasMenuOpen(Player p){
+		return openedFor.contains(p);
+	}
 	public IconMenu(String name, int size, OptionClickEventHandler handler,
 			Plugin plugin)
 	{
@@ -46,6 +51,7 @@ public class IconMenu implements Listener {
 	}
 
 	public void open(Player player) {
+		openedFor.add(player);
 		Inventory inventory = Bukkit.createInventory(player, size, name);
 		for (int i = 0; i < optionIcons.length; i++)
 		{
@@ -57,12 +63,13 @@ public class IconMenu implements Listener {
 		player.openInventory(inventory);
 	}
 
-	public void destroy() {
+	public void destroy(Player p) {
 		HandlerList.unregisterAll(this);
 		handler = null;
 		plugin = null;
 		optionNames = null;
 		optionIcons = null;
+		openedFor.remove(p);
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -85,7 +92,7 @@ public class IconMenu implements Listener {
 						p.closeInventory();
 					}
 				}, 1);
-				destroy();
+				destroy(p);
 			}
 		}
 	}
