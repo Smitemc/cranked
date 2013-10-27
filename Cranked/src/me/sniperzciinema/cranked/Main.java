@@ -10,6 +10,7 @@ import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Listeners.CrackShotApi;
 import me.sniperzciinema.cranked.Listeners.DamageEvents;
+import me.sniperzciinema.cranked.Listeners.RankingsToggle;
 import me.sniperzciinema.cranked.Listeners.RegisterAndUnRegister;
 import me.sniperzciinema.cranked.Listeners.MiscListeners;
 import me.sniperzciinema.cranked.Messages.Msgs;
@@ -92,6 +93,9 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(register, this);
 		MiscListeners MiscListeners = new MiscListeners(this);
 		getServer().getPluginManager().registerEvents(MiscListeners, this);
+		RankingsToggle RankingsToggle = new RankingsToggle();
+		getServer().getPluginManager().registerEvents(RankingsToggle, this);
+		
 		if(getServer().getPluginManager().getPlugin("CrackShot") != null){
 			CrackShotApi CrackShotApi = new CrackShotApi(this);
 			getServer().getPluginManager().registerEvents(CrackShotApi, this);
@@ -115,7 +119,7 @@ public class Main extends JavaPlugin {
 		for (Player p : Bukkit.getOnlinePlayers())
 		{
 			CPlayer cp = new CPlayer(p);
-			CPlayerManager.loadCrackedPlayer(cp);
+			CPlayerManager.loadCrankedPlayer(cp);
 		}
 		System.out.println("Loading Arenas...");
 		if (Files.getArenas().getConfigurationSection("Arenas") != null)
