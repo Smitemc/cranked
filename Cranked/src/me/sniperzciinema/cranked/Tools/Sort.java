@@ -14,7 +14,7 @@ import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
 public class Sort {
 
-	public static Player[] top3(List<Player> list) {
+	public static Player[] topPoints(List<Player> list, Integer howMany) {
 
 		HashMap<Player, Integer> points = new HashMap<Player, Integer>();
 		// Get all the players and put them and their score in a new hashmap for
@@ -22,15 +22,13 @@ public class Sort {
 		Player[] top = { null };
 		for (Player p : list)
 		{
-			CPlayer cp = CPlayerManager.getCrackedPlayer(p);
+			CPlayer cp = CPlayerManager.getCrankedPlayer(p);
 			points.put(cp.getPlayer(), cp.getPoints());
 		}
 
 		int maxValueInMap = (Collections.max(points.values()));
 		int place = 0;
-
-		//keep going through an getting the 1,2,and 3rd but not 4th
-		while (place != 3)
+		while (place != howMany)
 		{
 			//If the list still has players in it, find the top player
 			try

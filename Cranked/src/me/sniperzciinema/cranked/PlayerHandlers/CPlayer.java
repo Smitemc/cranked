@@ -26,7 +26,7 @@ public class CPlayer {
 	private int killstreak = 0;
 	private CPlayerTimers PlayerTimer = new CPlayerTimers(this);
 	private ScoreBoard ScoreBoard = new ScoreBoard(this);
-	//private long timeJoined;
+	// private long timeJoined;
 	private GameMode gamemode;
 	private int level;
 	private float exp;
@@ -125,16 +125,19 @@ public class CPlayer {
 
 	// Respawn the player
 	public void respawn() {
-		Player p = getPlayer();
-		p.setHealth(20.0);
-		p.setFoodLevel(20);
-		p.setFireTicks(0);
-		p.setExp(1.0F);
-		Random r = new Random();
-		int i = r.nextInt(getArena().getSpawns().size());
-		String loc = getArena().getSpawns().get(i);
-		p.teleport(LocationHandler.getPlayerLocation(loc));
-		Equip.equipPlayer(p);
+		if (getArena() != null)
+		{
+			Player p = getPlayer();
+			p.setHealth(20.0);
+			p.setFoodLevel(20);
+			p.setFireTicks(0);
+			p.setExp(1.0F);
+			Random r = new Random();
+			int i = r.nextInt(getArena().getSpawns().size());
+			String loc = getArena().getSpawns().get(i);
+			p.teleport(LocationHandler.getPlayerLocation(loc));
+			Equip.equipPlayer(p);
+		}
 	}
 
 	// Get the players current killStreak
@@ -280,22 +283,22 @@ public class CPlayer {
 		return Stats.getScore(getName());
 	}
 
-	//get the players kills this game
+	// get the players kills this game
 	public int getKills() {
 		return kills;
 	}
 
-	//Set the players kills this game
+	// Set the players kills this game
 	public void setKills(int kills) {
 		this.kills = kills;
 	}
 
-	//Get the players deaths this game
+	// Get the players deaths this game
 	public int getDeaths() {
 		return deaths;
 	}
 
-	//Set the players deaths
+	// Set the players deaths
 	public void setDeaths(int deaths) {
 		this.deaths = deaths;
 	}

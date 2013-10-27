@@ -16,7 +16,7 @@ public class CPlayerManager {
 	}
 
 	// Method to register an arena if not registered, just adds it to the list
-	public static CPlayer getCrackedPlayer(Player player) {
+	public static CPlayer getCrankedPlayer(Player player) {
 		for (CPlayer p : players)
 		{
 			if (p.name.equalsIgnoreCase(player.getName()))
@@ -25,28 +25,28 @@ public class CPlayerManager {
 		return null;
 	}
 
-	// Add the cracked player to the players list
-	public static void loadCrackedPlayer(CPlayer cp) {
-		if (!isCrackedPlayer(cp.getPlayer()))
+	// Add the Cranked player to the players list
+	public static void loadCrankedPlayer(CPlayer cp) {
+		if (!isCrankedPlayer(cp.getPlayer()))
 		{
 			players.add(cp);
 		}
 	}
 
 	// Create a CPlayer for a player
-	public static void createCrackedPlayer(Player player) {
+	public static void createCrankedPlayer(Player player) {
 		CPlayer cp = new CPlayer(player);
 		players.add(cp);
 	}
 
-	// Delete the cracked player
-	public static void deleteCrackedPlayer(CPlayer cp) {
+	// Delete the Cranked player
+	public static void deleteCrankedPlayer(CPlayer cp) {
 		players.remove(cp);
 	}
 
-	// Check if the player is a cracked player
-	public static boolean isCrackedPlayer(Player p) {
-		return players.contains(getCrackedPlayer(p));
+	// Check if the player is a Cranked player
+	public static boolean isCrankedPlayer(Player p) {
+		return players.contains(getCrankedPlayer(p));
 	}
 
 	// Set the CPlayer's info
@@ -61,6 +61,6 @@ public class CPlayerManager {
 
 	// Check if a player is in an arena
 	public static boolean isInArena(Player player) {
-		return (getCrackedPlayer(player).getArena() != null);
+		return (getCrankedPlayer(player).getArena() != null);
 	}
 }

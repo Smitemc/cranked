@@ -19,7 +19,7 @@ public class Agility {
 		if (byKillStreak)
 		{
 			// Get their kills and the regular speed
-			int killStreak = CPlayerManager.getCrackedPlayer(p).getKillstreak();
+			int killStreak = CPlayerManager.getCrankedPlayer(p).getKillstreak();
 			float regularSpeed = 0.2F;
 			// Set their speed accordingly
 			try{

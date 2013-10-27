@@ -56,7 +56,7 @@ public class DamageEvents implements Listener {
 					// If the game has fully started
 					else
 					{
-						CPlayer cv = CPlayerManager.getCrackedPlayer(victim);
+						CPlayer cv = CPlayerManager.getCrankedPlayer(victim);
 						Player killer = null;
 						if (cv.getLastDamager() != null)
 							killer = cv.getLastDamager();
@@ -122,7 +122,7 @@ public class DamageEvents implements Listener {
 					// If the game has fully started
 					else
 					{
-						CPlayer cv = CPlayerManager.getCrackedPlayer(victim);
+						CPlayer cv = CPlayerManager.getCrankedPlayer(victim);
 
 						// Saves who hit the person last
 						cv.setLastDamager(killer);
@@ -175,7 +175,7 @@ public class DamageEvents implements Listener {
 				death = DeathTypes.Arrow;
 			} else
 			{
-				CPlayer cv = CPlayerManager.getCrackedPlayer(victim);
+				CPlayer cv = CPlayerManager.getCrankedPlayer(victim);
 				killer = cv.getLastDamager();
 			}
 

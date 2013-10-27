@@ -52,7 +52,7 @@ public class CrackShotApi implements Listener {
 			// If the game has fully started
 			else
 			{
-				CPlayer cv = CPlayerManager.getCrackedPlayer(victim);
+				CPlayer cv = CPlayerManager.getCrankedPlayer(victim);
 
 				// Saves who hit the person last
 				cv.setLastDamager(killer);

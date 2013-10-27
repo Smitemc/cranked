@@ -1,9 +1,10 @@
 Format:
-  Header: '&7&o&m«««««««««««<<&e&l<title>&7&o&m>>»»»»»»»»»»»»»»'
-  Line: '&a&m==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-==-=='
+  Header: '&e&l>&e&m--------------««&4&l<title>&e&o&m»»--------------&l<'
+  Line: '&e&l>&e&m-------------------------------------------------&l<'
 Arena:
   Created: "&aYou have created &b&o<arena>."
   Creator: "&a&lMade by: &f&o<creator>"
+  Information: "&a&lArena: &f&o<arena> - &a&lMade by: &f&o<creator>"
   How To Set More Spawns: "&9Use the &f&o/&oCR SetSpawn &9to add more spawns."  
   Removed: "&f&f&o<arena> &7has been removed."
   How To Remove Arenas: "&9Use the &f/&oCR Remove <arena> &7to remove arenas."
@@ -31,7 +32,7 @@ Game:
   Game Time Left: "Time left: &e&l<time> &9left!"
   Start: "&a&lKill them all &4>:D!"
   Starting: "&6&lThe game has started!"
-  Ended: "&bThe game has ended!"
+  Ended: "    &9&lThe Game Has Ended!"
 GameOver:
   Times Up: "&6&lTimes Up!"
   Winners: "&a<place>. &e&l<player>"

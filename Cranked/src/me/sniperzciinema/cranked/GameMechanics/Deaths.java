@@ -21,7 +21,7 @@ public class Deaths {
 		// still make them suicide safetly
 		if (killer != null)
 		{
-			cKiller = CPlayerManager.getCrackedPlayer(killer);
+			cKiller = CPlayerManager.getCrankedPlayer(killer);
 			arena = cKiller.getArena();
 			// Restart their last kill timer
 			cKiller.getTimer().restartTimer();
@@ -34,14 +34,14 @@ public class Deaths {
 			cKiller.setKillstreak(cKiller.getKillstreak() + 1);
 			// Update their speed depending on their new killStreak total
 			cKiller.updateSpeed();
-			cKiller.getScoreBoard().updateScoreBoard();
+			cKiller.getScoreBoard().showStats();
 		}
 		if (killed != null)
 		{
 			if (death == DeathTypes.OutOfTime)
 			killed.getWorld().createExplosion(killed.getLocation(), -1);
 
-			cKilled = CPlayerManager.getCrackedPlayer(killed);
+			cKilled = CPlayerManager.getCrankedPlayer(killed);
 			arena = cKilled.getArena();
 			cKilled.setKillstreak(0);
 			cKilled.updateSpeed();
@@ -50,7 +50,7 @@ public class Deaths {
 			cKilled.setKills(cKilled.getDeaths() + 1);
 			// Respawn the player
 			cKilled.respawn();
-			cKilled.getScoreBoard().updateScoreBoard();
+			cKilled.getScoreBoard().showStats();
 		}
 
 		// Tell players that <killer> killed <killed>

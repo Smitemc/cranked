@@ -151,7 +151,7 @@ public class ArenaManager {
 
 	// Get the players arena
 	public static Arena getArena(Player p) {
-		return CPlayerManager.getCrackedPlayer(p).getArena();
+		return CPlayerManager.getCrankedPlayer(p).getArena();
 	}
 
 	// Set a spawn for the arena

@@ -12,7 +12,7 @@ public class ScoreBoardVariables {
 
 	public static String getLine(String string, Player user) {
 
-		CPlayer cp = CPlayerManager.getCrackedPlayer(user);
+		CPlayer cp = CPlayerManager.getCrankedPlayer(user);
 		String newString = string;
 		// Replace all variables we need
 

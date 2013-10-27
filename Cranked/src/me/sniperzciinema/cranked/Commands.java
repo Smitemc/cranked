@@ -37,7 +37,7 @@ public class Commands implements CommandExecutor {
 			if (sender instanceof Player)
 			{
 				p = (Player)sender;
-				cp = CPlayerManager.getCrackedPlayer(p);
+				cp = CPlayerManager.getCrankedPlayer(p);
 			}
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
@@ -52,7 +52,7 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				if (!sender.hasPermission("Cracked.Join"))
+				if (!sender.hasPermission("Cranked.Join"))
 				{
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
@@ -74,6 +74,8 @@ public class Commands implements CommandExecutor {
 							p.sendMessage("");
 							p.sendMessage(Msgs.Game_You_Joined_A_Game.getString("<arena>", cp.getArena().getName()));
 							p.sendMessage(Msgs.Arena_Creator.getString("<creator>", arena.getCreator()));
+							p.sendMessage("");
+							p.sendMessage("");
 							if (arena.getState() == States.Waiting)
 							{
 								p.sendMessage(Msgs.Arena_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
@@ -113,7 +115,7 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				if (!p.hasPermission("Cracked.Join"))
+				if (!p.hasPermission("Cranked.Join"))
 				{
 					p.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
@@ -135,7 +137,7 @@ public class Commands implements CommandExecutor {
 					// Update the other players on the situation
 					for (Player ppl : arena.getPlayers())
 					{
-						CPlayerManager.getCrackedPlayer(ppl).getScoreBoard().updateScoreBoard();
+						CPlayerManager.getCrankedPlayer(ppl).getScoreBoard().showStats();
 						ppl.sendMessage(Msgs.Game_They_Left_A_Game.getString("<player>", cp.getName(), "<arena>", arena.getName()));
 					}
 
@@ -151,7 +153,7 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				if (!sender.hasPermission("Cracked.SetUp"))
+				if (!sender.hasPermission("Cranked.SetUp"))
 				{
 
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
@@ -163,6 +165,7 @@ public class Commands implements CommandExecutor {
 					{
 
 						ArenaManager.createArena(args[1]);
+						p.sendMessage(Msgs.Format_Line.getString());
 						p.sendMessage(Msgs.Arena_Created.getString("<arena>", arena));
 						p.sendMessage(Msgs.Arena_How_To_Set_More_Spawns.getString());
 						cp.setCreating(arena);
@@ -170,6 +173,7 @@ public class Commands implements CommandExecutor {
 							ArenaManager.getArena(arena).setCreator(args[2]);
 						else
 							ArenaManager.getArena(arena).setCreator("Unkown");
+						p.sendMessage(Msgs.Format_Line.getString());
 								
 					} else
 					{
@@ -187,7 +191,7 @@ public class Commands implements CommandExecutor {
 			// //////////////////////////////REMOVE///////////////////////////////////
 			else if (args.length > 0 && args[0].equalsIgnoreCase("REMOVE"))
 			{
-				if (!sender.hasPermission("Cracked.SetUp"))
+				if (!sender.hasPermission("Cranked.SetUp"))
 				{
 
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
@@ -213,15 +217,15 @@ public class Commands implements CommandExecutor {
 			// //////////////////////////////ARENAS///////////////////////////////////
 			else if (args.length > 0 && args[0].equalsIgnoreCase("ARENAS"))
 			{
-				if (!sender.hasPermission("Cracked.List"))
+				if (!sender.hasPermission("Cranked.List"))
 				{
 					sender.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
 				} else
 				{
-
 					sender.sendMessage(Msgs.Format_Header.getString("<title>", "Arenas"));
 					sender.sendMessage(Msgs.Commands_List_Arenas.getString("<validarenas>", ArenaManager.getPossibleArenas(), "<notvalidarenas>", ArenaManager.getNotPossibleArenas()));
+					sender.sendMessage(Msgs.Format_Line.getString());
 				}
 			}
 			// //////////////////////////////SETSPAWN///////////////////////////////////
@@ -232,7 +236,7 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				if (!p.hasPermission("Cracked.Setup"))
+				if (!p.hasPermission("Cranked.Setup"))
 				{
 					p.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
@@ -257,7 +261,7 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				if (!p.hasPermission("Cracked.Setup"))
+				if (!p.hasPermission("Cranked.Setup"))
 				{
 					p.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
@@ -278,6 +282,20 @@ public class Commands implements CommandExecutor {
 					}
 					else{
 						p.sendMessage(Msgs.Commands_How_To_Set_Arena.getString());
+					}
+				}
+			}
+			// //////////////////////////////ADMIN///////////////////////////////////
+			else if (args.length > 0 && args[0].equalsIgnoreCase("ADMIN"))
+			{
+				if (!sender.hasPermission("Cranked.Admin"))
+				{
+					sender.sendMessage(Msgs.Error_No_Permission.getString());
+					return true;
+				} else
+				{
+					if(args.length == 2){
+						
 					}
 				}
 			}

@@ -132,8 +132,8 @@ public class ArenaTimers {
 		// Apply potions
 		for (Player player : arena.getPlayers())
 		{
-			CPlayerManager.getCrackedPlayer(player).respawn();
-			CPlayerManager.getCrackedPlayer(player).getScoreBoard().updateScoreBoard();
+			CPlayerManager.getCrankedPlayer(player).respawn();
+			CPlayerManager.getCrankedPlayer(player).getScoreBoard().showStats();
 			
 			player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,
 					Integer.MAX_VALUE, 128));
@@ -179,7 +179,7 @@ public class ArenaTimers {
 		timeLeft = getGameTime();
 		for (Player p : arena.getPlayers())
 		{
-			CPlayerManager.getCrackedPlayer(p).getScoreBoard().updateScoreBoard();
+			CPlayerManager.getCrankedPlayer(p).getScoreBoard().showStats();
 			Agility.resetSpeed(p);
 			for (PotionEffect effect : p.getActivePotionEffects())
 				p.removePotionEffect(effect.getType());

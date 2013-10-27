@@ -16,6 +16,7 @@ public enum Msgs
 	Arena_Created("Arena.Created"),//<arena>
 	Arena_Creator("Arena.Creator"), // <creator>>
 	Arena_Removed("Arena.Removed"), //<arena>
+	Arena_Information("Arena.Information"), //<arena> // <creator>>
 	Arena_How_To_Set_More_Spawns("Arena.How To Set More Spawns"),
 	Error_No_Permission("Error.No Permission"), 
 	Error_Game_Already_Started("Error.Games Already Started"), 
@@ -59,7 +60,7 @@ public enum Msgs
 
 	//Get the message from the Messages.yml, well replacing and variables given
 	public String getString() {
-		String prefix = (string.equals("Format.Line") ? "" : Main.cranked);
+		String prefix = Main.cranked;
 		try
 		{
 			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string));
@@ -70,7 +71,7 @@ public enum Msgs
 	}
 
 	public String getString(String replacethis, String withthis) {
-		String prefix = (string.equals("Format.Line") ? "" : Main.cranked);
+		String prefix = Main.cranked;
 		try
 		{
 			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis));
@@ -81,7 +82,7 @@ public enum Msgs
 	}
 
 	public String getString(String replacethis, String withthis, String replacethis2, String withthis2) {
-		String prefix = (string.equals("Format.Line") ? "" : Main.cranked);
+		String prefix =Main.cranked;
 		try
 		{
 			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2));

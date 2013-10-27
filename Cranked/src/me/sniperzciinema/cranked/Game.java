@@ -18,7 +18,7 @@ public class Game {
 	public static void start(Arena arena) {
 		// Respawn all the players
 		for (Player p : arena.getPlayers())
-			CPlayerManager.getCrackedPlayer(p).respawn();
+			CPlayerManager.getCrankedPlayer(p).respawn();
 
 		// Start the pregame timer
 		arena.getTimer().startPreGameTimer();
@@ -30,13 +30,15 @@ public class Game {
 		arena.getTimer().resetGame();
 		arena.setState(States.Waiting);
 
-		Player[] winners = Sort.top3(arena.getPlayers());
+		Player[] winners = Sort.topPoints(arena.getPlayers(), 3);
 		int place = 0;
 		// Reset all players, inform them the game ended
 		for (Player p : arena.getPlayers())
 		{
-			CPlayer cp = CPlayerManager.getCrackedPlayer(p);
+			CPlayer cp = CPlayerManager.getCrankedPlayer(p);
 			p.sendMessage(Msgs.Format_Line.getString());
+			p.sendMessage("");
+			p.sendMessage(Msgs.Game_Ended.getString());
 			if (timeRanOut)
 				p.sendMessage(Msgs.GameOver_Times_Up.getString());
 
@@ -44,11 +46,13 @@ public class Game {
 			for (Player winner : winners)
 			{
 				if (winner != null)
-					p.sendMessage(Msgs.GameOver_Winners.getString("<place>", String.valueOf(place+1), "<player>", winner.getName()));
+					p.sendMessage(Msgs.GameOver_Winners.getString("<place>", String.valueOf(place+1), "<player>", winner.getName() + "("+CPlayerManager.getCrankedPlayer(winner).getPoints()+")"));
 				place++;
 			}
 
 			p.sendMessage("");
+			p.sendMessage(Msgs.Arena_Information.getString("<arena>", arena.getName(), "<creator>", arena.getCreator()));
+			p.sendMessage(Msgs.Arena_Creator.getString("<creator>", arena.getCreator()));
 			p.sendMessage(Msgs.Format_Line.getString());
 			leave(cp);
 		}
@@ -69,7 +73,7 @@ public class Game {
 		// Set the players info
 		cp.setInfo();
 		cp.setArena(arena);
-		cp.getScoreBoard().updateScoreBoard();
+		cp.getScoreBoard().showStats();
 
 		for (PotionEffect effect : p.getActivePotionEffects())
 			p.removePotionEffect(effect.getType());
@@ -89,7 +93,7 @@ public class Game {
 		Arena arena = cp.getArena();
 		// Reset the player
 		cp.reset();
-		cp.getScoreBoard().updateScoreBoard();
+		cp.getScoreBoard().showStats();
 
 		// If there's noone left in the arena, reset it
 		if (arena.getPlayers().size() <= 1)
@@ -99,9 +103,9 @@ public class Game {
 			arena.getTimer().stopPreGameTimer();
 			for(Player p : arena.getPlayers()){
 				p.sendMessage(Msgs.Error_Not_Enough_Players.getString());
-				CPlayer cpp = CPlayerManager.getCrackedPlayer(p);
+				CPlayer cpp = CPlayerManager.getCrankedPlayer(p);
 				cpp.reset();
-				cpp.getScoreBoard().updateScoreBoard();
+				cpp.getScoreBoard().showStats();
 
 			}
 	}

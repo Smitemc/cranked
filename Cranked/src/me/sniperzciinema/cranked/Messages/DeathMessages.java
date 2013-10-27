@@ -23,9 +23,9 @@ public class DeathMessages {
 		// Replace color codes, and killer and killed names
 		msg = ChatColor.translateAlternateColorCodes('&', msg);
 		if (killer != null)
-			msg = msg.replaceAll("<killer>", killer.getName()+"("+CPlayerManager.getCrackedPlayer(killer).getPoints()+")");
+			msg = msg.replaceAll("<killer>", killer.getName()+"("+CPlayerManager.getCrankedPlayer(killer).getPoints()+")");
 		if (killed != null)
-		msg = msg.replaceAll("<killed>", killed.getName() +"("+CPlayerManager.getCrackedPlayer(killed).getPoints()+")");
+		msg = msg.replaceAll("<killed>", killed.getName() +"("+CPlayerManager.getCrankedPlayer(killed).getPoints()+")");
 		return msg;
 	}
 }
