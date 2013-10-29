@@ -1,7 +1,6 @@
 
 package me.sniperzciinema.cranked.Listeners;
 
-import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.ArenaHandlers.States;
@@ -24,13 +23,6 @@ import org.bukkit.inventory.ItemStack;
 
 
 public class DamageEvents implements Listener {
-
-	public Main plugin;
-
-	public DamageEvents(Main instance)
-	{
-		this.plugin = instance;
-	}
 
 	// Player is Damaged, User is Damager
 	// When entity is damaged

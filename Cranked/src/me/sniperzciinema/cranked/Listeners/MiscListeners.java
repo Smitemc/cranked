@@ -1,10 +1,10 @@
 
 package me.sniperzciinema.cranked.Listeners;
 
-import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
+import me.sniperzciinema.cranked.Tools.Files;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -24,19 +24,11 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.plugin.Plugin;
 
 
 //TODO: Set up breaking/placing blocks to work with listeners
 
 public class MiscListeners implements Listener {
-
-	private Plugin plugin;
-
-	public MiscListeners(Main instance)
-	{
-		this.plugin = instance;
-	}
 
 	// Disable dropping items if the player is in game
 	@EventHandler(priority = EventPriority.NORMAL)
@@ -109,11 +101,11 @@ public class MiscListeners implements Listener {
 
 				// If a player tries a command but is in infected, block all
 				// that aren't /inf
-				if (plugin.getConfig().getStringList("Blocked Commands").contains(msg.toLowerCase()))
+				if (Files.getConfig().getStringList("Blocked Commands").contains(msg.toLowerCase()))
 				{
 					e.getPlayer().sendMessage(Msgs.Error_Cant_Use_Command.getString());
 					e.setCancelled(true);
-				} else if (!(plugin.getConfig().getStringList("Allowed Commands").contains(msg.toLowerCase()) || e.getMessage().toLowerCase().contains("inf")))
+				} else if (!(Files.getConfig().getStringList("Allowed Commands").contains(msg.toLowerCase()) || e.getMessage().toLowerCase().contains("inf")))
 				{
 					e.getPlayer().sendMessage(Msgs.Error_Cant_Use_Command.getString());
 					e.setCancelled(true);

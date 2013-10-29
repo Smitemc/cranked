@@ -13,6 +13,7 @@ import me.sniperzciinema.cranked.Listeners.DamageEvents;
 import me.sniperzciinema.cranked.Listeners.RankingsToggle;
 import me.sniperzciinema.cranked.Listeners.RegisterAndUnRegister;
 import me.sniperzciinema.cranked.Listeners.MiscListeners;
+import me.sniperzciinema.cranked.Listeners.SignListener;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.StringUtil;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
@@ -88,17 +89,19 @@ public class Main extends JavaPlugin {
 		me = this;
 		// Register the event listeners
 
-		DamageEvents damage = new DamageEvents(this);
+		DamageEvents damage = new DamageEvents();
 		getServer().getPluginManager().registerEvents(damage, this);
-		RegisterAndUnRegister register = new RegisterAndUnRegister(this);
+		SignListener sign = new SignListener();
+		getServer().getPluginManager().registerEvents(sign, this);
+		RegisterAndUnRegister register = new RegisterAndUnRegister();
 		getServer().getPluginManager().registerEvents(register, this);
-		MiscListeners MiscListeners = new MiscListeners(this);
+		MiscListeners MiscListeners = new MiscListeners();
 		getServer().getPluginManager().registerEvents(MiscListeners, this);
 		RankingsToggle RankingsToggle = new RankingsToggle();
 		getServer().getPluginManager().registerEvents(RankingsToggle, this);
 		
 		if(getServer().getPluginManager().getPlugin("CrackShot") != null){
-			CrackShotApi CrackShotApi = new CrackShotApi(this);
+			CrackShotApi CrackShotApi = new CrackShotApi();
 			getServer().getPluginManager().registerEvents(CrackShotApi, this);
 			System.out.println("CrackShot is loaded up and ready for use!");
 		}

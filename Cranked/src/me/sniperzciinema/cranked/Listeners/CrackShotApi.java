@@ -1,7 +1,6 @@
 
 package me.sniperzciinema.cranked.Listeners;
 
-import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
 import me.sniperzciinema.cranked.ArenaHandlers.States;
@@ -19,13 +18,6 @@ import com.shampaggon.crackshot.events.WeaponDamageEntityEvent;
 
 
 public class CrackShotApi implements Listener {
-
-	public Main plugin;
-
-	public CrackShotApi(Main instance)
-	{
-		this.plugin = instance;
-	}
 
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onPlayerGetShot(WeaponDamageEntityEvent e) {

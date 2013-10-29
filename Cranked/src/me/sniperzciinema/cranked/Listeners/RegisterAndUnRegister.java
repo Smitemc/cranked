@@ -1,7 +1,6 @@
 
 package me.sniperzciinema.cranked.Listeners;
 
-import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
@@ -15,11 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class RegisterAndUnRegister implements Listener{
 	
-	Main plugin;
 	
-	public RegisterAndUnRegister(Main instance){
-		plugin = instance;
-	}
 //When a player joins the server, create a CPlayer for them
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onJoinCreateCrankedPlayer(PlayerJoinEvent e){
