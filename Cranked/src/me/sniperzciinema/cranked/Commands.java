@@ -323,7 +323,7 @@ public class Commands implements CommandExecutor {
 						Arena arena = ArenaManager.getArena(args[1]);
 						sender.sendMessage("");
 						sender.sendMessage(Msgs.Format_Header.getString("<title>", arena.getName() + " Information"));
-						sender.sendMessage(Msgs.Info_Players_In.getString("<current>", String.valueOf(arena.getPlayers().size())));
+						sender.sendMessage(Msgs.Info_Players_In.getString("<current>", String.valueOf(arena.getPlayers().size()), "<max>", String.valueOf(arena.getSettings().getMaxPlayers())));
 						sender.sendMessage(Msgs.Info_Required_Players_To_Start.getString("<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
 						sender.sendMessage(Msgs.Info_Game_State.getString("<state>", String.valueOf(arena.getState())));
 						sender.sendMessage(Msgs.Info_Time_Left.getString("<time>", String.valueOf(arena.getState() == States.Started ? Time.getTime((long) arena.getTimer().getTimeLeft()) : "N/A")));
