@@ -48,17 +48,23 @@ public class Settings {
 	}
 
 	public int getScorePerKill() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Score.PerKill"))
-			return Files.getArenas().getInt("Arenas." + arena.getName() + ".Score.PerKill");
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Score.Per Kill"))
+			return Files.getArenas().getInt("Arenas." + arena.getName() + ".Score.Per Kill");
 		else
-			return Files.getConfig().getInt("Settings.Global.Score.PerKill");
+			return Files.getConfig().getInt("Settings.Global.Score.Per Kill");
 	}
 
 	public int getPointsToWin() {
-		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Points.MaxPoints"))
-			return Files.getArenas().getInt("Arenas." + arena.getName() + ".Points.MaxPoints");
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Points.Max Points"))
+			return Files.getArenas().getInt("Arenas." + arena.getName() + ".Points.Max Points");
 		else
 			return Files.getConfig().getInt("Settings.Global.Points.MaxPoints");
+	}
+	public int getMaxPlayers() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Game.Max Players"))
+			return Files.getArenas().getInt("Arenas." + arena.getName() + ".Game.Max Players");
+		else
+			return Files.getConfig().getInt("Settings.Global.Game.MaxPlayers");
 	}
 
 	// ////////////////////////////////////////////////-BOOLEANS-////////////////////////////////////////////////////

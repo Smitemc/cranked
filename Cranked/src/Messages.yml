@@ -54,7 +54,7 @@ Commands:
   How To Delete Arena Spawns: "&e&o/CR DelSpawns <Spawn> &7- &fDelete arena Spawns"
   How To Admin: "&e&o/CR Admins &7- &fShow Admin Commands"
 Info:
-  Players In: "&e&lThere are currently &f&o<current> &e&lplayers playing."
+  Players In: "&e&lThere are currently &f&o<current>/<max> &e&lplayers playing."
   Game State: "&9&lGame State: &f&o<state>"
   Time Left: "&4&lTime Left: &f&o<time>"
   Required Players To Start: "&5&lAuto Start At: &f&o<needed>"

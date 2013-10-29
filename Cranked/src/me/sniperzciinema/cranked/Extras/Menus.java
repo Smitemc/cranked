@@ -63,7 +63,7 @@ public class Menus {
 						ChatColor.GREEN + "Click Here Join This Arena", 
 						ChatColor.GRAY+"--------------------------", 
 						ChatColor.YELLOW + "Auto Start At: " + arena.getSettings().getRequiredPlayers(), 
-						ChatColor.YELLOW + "Playing: " + arena.getPlayers().size(), 
+						ChatColor.YELLOW + "Playing: " + arena.getPlayers().size()+"/"+arena.getSettings().getMaxPlayers(), 
 						ChatColor.YELLOW + "State: " + arena.getState(), 
 						ChatColor.YELLOW + "Time Left: " +  (arena.getState() == States.Started ? arena.getTimer().getTimeLeft():"N/A"),
 						ChatColor.GRAY+"--------------------------", 
@@ -77,15 +77,15 @@ public class Menus {
 						ChatColor.RED + "This arena isn't playable!",
 						ChatColor.RED + "      It's Missing Spawns!",
 						ChatColor.GRAY+"--------------------------", 
-						ChatColor.RED + "Auto Start At: " + arena.getSettings().getRequiredPlayers(), 
-						ChatColor.RED + "Playing: " + arena.getPlayers().size(), 
-						ChatColor.RED + "State: " + arena.getState(), 
-						ChatColor.RED + "Time Left: " +  (arena.getState() == States.Started ? arena.getTimer().getTimeLeft():"N/A"),
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Auto Start At: " + arena.getSettings().getRequiredPlayers(), 
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Playing: " + arena.getPlayers().size()+"/"+arena.getSettings().getMaxPlayers(), 
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "State: " + arena.getState(), 
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Time Left: " +  (arena.getState() == States.Started ? arena.getTimer().getTimeLeft():"N/A"),
 						ChatColor.GRAY+"--------------------------", 
-						ChatColor.RED + "Time Limit: " + Time.getTime((long) arena.getSettings().getGameTime()), 
-						ChatColor.RED + "Points To Win: " + arena.getSettings().getPointsToWin(), 
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Time Limit: " + Time.getTime((long) arena.getSettings().getGameTime()), 
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Points To Win: " + arena.getSettings().getPointsToWin(), 
 						ChatColor.GRAY+"--------------------------", 
-						ChatColor.RED + "Creator: " + ChatColor.WHITE + arena.getCreator());
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Creator: " + ChatColor.WHITE + arena.getCreator());
 
 			place++;
 		}

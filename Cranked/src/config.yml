@@ -12,13 +12,15 @@ Settings:
       PreGame: 10
       Game: 300
       Waiting Status Update: 60
+    Playing:
+      Max Players: 20
     Speed:
       Bonus Well Waiting: 0.6
       Bonus Per Kill: 0.075
     Score:
-      Score Per Kill: 10
+      Per Kill: 10
     Points:
-      MaxPoints: 30
+      Max Points: 30
     Misc:
       Can Drop Items: false
       Can Loose Food: false
