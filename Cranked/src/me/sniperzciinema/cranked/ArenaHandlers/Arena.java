@@ -16,7 +16,7 @@ import me.sniperzciinema.cranked.Tools.Settings;
 public class Arena {
 
 	private String name;
-	private States state = States.Waiting;
+	private GameState state = GameState.Waiting;
 	private HashMap<Location, Inventory> chests = new HashMap<Location, Inventory>();
 	private HashMap<Location, Material> blocks = new HashMap<Location, Material>();
 
@@ -50,12 +50,12 @@ public class Arena {
 	}
 
 	// Get the arenas state
-	public States getState() {
+	public GameState getState() {
 		return state;
 	}
 
 	// Set the arenas state
-	public void setState(States state) {
+	public void setState(GameState state) {
 		this.state = state;
 	}
 
@@ -109,7 +109,7 @@ public class Arena {
 		getTimer().stopGameTimer();
 		getTimer().stopPreGameTimer();
 		getTimer().stopUpdaterTimer();
-		setState(States.Waiting);
+		setState(GameState.Waiting);
 		// Clear blocks
 		if (!this.getBlocks().isEmpty())
 			for (Location loc : this.getBlocks().keySet())

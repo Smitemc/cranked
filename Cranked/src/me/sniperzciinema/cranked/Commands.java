@@ -5,7 +5,7 @@ import java.util.List;
 
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
-import me.sniperzciinema.cranked.ArenaHandlers.States;
+import me.sniperzciinema.cranked.ArenaHandlers.GameState;
 import me.sniperzciinema.cranked.Extras.Menus;
 import me.sniperzciinema.cranked.GameMechanics.Agility;
 import me.sniperzciinema.cranked.GameMechanics.DeathTypes;
@@ -25,7 +25,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
 
 public class Commands implements CommandExecutor {
 
@@ -83,13 +82,13 @@ public class Commands implements CommandExecutor {
 							p.sendMessage(Msgs.Arena_Creator.getString("<creator>", arena.getCreator()));
 							p.sendMessage("");
 							p.sendMessage("");
-							if (arena.getState() == States.Waiting)
+							if (arena.getState() == GameState.Waiting)
 							{
 								p.sendMessage(Msgs.Game_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
-							} else if (arena.getState() == States.PreGame)
+							} else if (arena.getState() == GameState.PreGame)
 							{
 								p.sendMessage(Msgs.Game_Starting.getString("<time>", Time.getTime((long) arena.getTimer().getTimeLeft())));
-							} else if (arena.getState() == States.Started)
+							} else if (arena.getState() == GameState.Started)
 							{
 								p.sendMessage(Msgs.Game_Time_Left.getString("<time>", Time.getTime((long) arena.getTimer().getTimeLeft())));
 							}
@@ -154,6 +153,7 @@ public class Commands implements CommandExecutor {
 			// //////////////////////////////CREATE///////////////////////////////////
 			else if (args.length > 0 && args[0].equalsIgnoreCase("CREATE"))
 			{
+				
 				if (p == null)
 				{
 					sender.sendMessage("Expected a player!");
@@ -326,7 +326,7 @@ public class Commands implements CommandExecutor {
 						sender.sendMessage(Msgs.Info_Players_In.getString("<current>", String.valueOf(arena.getPlayers().size()), "<max>", String.valueOf(arena.getSettings().getMaxPlayers())));
 						sender.sendMessage(Msgs.Info_Required_Players_To_Start.getString("<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
 						sender.sendMessage(Msgs.Info_Game_State.getString("<state>", String.valueOf(arena.getState())));
-						sender.sendMessage(Msgs.Info_Time_Left.getString("<time>", String.valueOf(arena.getState() == States.Started ? Time.getTime((long) arena.getTimer().getTimeLeft()) : "N/A")));
+						sender.sendMessage(Msgs.Info_Time_Left.getString("<time>", String.valueOf(arena.getState() == GameState.Started ? Time.getTime((long) arena.getTimer().getTimeLeft()) : "N/A")));
 						sender.sendMessage(Msgs.Info_Time_Limit.getString("<time>", String.valueOf(arena.getSettings().getGameTime())));
 						sender.sendMessage(Msgs.Info_Creator.getString("<creator>", String.valueOf(arena.getCreator())));
 					} else

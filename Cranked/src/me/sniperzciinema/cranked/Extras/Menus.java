@@ -7,7 +7,7 @@ import java.util.Random;
 import me.sniperzciinema.cranked.Main;
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
-import me.sniperzciinema.cranked.ArenaHandlers.States;
+import me.sniperzciinema.cranked.ArenaHandlers.GameState;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.Time;
 import me.sniperzciinema.cranked.Tools.Files;
@@ -65,7 +65,7 @@ public class Menus {
 						ChatColor.YELLOW + "Auto Start At: " + arena.getSettings().getRequiredPlayers(), 
 						ChatColor.YELLOW + "Playing: " + arena.getPlayers().size()+"/"+arena.getSettings().getMaxPlayers(), 
 						ChatColor.YELLOW + "State: " + arena.getState(), 
-						ChatColor.YELLOW + "Time Left: " +  (arena.getState() == States.Started ? arena.getTimer().getTimeLeft():"N/A"),
+						ChatColor.YELLOW + "Time Left: " +  (arena.getState() == GameState.Started ? arena.getTimer().getTimeLeft():"N/A"),
 						ChatColor.GRAY+"--------------------------", 
 						ChatColor.RED + "Time Limit: " + Time.getTime((long) arena.getSettings().getGameTime()), 
 						ChatColor.RED + "Points To Win: " + arena.getSettings().getPointsToWin(), 
@@ -80,7 +80,7 @@ public class Menus {
 						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Auto Start At: " + arena.getSettings().getRequiredPlayers(), 
 						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Playing: " + arena.getPlayers().size()+"/"+arena.getSettings().getMaxPlayers(), 
 						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "State: " + arena.getState(), 
-						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Time Left: " +  (arena.getState() == States.Started ? arena.getTimer().getTimeLeft():"N/A"),
+						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Time Left: " +  (arena.getState() == GameState.Started ? arena.getTimer().getTimeLeft():"N/A"),
 						ChatColor.GRAY+"--------------------------", 
 						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Time Limit: " + Time.getTime((long) arena.getSettings().getGameTime()), 
 						"" + ChatColor.RED + ChatColor.STRIKETHROUGH + "Points To Win: " + arena.getSettings().getPointsToWin(), 

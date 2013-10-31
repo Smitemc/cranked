@@ -3,7 +3,7 @@ package me.sniperzciinema.cranked.Listeners;
 
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
-import me.sniperzciinema.cranked.ArenaHandlers.States;
+import me.sniperzciinema.cranked.ArenaHandlers.GameState;
 import me.sniperzciinema.cranked.GameMechanics.DeathTypes;
 import me.sniperzciinema.cranked.GameMechanics.Deaths;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
@@ -39,7 +39,7 @@ public class DamageEvents implements Listener {
 					Arena arena = ArenaManager.getArena(victim);
 
 					// If the attack happened before the game started
-					if (arena.getState() != States.Started)
+					if (arena.getState() != GameState.Started)
 					{
 						e.setDamage(0);
 						e.setCancelled(true);
@@ -105,7 +105,7 @@ public class DamageEvents implements Listener {
 
 					Arena arena = ArenaManager.getArena(victim);
 
-					if (arena.getState() != States.Started)
+					if (arena.getState() != GameState.Started)
 					{
 						e.setDamage(0);
 						e.setCancelled(true);

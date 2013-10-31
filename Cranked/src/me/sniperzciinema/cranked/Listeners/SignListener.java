@@ -4,7 +4,7 @@ package me.sniperzciinema.cranked.Listeners;
 import me.sniperzciinema.cranked.Game;
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
-import me.sniperzciinema.cranked.ArenaHandlers.States;
+import me.sniperzciinema.cranked.ArenaHandlers.GameState;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.Messages.Time;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
@@ -57,13 +57,13 @@ public class SignListener implements Listener {
 							p.sendMessage(Msgs.Arena_Creator.getString("<creator>", arena.getCreator()));
 							p.sendMessage("");
 							p.sendMessage("");
-							if (arena.getState() == States.Waiting)
+							if (arena.getState() == GameState.Waiting)
 							{
 								p.sendMessage(Msgs.Game_StatusUpdate.getString("<current>", String.valueOf(arena.getPlayers().size()), "<needed>", String.valueOf(arena.getSettings().getRequiredPlayers())));
-							} else if (arena.getState() == States.PreGame)
+							} else if (arena.getState() == GameState.PreGame)
 							{
 								p.sendMessage(Msgs.Game_Starting.getString("<time>", Time.getTime((long) arena.getTimer().getTimeLeft())));
-							} else if (arena.getState() == States.Started)
+							} else if (arena.getState() == GameState.Started)
 							{
 								p.sendMessage(Msgs.Game_Time_Left.getString("<time>", Time.getTime((long) arena.getTimer().getTimeLeft())));
 							}

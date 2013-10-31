@@ -127,7 +127,7 @@ public class ArenaTimers {
 		// Set the info
 		stopUpdaterTimer();
 		timeLeft = getTimePreGame();
-		arena.setState(States.PreGame);
+		arena.setState(GameState.PreGame);
 
 		// Apply potions
 		for (Player player : arena.getPlayers())
@@ -174,7 +174,7 @@ public class ArenaTimers {
 	public void startGameTimer() {
 		// Set info
 		stopPreGameTimer();
-		arena.setState(States.Started);
+		arena.setState(GameState.Started);
 		
 		timeLeft = getGameTime();
 		for (Player p : arena.getPlayers())
