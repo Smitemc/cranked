@@ -134,7 +134,7 @@ public class ArenaTimers {
 		{
 			CPlayerManager.getCrankedPlayer(player).respawn();
 			CPlayerManager.getCrankedPlayer(player).getScoreBoard().showStats();
-			
+			player.sendMessage(Msgs.Game_PreGame_Please_Wait.getString());
 			player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP,
 					Integer.MAX_VALUE, 128));
 			player.addPotionEffect(new PotionEffect(

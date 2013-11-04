@@ -31,6 +31,7 @@ Game:
   They Left A Game: "&c&l<player> left &f&o<arena>."
   Not Enough Players: "&cTheres not enough players to start game!"
   Players Needed: "&c&o<current>&4/&o&c&o<needed> &3players in the game"
+  PreGame Please Wait: "Please Wait for the game to start"
   PreGame Time Left: "Starting in: &e&l<time>!"
   Game Time Left: "Time left: &e&l<time> &9left!"
   Start: "&a&lKill them all &4>:D!"

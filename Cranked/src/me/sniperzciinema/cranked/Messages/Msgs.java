@@ -47,6 +47,7 @@ public enum Msgs
 	Game_Not_Enough_Players("Game.Not Enough Players"), 
 	Game_Players_Needed("Game.Players Needed"),//<current>> // <needed>
 	Game_PreGame_Time_Left("Game.PreGame Time Left"),// <time>
+	Game_PreGame_Please_Wait("Game.PreGame Please Wait"),
 	Game_Time_Left("Game.Game Time Left"), // <time>
 	Game_Ended("Game.Ended"),
 	Commands_How_To_Set_Spawn("Commands.How To Set Spawn"), 
@@ -93,25 +94,29 @@ public enum Msgs
 		}
 	}
 
-	public String getString(String replacethis, String withthis) {
+	public String getString(String... variables) {
 		String prefix = Main.cranked;
 		try
 		{
-			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis));
+			String message = prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string));
+			int i = 0;
+			String replace = null;
+			for (String variable : variables)
+			{
+				if (i == 0)
+				{
+					replace = variable;
+					i++;
+				} else
+				{
+					message = message.replaceAll(replace, variable);
+					i = 0;
+				}
+			}
+			return message;
 		} catch (NullPointerException npe)
 		{
-			return prefix +"Unable to find message: "+string;
-		}
-	}
-
-	public String getString(String replacethis, String withthis, String replacethis2, String withthis2) {
-		String prefix =Main.cranked;
-		try
-		{
-			return prefix + ChatColor.translateAlternateColorCodes('&', Files.getMessages().getString(string).replaceAll(replacethis, withthis).replaceAll(replacethis2, withthis2));
-		} catch (NullPointerException npe)
-		{
-			return prefix +"Unable to find message: "+string;
+			return prefix + "Unable to find message: " + string;
 		}
 	}
 };

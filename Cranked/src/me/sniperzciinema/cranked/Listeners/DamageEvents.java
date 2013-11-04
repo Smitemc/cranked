@@ -9,7 +9,6 @@ import me.sniperzciinema.cranked.GameMechanics.Deaths;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
-import org.bukkit.Material;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,8 +17,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.ItemStack;
 
 
 public class DamageEvents implements Listener {
@@ -55,9 +52,7 @@ public class DamageEvents implements Listener {
 
 						if ((victim != null) && (killer != null))
 						{
-							// Saves who hit the person last
-							cv.setLastDamager(killer);
-
+							
 							// If it was enough to kill the player
 							if (victim.getHealth() - e.getDamage() <= 0)
 							{
@@ -102,7 +97,6 @@ public class DamageEvents implements Listener {
 
 				if (killer instanceof Player)
 				{
-
 					Arena arena = ArenaManager.getArena(victim);
 
 					if (arena.getState() != GameState.Started)
@@ -114,6 +108,7 @@ public class DamageEvents implements Listener {
 					// If the game has fully started
 					else
 					{
+
 						CPlayer cv = CPlayerManager.getCrankedPlayer(victim);
 
 						// Saves who hit the person last
@@ -122,6 +117,7 @@ public class DamageEvents implements Listener {
 						// If it was enough to kill the player
 						if (victim.getHealth() - e.getDamage() <= 0)
 						{
+
 							e.setDamage(0);
 							Deaths.playerDies(killer, victim, death);
 						}
@@ -130,51 +126,6 @@ public class DamageEvents implements Listener {
 				}
 			}
 
-		}
-	}
-
-	@EventHandler(priority = EventPriority.NORMAL)
-	public void onPlayerDeath(PlayerDeathEvent e) {
-
-		Player victim = (Player) e.getEntity();
-		Player killer = null;
-
-		// If they're in the game
-		if (ArenaManager.getArena(victim) != null)
-		{
-
-			for (ItemStack is : e.getDrops())
-			{
-				is.setType(Material.AIR);
-			}
-			e.setDeathMessage("");
-			e.getDrops().clear();
-			e.setKeepLevel(true);
-			e.getEntity().setHealth(20);
-
-			DeathTypes death = DeathTypes.Melee;
-
-			if (e.getEntity().getKiller() instanceof Player)
-				killer = (Player) e.getEntity().getKiller();
-
-			else if (victim.getKiller() instanceof Arrow)
-			{
-				victim = (Player) e.getEntity();
-				Arrow arrow = (Arrow) victim.getKiller();
-
-				if (arrow.getShooter() instanceof Player)
-					killer = (Player) arrow.getShooter();
-				death = DeathTypes.Arrow;
-			} else
-			{
-				CPlayer cv = CPlayerManager.getCrankedPlayer(victim);
-				killer = cv.getLastDamager();
-			}
-
-			if (killer instanceof Player)
-			{
-				Deaths.playerDies(killer, victim, death);
-			}
 		}
 	}
 
