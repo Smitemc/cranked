@@ -17,7 +17,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-
 public class CPlayer {
 
 	private Player player;
@@ -26,7 +25,7 @@ public class CPlayer {
 	private int killstreak = 0;
 	private CPlayerTimers PlayerTimer = new CPlayerTimers(this);
 	private ScoreBoard ScoreBoard = new ScoreBoard(this);
-	// private long timeJoined;
+	private long timeJoined;
 	private GameMode gamemode;
 	private int level;
 	private float exp;
@@ -43,21 +42,12 @@ public class CPlayer {
 
 	public CPlayer(Player p)
 	{
-		location = p.getLocation();
 		name = p.getName();
-		gamemode = p.getGameMode();
-		level = p.getLevel();
-		exp = p.getExp();
-		health = p.getHealth();
-		food = p.getFoodLevel();
-		inventory = p.getInventory().getContents();
-		armor = p.getInventory().getArmorContents();
-		p.getInventory().clear();
-		p.getInventory().setArmorContents(null);
 		player = p;
 	}
 
 	// Set all their info into their CPlayer
+	@SuppressWarnings("deprecation")
 	public void setInfo() {
 		location = player.getLocation();
 		name = player.getName();
@@ -70,6 +60,7 @@ public class CPlayer {
 		armor = player.getInventory().getArmorContents();
 		player.getInventory().clear();
 		player.getInventory().setArmorContents(null);
+		player.updateInventory();
 
 		player.setGameMode(GameMode.ADVENTURE);
 		player.setLevel(0);
@@ -111,19 +102,26 @@ public class CPlayer {
 		inventory = null;
 		armor = null;
 		arena = null;
+		timeJoined = 0;
 	}
 
 	// Set the last damager for the player
+	/**
+	 * @param p
+	 */
 	public void setLastDamager(Player p) {
 		lastDamager = p;
 	}
 
-	// Get the last damager for the player
+	/**
+	 * @return last damage
+	 */
 	public Player getLastDamager() {
 		return lastDamager;
 	}
 
 	// Respawn the player
+	@SuppressWarnings("deprecation")
 	public void respawn() {
 		if (getArena() != null)
 		{
@@ -137,6 +135,7 @@ public class CPlayer {
 			String loc = getArena().getSpawns().get(i);
 			p.teleport(LocationHandler.getPlayerLocation(loc));
 			Equip.equipPlayer(p);
+			p.updateInventory();
 		}
 	}
 
@@ -149,14 +148,6 @@ public class CPlayer {
 	public void setKillstreak(int killstreak) {
 		this.killstreak = killstreak;
 	}
-
-	// public long getTimeJoined() {
-	// return timeJoined;
-	// }
-
-	// public void setTimeJoined(long timeJoined) {
-	// this.timeJoined = timeJoined;
-	// }
 
 	// Get the players saved gamemode
 	public GameMode getGamemode() {
@@ -341,6 +332,20 @@ public class CPlayer {
 	// Get the players timers
 	public CPlayerTimers getTimer() {
 		return PlayerTimer;
+	}
+
+	/**
+	 * @return the timeJoined
+	 */
+	public long getTimeJoined() {
+		return timeJoined;
+	}
+
+	/**
+	 * @param timeJoined the timeJoined to set
+	 */
+	public void setTimeJoined(long timeJoined) {
+		this.timeJoined = timeJoined;
 	}
 
 }

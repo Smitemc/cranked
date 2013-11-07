@@ -68,6 +68,32 @@ public class Stats {
 		}
 	}
 
+	/**
+	 * 
+	 * @param name
+	 * @return playingTime
+	 */
+	public static int getPlayingTime(String name) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			return Integer.valueOf(getMySQLStats(name, "Playing Time"));
+		else
+			return Files.getPlayers().getInt("Players." + name + ".Playing Time");
+	}
+/**
+ * 
+ * @param name
+ * @param playingTime
+ */
+	public static void setPlayingTime(String name, Long playingTime) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			setMySQLStats(name, "Playing Time", playingTime.intValue());
+		else
+		{
+			Files.getPlayers().set("Players." + name + ".Playing Time", playingTime.intValue());
+			Files.savePlayers();
+		}
+	}
+
 	// Method to get the MySQL Stats (Untested...)
 	private static String getMySQLStats(String name, String stat) {
 		String value = "0";

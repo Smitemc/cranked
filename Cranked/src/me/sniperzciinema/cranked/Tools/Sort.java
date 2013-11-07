@@ -27,7 +27,7 @@ public class Sort {
 		}
 
 		int maxValueInMap = (Collections.max(points.values()));
-		int place = 0;
+		int place = 1;
 		while (place != howMany)
 		{
 			//If the list still has players in it, find the top player

@@ -2,6 +2,8 @@
 package me.sniperzciinema.cranked;
 
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
+import me.sniperzciinema.cranked.ArenaHandlers.GameState;
+import me.sniperzciinema.cranked.GameMechanics.Stats;
 import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
@@ -16,9 +18,12 @@ public class Game {
 
 	public static void start(Arena arena) {
 		// Respawn all the players
-		for (Player p : arena.getPlayers())
-			CPlayerManager.getCrankedPlayer(p).respawn();
-
+		for (Player p : arena.getPlayers()){
+			CPlayer cp = CPlayerManager.getCrankedPlayer(p);
+			cp.respawn();
+			cp.setTimeJoined(System.currentTimeMillis()/1000);
+		}
+		
 		// Start the pregame timer
 		arena.getTimer().startPreGameTimer();
 	}
@@ -34,6 +39,7 @@ public class Game {
 		for (Player p : arena.getPlayers())
 		{
 			CPlayer cp = CPlayerManager.getCrankedPlayer(p);
+			Stats.setPlayingTime(p.getName(), Stats.getPlayingTime(p.getName()) + (System.currentTimeMillis()/1000 - cp.getTimeJoined()));
 			p.sendMessage(Msgs.Format_Line.getString());
 			p.sendMessage("");
 			p.sendMessage(Msgs.Game_Ended.getString());
@@ -83,8 +89,12 @@ public class Game {
 		p.setFallDistance(0);
 		cp.respawn();
 
+		if(arena.getState() == GameState.Started){
+			cp.setTimeJoined(System.currentTimeMillis()/1000);
+		}
+		
 		// See if autostart happens yet
-		if (arena.getPlayers().size() >= Settings.getRequiredPlayers())
+		else if (arena.getState() == GameState.Waiting && arena.getPlayers().size() >= Settings.getRequiredPlayers())
 		{
 			start(arena);
 		}
