@@ -4,8 +4,6 @@ package me.sniperzciinema.cranked.PlayerHandlers;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.sniperzciinema.cranked.Game;
-
 import org.bukkit.entity.Player;
 
 
@@ -44,7 +42,6 @@ public class CPlayerManager {
 
 	// Delete the Cranked player
 	public static void deleteCrankedPlayer(CPlayer cp) {
-		Game.leave(cp);
 		players.remove(cp);
 	}
 

@@ -3,9 +3,12 @@ package me.sniperzciinema.cranked.GameMechanics;
 
 import me.sniperzciinema.cranked.Game;
 import me.sniperzciinema.cranked.ArenaHandlers.Arena;
+//import me.sniperzciinema.cranked.Extras.PopUps;
 import me.sniperzciinema.cranked.Messages.DeathMessages;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
+
+//import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 
@@ -43,6 +46,8 @@ public class Deaths {
 
 			cKilled = CPlayerManager.getCrankedPlayer(killed);
 			arena = cKilled.getArena();
+			if(Stats.getHighestKillStreak(killed.getName()) < cKilled.getKillstreak())
+				Stats.setHighestKillStreak(killed.getName(), cKilled.getKillstreak());
 			cKilled.setKillstreak(0);
 			cKilled.updateSpeed();
 			cKilled.getTimer().stopTimer();
@@ -60,6 +65,11 @@ public class Deaths {
 		// Check if they reached the max kills, if so end the game
 		if (cKiller != null)
 		{
+			//if(Bukkit.getPluginManager().getPlugin("ProtocolLib") != null)
+				//if(cKiller.getTimer().isCranked())
+				//	PopUps.cranked2(killer);
+				//else
+				//	PopUps.cranked(killer);
 			if (cKiller.getPoints() >= cKiller.getArena().getSettings().getPointsToWin())
 				Game.end(cKiller.getArena(), false);
 		}

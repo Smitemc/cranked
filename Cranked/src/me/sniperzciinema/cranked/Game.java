@@ -39,6 +39,9 @@ public class Game {
 		for (Player p : arena.getPlayers())
 		{
 			CPlayer cp = CPlayerManager.getCrankedPlayer(p);
+			cp.getTimer().stopTimer();
+			if(Stats.getHighestKillStreak(p.getName()) < cp.getKillstreak())
+				Stats.setHighestKillStreak(p.getName(), cp.getKillstreak());
 			Stats.setPlayingTime(p.getName(), Stats.getPlayingTime(p.getName()) + (System.currentTimeMillis()/1000 - cp.getTimeJoined()));
 			p.sendMessage(Msgs.Format_Line.getString());
 			p.sendMessage("");

@@ -1,6 +1,7 @@
 
 package me.sniperzciinema.cranked.Listeners;
 
+import me.sniperzciinema.cranked.Game;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayer;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 
@@ -26,6 +27,8 @@ public class RegisterAndUnRegister implements Listener{
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onLeaveDeleteCrankedPlayer(PlayerQuitEvent e){
 		CPlayer cp = CPlayerManager.getCrankedPlayer(e.getPlayer());
+		if(cp.getArena() != null)
+			Game.leave(cp);
 		CPlayerManager.deleteCrankedPlayer(cp);
 	}
 
@@ -33,6 +36,8 @@ public class RegisterAndUnRegister implements Listener{
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onKickedDeleteCrankedPlayer(PlayerKickEvent e){
 		CPlayer cp = CPlayerManager.getCrankedPlayer(e.getPlayer());
+		if(cp.getArena() != null)
+			Game.leave(cp);
 		CPlayerManager.deleteCrankedPlayer(cp);
 	}
 

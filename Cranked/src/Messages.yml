@@ -63,9 +63,11 @@ Info:
   Max Points: "&9&lMax Points: &f&o<points>"
   Creator: "&a&lMade by: &f&o<creator>"
 Stats:
-  Score: "&9Score: &b&o<value>"
+  Score: "&bScore: &b&o<value>"
+  Highest KillStreak: "&6Highest KillStreak: &a&o<value>"
   Kills: "&2Kills: &a&o<value>"
   Deaths: "&4Deaths: &c&o<value>"
+  Playing Time: "&ePlaying Time: &c&o<value>"
 Deaths:
   Arrow:
     - "&c<killer> &e&ohas shot &7<killed>"

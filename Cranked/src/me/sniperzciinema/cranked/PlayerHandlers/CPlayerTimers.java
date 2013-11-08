@@ -4,6 +4,7 @@ package me.sniperzciinema.cranked.PlayerHandlers;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import me.sniperzciinema.cranked.Main;
+import me.sniperzciinema.cranked.ArenaHandlers.GameState;
 import me.sniperzciinema.cranked.GameMechanics.DeathTypes;
 import me.sniperzciinema.cranked.GameMechanics.Deaths;
 
@@ -23,6 +24,9 @@ public class CPlayerTimers {
 	public CPlayer getCrankedPlayer() {
 		return cp;
 	}
+	public boolean isCranked(){
+		return timeSinceLastKill != 0;
+	}
 
 	// Return the time since the players last kill
 	public int getTimeSinceLastKill() {
@@ -32,6 +36,7 @@ public class CPlayerTimers {
 	// Method to stop the timer
 	public void stopTimer() {
 		Bukkit.getScheduler().cancelTask(timer);
+		reset();
 	}
 
 	// Reset the time since last kill
@@ -79,7 +84,8 @@ public class CPlayerTimers {
 				{
 					// Times up and they didnt get a kill, so we'll kill them
 					// with a bang(That doesn't break blocks)!
-					Deaths.playerDies(null, player, DeathTypes.OutOfTime);
+					if(getCrankedPlayer().getArena().getState() == GameState.Started)
+						Deaths.playerDies(null, player, DeathTypes.OutOfTime);
 				}
 			}
 		}, 0L, 20L);

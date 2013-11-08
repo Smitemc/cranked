@@ -34,8 +34,10 @@ public class Sort {
 			try
 			{
 				for (Entry<Player, Integer> e : points.entrySet())
-					if (e.getValue() == maxValueInMap)
-						top[place] = e.getKey();
+					if (e.getValue() == maxValueInMap){
+						top[place-1] = e.getKey();
+
+					}
 			} catch (ArrayIndexOutOfBoundsException AIOBE)
 			{
 				// Do nothing because that just means it'll be null

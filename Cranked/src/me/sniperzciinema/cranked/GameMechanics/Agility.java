@@ -2,7 +2,6 @@
 package me.sniperzciinema.cranked.GameMechanics;
 
 import me.sniperzciinema.cranked.ArenaHandlers.ArenaManager;
-import me.sniperzciinema.cranked.Messages.Msgs;
 import me.sniperzciinema.cranked.PlayerHandlers.CPlayerManager;
 import me.sniperzciinema.cranked.Tools.Settings;
 
@@ -23,10 +22,13 @@ public class Agility {
 			float regularSpeed = 0.2F;
 			// Set their speed accordingly
 			try{
-			p.setWalkSpeed(regularSpeed + (float) ((killStreak > 0) ? (Settings.getBonusSpeed() * killStreak) : 0));
-			}catch(IllegalArgumentException IAE){
-				p.sendMessage(Msgs.Error_Max_Speed.getString());
-			}
+				if(Settings.speedUpOnce()){
+					if(!(regularSpeed + (float) ((killStreak > 0) ? (Settings.getBonusSpeed() * killStreak) : 0) > Settings.getMaxSpeed()))
+						p.setWalkSpeed(regularSpeed + Settings.getBonusSpeed());
+				}
+				else
+					p.setWalkSpeed(regularSpeed + (float) ((killStreak > 0) ? (Settings.getBonusSpeed() * killStreak) : 0));
+			}catch(IllegalArgumentException IAE){}
 		} else
 			// Set their speed to what ever the Waiting Bonus Speed it
 			p.setWalkSpeed(Settings.getWaitingSpeed());

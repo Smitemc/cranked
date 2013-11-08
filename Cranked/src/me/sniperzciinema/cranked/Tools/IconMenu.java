@@ -69,7 +69,6 @@ public class IconMenu implements Listener {
 		plugin = null;
 		optionNames = null;
 		optionIcons = null;
-		openedFor.remove(p);
 	}
 
 	@EventHandler(priority = EventPriority.MONITOR)
@@ -90,6 +89,7 @@ public class IconMenu implements Listener {
 
 					public void run() {
 						p.closeInventory();
+						openedFor.remove(p);
 					}
 				}, 1);
 				destroy(p);

@@ -179,7 +179,8 @@ public class ArenaTimers {
 		timeLeft = getGameTime();
 		for (Player p : arena.getPlayers())
 		{
-			CPlayerManager.getCrankedPlayer(p).getScoreBoard().showStats();
+			if(!p.isSneaking())
+				CPlayerManager.getCrankedPlayer(p).getScoreBoard().showStats();
 			Agility.resetSpeed(p);
 			for (PotionEffect effect : p.getActivePotionEffects())
 				p.removePotionEffect(effect.getType());

@@ -83,6 +83,14 @@ public class Settings {
 		else
 			return Files.getConfig().getBoolean("Settings.Global.Misc.Can Loose Hunger");
 	}
+
+	public boolean speedUpOnce() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Speed.Only Add Speed Once"))
+			return Files.getArenas().getBoolean("Arenas." + arena.getName() + ".Only Add Speed Once");
+		else
+			return Files.getConfig().getBoolean("Settings.Global.Speed.Only Add Speed Once");
+	}
+
 	// ////////////////////////////////////////////////-FLOATS-///////////////////////////////////////////////////////
 
 	public float getBonusSpeed() {
@@ -90,6 +98,12 @@ public class Settings {
 			return Float.parseFloat(Files.getArenas().getString("Arenas." + arena.getName() + ".Speed.Bonus Per Kill"));
 		else
 			return Float.parseFloat(Files.getConfig().getString("Settings.Global.Speed.Bonus Per Kill"));
+	}
+	public float getMaxSpeed() {
+		if (Files.getArenas().contains("Arenas." + arena.getName() + ".Speed.Max Speed"))
+			return Float.parseFloat(Files.getArenas().getString("Arenas." + arena.getName() + ".Speed.Max Speed"));
+		else
+			return Float.parseFloat(Files.getConfig().getString("Settings.Global.Speed.Max Speed"));
 	}
 
 	public float getWaitingSpeed() {

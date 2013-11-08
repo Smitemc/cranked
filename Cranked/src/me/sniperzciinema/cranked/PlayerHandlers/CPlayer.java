@@ -321,7 +321,7 @@ public class CPlayer {
 		if (deaths != 0)
 			Stats.setDeaths(getName(), getOverallDeaths() + deaths);
 		if (score != 0)
-			Stats.setScore(getName(), getScore() + score);
+			Stats.setScore(getName(), score);
 	}
 
 	// Get the players scoreboard
@@ -332,6 +332,10 @@ public class CPlayer {
 	// Get the players timers
 	public CPlayerTimers getTimer() {
 		return PlayerTimer;
+	}
+	
+	public boolean isCranked(){
+		return getTimer().isCranked();
 	}
 
 	/**

@@ -33,7 +33,6 @@ public enum Msgs
 	Error_Plugin_Unload("Error.Plugin Unload"), 
 	Error_Cant_Use_Command("Error.Cant Use Command"),
 	Error_Not_Enough_Players("Error.Not Enough Players"),
-	Error_Max_Speed("Error.Max Speed"),
 	GameOver_Winners("GameOver.Winners"),
 	GameOver_Times_Up("GameOver.Times Up"),
 	GameOver_Max_Points_Reached("GameOver.Max Points Reached"),
@@ -69,10 +68,12 @@ public enum Msgs
 	Info_Required_Players_To_Start("Info.Required Players To Start"),
 	Info_Time_Limit("Info.Time Limit"),//<time>
 	Info_Max_Points("Info.Max Points"),//<points>
-	Info_Creator("Info.Max Creator"),//<creator>
+	Info_Creator("Info.Creator"),//<creator>
 	Stats_Score("Stats.Score"),//<value>
 	Stats_Kills("Stats.Kills"),//<value>
 	Stats_Deaths("Stats.Deaths"),//<value>
+	Stats_Playing_Time("Stats.Playing Time"),//<value>
+	Stats_Highest_KillStreak("Stats.Highest KillStreak"),//<value>
 	;
 
 	private String string;

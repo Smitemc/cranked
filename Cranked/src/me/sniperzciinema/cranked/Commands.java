@@ -49,9 +49,10 @@ public class Commands implements CommandExecutor {
 
 			if (args.length > 0 && args[0].equalsIgnoreCase("TEST"))
 			{
+				Deaths.playerDies(p,null, DeathTypes.Other);
 			}
 			// //////////////////////////////JOIN///////////////////////////////////
-			if (args.length > 0 && args[0].equalsIgnoreCase("JOIN"))
+			else if (args.length > 0 && args[0].equalsIgnoreCase("JOIN"))
 			{
 				if (p == null)
 				{
@@ -510,37 +511,36 @@ public class Commands implements CommandExecutor {
 					sender.sendMessage("Expected a player!");
 					return true;
 				}
-				Player player = (Player) sender;
-				if (!player.hasPermission("Cranked.Stats"))
+				if (!p.hasPermission("Cranked.Stats"))
 				{
-					player.sendMessage(Msgs.Error_No_Permission.getString());
+					p.sendMessage(Msgs.Error_No_Permission.getString());
 					return true;
 				}
 				if (args.length != 1)
 				{
-					if (!player.hasPermission("Cranked.Stats.Other"))
+					if (!p.hasPermission("Cranked.Stats.Other"))
 					{
-						player.sendMessage(Msgs.Error_No_Permission.getString());
+						p.sendMessage(Msgs.Error_No_Permission.getString());
 						return true;
 					}
-
 					String user = args[1].toLowerCase();
-					player.sendMessage("");
-					player.sendMessage(Msgs.Format_Header.getString("<title>", user));
-					player.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getScore(user))));
-					player.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getKills(user))));
-					player.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getDeaths(user))));
-
+					p.sendMessage("");
+					p.sendMessage(Msgs.Format_Header.getString("<title>", user));
+					p.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getScore(user))));
+					p.sendMessage(Msgs.Stats_Highest_KillStreak.getString("<value>", String.valueOf(Stats.getHighestKillStreak(user))));
+					p.sendMessage(Msgs.Stats_Kills.getString("<value>", String.valueOf(Stats.getKills(user))));
+					p.sendMessage(Msgs.Stats_Deaths.getString("<value>", String.valueOf(Stats.getDeaths(user))));
+					p.sendMessage(Msgs.Stats_Playing_Time.getString("<value>", String.valueOf(Time.getTime((long)Stats.getPlayingTime(user)))));
 				} else
 				{
-					String user = player.getName().toLowerCase();
-
-					player.sendMessage("");
-					player.sendMessage(Msgs.Format_Header.getString("<title>", user));
-					player.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getScore(user))));
-					player.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getKills(user))));
-					player.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getDeaths(user))));
-
+					String user = p.getName().toLowerCase();
+					p.sendMessage("");
+					p.sendMessage(Msgs.Format_Header.getString("<title>", user));
+					p.sendMessage(Msgs.Stats_Score.getString("<value>", String.valueOf(Stats.getScore(user))));
+					p.sendMessage(Msgs.Stats_Highest_KillStreak.getString("<value>", String.valueOf(Stats.getHighestKillStreak(user))));
+					p.sendMessage(Msgs.Stats_Kills.getString("<value>", String.valueOf(Stats.getKills(user))));
+					p.sendMessage(Msgs.Stats_Deaths.getString("<value>", String.valueOf(Stats.getDeaths(user))));
+					p.sendMessage(Msgs.Stats_Playing_Time.getString("<value>", String.valueOf(Time.getTime((long)Stats.getPlayingTime(user)))));
 				}
 			}
 

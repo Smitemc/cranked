@@ -39,7 +39,7 @@ public class Main extends JavaPlugin {
 
 	public static MySQL MySQL = null;
 	public static Connection c = null;
-	
+
 	public static boolean update;
 	public static String name;
 
@@ -50,7 +50,10 @@ public class Main extends JavaPlugin {
 		{
 			try
 			{
-				Updater updater = new Updater(this, 0/*NEED TO UPLOAD FIRST TO GET ID*/, getFile(),
+				Updater updater = new Updater(this, 0/*
+													 * NEED TO UPLOAD FIRST TO
+													 * GET ID
+													 */, getFile(),
 						Updater.UpdateType.NO_DOWNLOAD, false);
 
 				Main.update = updater.getResult() == Updater.UpdateResult.UPDATE_AVAILABLE;
@@ -85,7 +88,7 @@ public class Main extends JavaPlugin {
 		{
 			System.out.println("Metrics was unable to start...");
 		}
-		
+
 		me = this;
 		// Register the event listeners
 
@@ -99,8 +102,9 @@ public class Main extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(MiscListeners, this);
 		RankingsToggle RankingsToggle = new RankingsToggle();
 		getServer().getPluginManager().registerEvents(RankingsToggle, this);
-		
-		if(getServer().getPluginManager().getPlugin("CrackShot") != null){
+
+		if (getServer().getPluginManager().getPlugin("CrackShot") != null)
+		{
 			CrackShotApi CrackShotApi = new CrackShotApi();
 			getServer().getPluginManager().registerEvents(CrackShotApi, this);
 			System.out.println("CrackShot is loaded up and ready for use!");
@@ -118,7 +122,6 @@ public class Main extends JavaPlugin {
 		Files.saveMessages();
 		Files.getConfig().options().copyDefaults(true);
 		Files.saveConfig();
-		
 
 		for (Player p : Bukkit.getOnlinePlayers())
 		{
@@ -144,18 +147,18 @@ public class Main extends JavaPlugin {
 					getConfig().getString("MySQL.User"),
 					getConfig().getString("MySQL.Pass"));
 			c = MySQL.openConnection();
-			 try
-				{
-					 Statement state = c.createStatement();
-				
-					state.executeUpdate("CREATE TABLE IF NOT EXISTS Cranked (Player CHAR(16), Kills INT(10), Deaths INT(10), Score INT(10));");
-				} catch (SQLException e)
-				{
-					e.printStackTrace();
-					System.out.println("!Unable to connect to MySQL!");
-					getConfig().set("MySql.Enable", false);
-					saveConfig();
-				}
+			try
+			{
+				Statement state = c.createStatement();
+
+				state.executeUpdate("CREATE TABLE IF NOT EXISTS Cranked (Player CHAR(16), Kills INT(10), Deaths INT(10), Score INT(10));");
+			} catch (SQLException e)
+			{
+				e.printStackTrace();
+				System.out.println("!Unable to connect to MySQL!");
+				getConfig().set("MySql.Enable", false);
+				saveConfig();
+			}
 		}
 		System.out.println("Using Players.yml for stats");
 		System.out.println("====================");
@@ -166,13 +169,20 @@ public class Main extends JavaPlugin {
 		if (!CPlayerManager.getPlayers().isEmpty())
 			for (CPlayer cp : CPlayerManager.getPlayers())
 			{
-				if(cp.getArena() != null){
+				if (cp.getArena() != null)
+				{
 					cp.getPlayer().sendMessage(Msgs.Error_Plugin_Unload.getString());
 					Game.leave(cp);
 				}
-				if(IconMenu.hasMenuOpen(cp.getPlayer()))
-					cp.getPlayer().closeInventory();
+				try
+				{
+					if (IconMenu.hasMenuOpen(cp.getPlayer()))
+						cp.getPlayer().closeInventory();
+				} catch (Exception e)
+				{
+				}
 			}
+
 		if (getConfig().getBoolean("MySQL.Enable"))
 		{
 			MySQL.closeConnection();

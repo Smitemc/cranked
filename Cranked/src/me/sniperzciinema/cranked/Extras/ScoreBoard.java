@@ -55,9 +55,10 @@ public class ScoreBoard {
 
 			for(Player p : Sort.topPoints(cp.getArena().getPlayers(), 10))
 			{
-				Score score = ob.getScore(Bukkit.getOfflinePlayer(p.getName()));
-
-				score.setScore(CPlayerManager.getCrankedPlayer(p).getPoints());
+				if(p != null){
+					Score score = ob.getScore(Bukkit.getOfflinePlayer(p.getName()));
+					score.setScore(CPlayerManager.getCrankedPlayer(p).getPoints());
+				}
 			}
 			player.setScoreboard(sb);
 		}

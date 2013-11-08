@@ -94,6 +94,32 @@ public class Stats {
 		}
 	}
 
+	/**
+	 * 
+	 * @param name
+	 * @return highestKillStreak
+	 */
+	public static int getHighestKillStreak(String name) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			return Integer.valueOf(getMySQLStats(name, "Highest KillStreak"));
+		else
+			return Files.getPlayers().getInt("Players." + name + ".Highest KillStreak");
+	}
+/**
+ * 
+ * @param name
+ * @param highestKillStreak
+ */
+	public static void setHighestKillStreak(String name, int highestKillStreak) {
+		if (Main.me.getConfig().getBoolean("MySQL.Enable"))
+			setMySQLStats(name, "Highest KillStreak", highestKillStreak);
+		else
+		{
+			Files.getPlayers().set("Players." + name + ".Highest KillStreak", highestKillStreak);
+			Files.savePlayers();
+		}
+	}
+
 	// Method to get the MySQL Stats (Untested...)
 	private static String getMySQLStats(String name, String stat) {
 		String value = "0";
