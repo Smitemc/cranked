@@ -2,9 +2,9 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Randy/Documents/Downloads/Dependancies/CrackShot.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Randy/Documents/Downloads/bukkit.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Randy/Documents/Downloads/craftbukkit.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Randy/Documents/Downloads/ProtocolLib-2.7.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/morpig/Downloads/bukkit-1.6.4-R2.1-20131031.000035-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/morpig/Downloads/CrackShot (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/morpig/Downloads/craftbukkit-1.6.4-R2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/morpig/Downloads/ProtocolLib-2.7.4-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
